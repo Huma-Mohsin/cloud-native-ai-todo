@@ -8,7 +8,9 @@ authors = [
     { name = "Hackathon Participant" }
 ]
 
-dependencies = []
+dependencies = [
+    "rich>=13.0.0",
+]
 
 [project.optional-dependencies]
 dev = [
