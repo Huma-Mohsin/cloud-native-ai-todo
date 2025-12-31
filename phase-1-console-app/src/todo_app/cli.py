@@ -140,6 +140,32 @@ class TodoCLI:
             )
             return
 
+        # Calculate statistics
+        total = len(tasks)
+        completed = sum(1 for task in tasks if task.completed)
+        pending = total - completed
+
+        # Display summary panel
+        console.print()
+        summary_text = Text()
+        summary_text.append("Total: ", style="bold white")
+        summary_text.append(f"{total}", style="bold cyan")
+        summary_text.append("  |  ", style="dim white")
+        summary_text.append("✓ Completed: ", style="bold green")
+        summary_text.append(f"{completed}", style="bold green")
+        summary_text.append("  |  ", style="dim white")
+        summary_text.append("○ Pending: ", style="bold yellow")
+        summary_text.append(f"{pending}", style="bold yellow")
+
+        console.print(
+            Panel(
+                summary_text,
+                title="[bold white]TASK SUMMARY[/bold white]",
+                border_style="bright_magenta",
+                padding=(0, 2),
+            )
+        )
+
         # Create table
         table = Table(
             title="[bold cyan]YOUR TASKS[/bold cyan]",
