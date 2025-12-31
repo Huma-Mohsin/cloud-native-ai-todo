@@ -1,0 +1,291 @@
+# Todo App - Hackathon II
+# Comprehensive .gitignore for all 5 phases
+
+# ============================================
+# Python (Phase I - Console App)
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+.venv/
+ENV/
+env/
+phase-*/venv/
+phase-*/.venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+coverage.xml
+*.cover
+.cache
+nosetests.xml
+
+# Type Checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# UV Package Manager
+.uv/
+
+# ============================================
+# Node.js / Next.js (Phase II - Web App)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# ============================================
+# Environment Variables & Secrets
+# ============================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+*.env
+credentials.json
+secrets.yaml
+.secrets/
+
+# API Keys (just in case)
+*_api_key
+*_secret_key
+*token*
+.api-keys
+
+# ============================================
+# Database (Phase II+)
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+db.sqlite3
+local.db
+
+# ============================================
+# Docker & Kubernetes (Phase IV+)
+# ============================================
+# Don't ignore Dockerfiles or K8s manifests, but ignore generated files
+docker-compose.override.yml
+.dockerignore.local
+
+# Helm
+charts/*/charts/
+*.tgz
+
+# Kubernetes secrets (DO NOT COMMIT)
+*-secret.yaml
+*-secrets.yaml
+
+# ============================================
+# IDEs & Editors
+# ============================================
+# VSCode
+.vscode/
+!.vscode/settings.json.example
+!.vscode/tasks.json.example
+*.code-workspace
+
+# JetBrains (PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.*.sw[a-p]
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.dir-locals.el
+
+# ============================================
+# Operating System Files
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+.Trash-*
+
+# ============================================
+# Logs
+# ============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ============================================
+# Temporary Files
+# ============================================
+tmp/
+temp/
+*.tmp
+*.temp
+.cache/
+
+# ============================================
+# Build Outputs
+# ============================================
+dist/
+build/
+*.bundle.js
+*.bundle.css
+
+# ============================================
+# AI / MCP (Phase III)
+# ============================================
+# Keep MCP config but ignore sensitive data
+# .mcp.json is tracked (project config)
+# .mcp.local.json would be ignored
+*.mcp.local.json
+mcp-logs/
+
+# ============================================
+# Cloud / Deployment (Phase V)
+# ============================================
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Pulumi
+.pulumi/
+Pulumi.*.yaml
+
+# ============================================
+# Misc
+# ============================================
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Compressed files (unless intentional)
+# *.zip
+# *.tar.gz
+# (Uncomment if you don't want to track archives)
+
+# ============================================
+# Project-Specific
+# ============================================
+# Demo videos (too large for git)
+*.mp4
+*.mov
+*.avi
+demo-video.*
+
+# Large datasets
+data/
+datasets/
+*.csv.large
+
+# Generated documentation (if auto-generated)
+# docs/_build/
+# (Uncomment if using Sphinx or similar)
+
+# ============================================
+# Keep These Files (Explicitly Track)
+# ============================================
+# Configuration examples
+!.env.example
+!.env.template
+
+# GitHub workflows
+!.github/
+
+# Claude Code skills (IMPORTANT for bonus points!)
+!.claude/
+!.claude/skills/
+
+# Docker files
+!Dockerfile
+!docker-compose.yml
+!.dockerignore
+
+# Kubernetes manifests
+!k8s/
+!kubernetes/
+!*.yaml
+!*.yml
+
+# Documentation
+!README.md
+!CLAUDE.md
+!BONUS_POINTS_EVIDENCE.md
+
+# Specs (required for submission)
+!specs/
+!.specify/
+
+# History (PHRs and ADRs)
+!history/
