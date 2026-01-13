@@ -206,8 +206,8 @@ export function TaskItem({
   // VIEW MODE
   return (
     <div
-      className={`relative bg-[#132f4c] border rounded-2xl shadow-[0_0_15px_rgba(59,130,246,0.1)] transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] ${
-        task.completed ? 'opacity-70 border-[#2a4a6f]' : isOverdue ? 'border-red-400' : 'border-[#2a4a6f]'
+      className={`relative bg-[#1a1a1a] border rounded-2xl shadow-[0_0_15px_rgba(59,130,246,0.1)] transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] ${
+        task.completed ? 'opacity-70 border-[#3a3a3a]' : isOverdue ? 'border-red-400' : 'border-[#3a3a3a]'
       }`}
     >
       {/* Status Indicator Line - Left Edge */}

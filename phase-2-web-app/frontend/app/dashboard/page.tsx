@@ -196,8 +196,8 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a1929] relative overflow-hidden">
-      {/* Deep Navy Background Pattern */}
+    <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
+      {/* Charcoal Black Background Pattern */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-0 -left-4 w-72 h-72 bg-[#66b2ff] rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
         <div className="absolute bottom-0 -right-4 w-72 h-72 bg-[#66b2ff] rounded-full mix-blend-multiply filter blur-3xl opacity-5"></div>
@@ -210,8 +210,8 @@ export default function DashboardPage() {
 
         {/* Main Content */}
         <div className="flex-1 min-w-0">
-          {/* Header - Deep Navy Design */}
-          <header className="sticky top-0 z-10 border-b border-[#1e3a5f] shadow-lg bg-[#132f4c]">
+          {/* Header - Charcoal Black Design */}
+          <header className="sticky top-0 z-10 border-b border-[#3a3a3a] shadow-lg bg-[#1a1a1a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#b2bac2] flex items-center gap-3">
@@ -224,7 +224,7 @@ export default function DashboardPage() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#1e3a5f] rounded-lg border border-[#2a4a6f]">
+                <div className="flex items-center gap-2 px-4 py-2 bg-[#2d2d2d] rounded-lg border border-[#3a3a3a]">
                   <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-[#1e3a5f] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
+                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
+                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-[#2a4a6f] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-700 transition-all font-semibold px-4 py-2"
+                  className="border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-400 transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>

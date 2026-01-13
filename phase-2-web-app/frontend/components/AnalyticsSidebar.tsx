@@ -150,14 +150,14 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       <aside
         className={`
           fixed lg:sticky top-0 left-0 h-screen lg:h-auto lg:min-h-screen w-96 xl:w-[450px]
-          bg-[#132f4c] border-r border-[#2a4a6f]
+          bg-[#1a1a1a] border-r border-[#3a3a3a]
           shadow-lg z-50 overflow-y-auto scrollbar-thin
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        {/* Header - Deep Navy */}
-        <div className="flex-shrink-0 bg-[#0f2335] border-b border-[#2a4a6f] p-5">
+        {/* Header - Charcoal Black */}
+        <div className="flex-shrink-0 bg-[#0a0a0a] border-b border-[#3a3a3a] p-5">
           <div className="flex items-center justify-between mb-1">
             <button
               onClick={onClose}
@@ -209,7 +209,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Task Status Distribution */}
-          <div className="bg-[#1e3a5f] rounded-lg p-5 shadow-lg border-2 border-[#2a4a6f]">
+          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#3a3a3a]">
             <h3 className="text-sm font-semibold text-[#b2bac2] mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
               <span>Task Status</span>
@@ -233,8 +233,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#132f4c',
-                    border: '2px solid #2a4a6f',
+                    backgroundColor: '#1a1a1a',
+                    border: '2px solid #3a3a3a',
                     borderRadius: '8px',
                     fontSize: '13px',
                     color: '#b2bac2',
@@ -249,7 +249,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Priority Distribution */}
-          <div className="bg-[#1e3a5f] rounded-lg p-5 shadow-lg border-2 border-[#2a4a6f]">
+          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#3a3a3a]">
             <h3 className="text-sm font-semibold text-[#b2bac2] mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
               <span>Priority Breakdown</span>
@@ -260,8 +260,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 <YAxis stroke="#8b9ab0" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#132f4c',
-                    border: '2px solid #2a4a6f',
+                    backgroundColor: '#1a1a1a',
+                    border: '2px solid #3a3a3a',
                     borderRadius: '8px',
                     fontSize: '13px',
                     color: '#b2bac2',
@@ -277,7 +277,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Weekly Activity */}
-          <div className="bg-[#1e3a5f] rounded-lg p-5 shadow-lg border-2 border-[#2a4a6f]">
+          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#3a3a3a]">
             <h3 className="text-sm font-semibold text-[#b2bac2] mb-4 flex items-center gap-2">
               <span className="text-lg">📈</span>
               <span>Weekly Activity</span>
@@ -288,8 +288,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 <YAxis stroke="#8b9ab0" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#132f4c',
-                    border: '2px solid #2a4a6f',
+                    backgroundColor: '#1a1a1a',
+                    border: '2px solid #3a3a3a',
                     borderRadius: '8px',
                     fontSize: '13px',
                     color: '#b2bac2',
@@ -317,7 +317,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Productivity Insights */}
-          <div className="bg-[#1e3a5f] rounded-lg p-5 shadow-lg border-2 border-[#66b2ff]">
+          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#66b2ff]">
             <h3 className="text-sm font-semibold text-[#b2bac2] mb-3 flex items-center gap-2">
               <span className="text-lg">💡</span>
               <span>Insights</span>
