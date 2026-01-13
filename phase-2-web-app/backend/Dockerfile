@@ -33,12 +33,14 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY --chown=appuser:appuser . .
 
+# Make startup script executable
+RUN chmod +x start.sh
+
 # Switch to non-root user
 USER appuser
 
-# Expose port (Railway uses dynamic PORT environment variable)
+# Expose port
 EXPOSE 8000
 
-# Run application with dynamic port from Railway
-# Using exec form with shell to properly expand environment variables
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Use startup script
+CMD ["./start.sh"]
