@@ -424,14 +424,26 @@ export default function DashboardPage() {
               <p className="mt-4 text-base font-medium text-[#b2bac2]">Loading tasks...</p>
             </div>
           ) : tasks.length === 0 ? (
-            <div className="bg-[#132f4c] border border-[#2a4a6f] rounded-lg shadow-lg text-center py-20">
-              <span className="text-5xl mb-4 inline-block opacity-50">📋</span>
-              <p className="text-lg font-medium text-[#b2bac2]">
-                {smartFilter === 'all' && 'No tasks yet. Create your first task above!'}
-                {smartFilter === 'today' && 'No tasks due today.'}
-                {smartFilter === 'overdue' && 'No overdue tasks. Great job!'}
-                {smartFilter === 'upcoming' && 'No upcoming tasks.'}
-                {smartFilter === 'completed' && 'No completed tasks yet.'}
+            <div className="bg-gradient-to-br from-[#132f4c] to-[#0f2335] border-2 border-[#2a4a6f] rounded-2xl shadow-[0_0_20px_rgba(59,130,246,0.1)] text-center py-16 px-6">
+              {/* Empty State SVG Illustration */}
+              <div className="mb-6 flex justify-center">
+                <svg className="w-32 h-32 text-[#66b2ff] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-[#b2bac2] mb-3">
+                {smartFilter === 'all' && 'No Tasks Yet'}
+                {smartFilter === 'today' && 'Nothing Due Today'}
+                {smartFilter === 'overdue' && 'All Caught Up!'}
+                {smartFilter === 'upcoming' && 'No Upcoming Tasks'}
+                {smartFilter === 'completed' && 'No Completed Tasks'}
+              </h3>
+              <p className="text-base text-[#8b9ab0] max-w-md mx-auto">
+                {smartFilter === 'all' && 'Start organizing your work by creating your first task above. Stay productive! 🚀'}
+                {smartFilter === 'today' && 'You have no tasks scheduled for today. Enjoy your free time! ☀️'}
+                {smartFilter === 'overdue' && 'Great job! You have no overdue tasks. Keep up the excellent work! 🎉'}
+                {smartFilter === 'upcoming' && 'No tasks are scheduled for the upcoming week. Plan ahead! 📅'}
+                {smartFilter === 'completed' && 'Complete some tasks to see them here. You got this! 💪'}
               </p>
             </div>
           ) : (
