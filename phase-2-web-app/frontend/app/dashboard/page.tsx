@@ -339,8 +339,8 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Create Task Form - Deep Navy card */}
-        <div className="bg-[#132f4c] border border-[#2a4a6f] rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+        {/* Create Task Form - Charcoal Black card */}
+        <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-lg shadow-lg p-6 sm:p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-lg bg-[#66b2ff] flex items-center justify-center">
               <span className="text-2xl text-white">+</span>
