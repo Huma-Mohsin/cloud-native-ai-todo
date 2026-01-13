@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
+                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
+                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-400 transition-all font-semibold px-4 py-2"
+                  className="border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-[#8b9ab0] transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                   onClick={() => { setShowSidebar(!showSidebar); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className={`w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] font-semibold ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] font-semibold ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('json'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] font-semibold"
+                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] font-semibold"
                 >
                   📥 JSON
                 </Button>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('csv'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] font-semibold"
+                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] font-semibold"
                 >
                   📊 CSV
                 </Button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="w-full justify-center border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-400 font-semibold"
+                  className="w-full justify-center border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-[#8b9ab0] font-semibold"
                 >
                   🚪 Logout
                 </Button>
