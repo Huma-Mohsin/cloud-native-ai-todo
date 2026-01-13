@@ -5,10 +5,9 @@ data quality and security.
 """
 
 import re
-from typing import Optional
 
 
-def validate_email(email: str) -> tuple[bool, Optional[str]]:
+def validate_email(email: str) -> tuple[bool, str | None]:
     """Validate email address format.
 
     Args:
@@ -24,7 +23,7 @@ def validate_email(email: str) -> tuple[bool, Optional[str]]:
         (False, 'Invalid email format')
     """
     # Basic email regex pattern
-    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
     if not email:
         return False, "Email is required"
@@ -38,7 +37,7 @@ def validate_email(email: str) -> tuple[bool, Optional[str]]:
     return True, None
 
 
-def validate_password_strength(password: str) -> tuple[bool, Optional[str]]:
+def validate_password_strength(password: str) -> tuple[bool, str | None]:
     """Validate password strength requirements.
 
     Requirements:
@@ -68,19 +67,19 @@ def validate_password_strength(password: str) -> tuple[bool, Optional[str]]:
     if len(password) > 128:
         return False, "Password must be less than 128 characters"
 
-    if not re.search(r'[A-Z]', password):
+    if not re.search(r"[A-Z]", password):
         return False, "Password must contain at least one uppercase letter"
 
-    if not re.search(r'[a-z]', password):
+    if not re.search(r"[a-z]", password):
         return False, "Password must contain at least one lowercase letter"
 
-    if not re.search(r'\d', password):
+    if not re.search(r"\d", password):
         return False, "Password must contain at least one digit"
 
     return True, None
 
 
-def validate_title_length(title: str) -> tuple[bool, Optional[str]]:
+def validate_title_length(title: str) -> tuple[bool, str | None]:
     """Validate task title length.
 
     Requirements:
@@ -110,7 +109,7 @@ def validate_title_length(title: str) -> tuple[bool, Optional[str]]:
     return True, None
 
 
-def validate_description_length(description: Optional[str]) -> tuple[bool, Optional[str]]:
+def validate_description_length(description: str | None) -> tuple[bool, str | None]:
     """Validate task description length.
 
     Requirements:

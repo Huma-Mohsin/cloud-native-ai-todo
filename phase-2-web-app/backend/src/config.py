@@ -4,7 +4,6 @@ This module handles loading and validating environment variables for the applica
 It uses Pydantic Settings for type-safe configuration management.
 """
 
-from typing import List
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -28,14 +27,11 @@ class Settings(BaseSettings):
     JWT_EXPIRATION_MINUTES: int = 1440  # 24 hours
 
     model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        case_sensitive=True,
-        extra="ignore"
+        env_file=".env", env_file_encoding="utf-8", case_sensitive=True, extra="ignore"
     )
 
     @property
-    def cors_origins_list(self) -> List[str]:
+    def cors_origins_list(self) -> list[str]:
         """Parse CORS_ORIGINS into a list of strings.
 
         Returns:
@@ -56,7 +52,9 @@ class Settings(BaseSettings):
             raise ValueError("DATABASE_URL must be a PostgreSQL connection string")
 
         if "asyncpg" not in self.DATABASE_URL:
-            raise ValueError("DATABASE_URL must use asyncpg driver (e.g., postgresql+asyncpg://...)")
+            raise ValueError(
+                "DATABASE_URL must use asyncpg driver (e.g., postgresql+asyncpg://...)"
+            )
 
 
 # Global settings instance

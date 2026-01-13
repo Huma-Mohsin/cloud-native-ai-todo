@@ -4,7 +4,7 @@ This module defines the User SQLModel for database persistence.
 """
 
 from datetime import datetime
-from typing import Optional
+
 from sqlmodel import Field, SQLModel
 
 
@@ -21,7 +21,7 @@ class User(SQLModel, table=True):
 
     __tablename__ = "users"
 
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     name: str = Field(min_length=1, max_length=100, index=False)
     email: str = Field(unique=True, index=True, max_length=255)
     password: str = Field(min_length=1)  # Stored as bcrypt hash

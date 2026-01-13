@@ -4,9 +4,10 @@ This module initializes the FastAPI application, configures middleware,
 and registers route handlers.
 """
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
 
 from .config import settings
 from .database import create_tables, dispose_engine
@@ -70,7 +71,7 @@ async def health_check():
     return {
         "status": "healthy",
         "environment": settings.ENVIRONMENT,
-        "version": "2.0.0"
+        "version": "2.0.0",
     }
 
 
@@ -86,12 +87,12 @@ async def root():
         "message": "Todo API - Phase II",
         "version": "2.0.0",
         "docs": "/docs",
-        "health": "/health"
+        "health": "/health",
     }
 
 
 # Import and register routers
-from .routes import auth_router, tasks_router, subtasks_router
+from .routes import auth_router, subtasks_router, tasks_router
 
 # Register authentication routes
 app.include_router(auth_router)

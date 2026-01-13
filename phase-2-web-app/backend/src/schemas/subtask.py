@@ -4,7 +4,7 @@ This module defines Pydantic schemas for subtask-related API operations.
 """
 
 from datetime import datetime
-from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -38,13 +38,13 @@ class UpdateSubtaskRequest(BaseModel):
         position: Updated position
     """
 
-    title: Optional[str] = Field(
+    title: str | None = Field(
         default=None, min_length=1, max_length=200, description="Updated subtask title"
     )
-    completed: Optional[bool] = Field(
+    completed: bool | None = Field(
         default=None, description="Updated completion status"
     )
-    position: Optional[int] = Field(default=None, description="Updated position")
+    position: int | None = Field(default=None, description="Updated position")
 
     class Config:
         """Pydantic model configuration."""

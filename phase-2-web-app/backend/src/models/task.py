@@ -4,9 +4,9 @@ This module defines the Task SQLModel for database persistence.
 """
 
 from datetime import datetime
-from typing import Optional, List, Literal
-from sqlmodel import Field, SQLModel, Column, JSON
+from typing import Literal
 
+from sqlmodel import JSON, Column, Field, SQLModel
 
 # Type alias for priority values
 PriorityType = Literal["low", "medium", "high"]
@@ -33,15 +33,15 @@ class Task(SQLModel, table=True):
 
     __tablename__ = "tasks"
 
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="users.id", index=True)
     title: str = Field(min_length=1, max_length=200)
-    description: Optional[str] = Field(default=None, max_length=1000)
+    description: str | None = Field(default=None, max_length=1000)
     completed: bool = Field(default=False)
     priority: str = Field(default="medium", max_length=20)
-    due_date: Optional[datetime] = Field(default=None)
-    category: Optional[str] = Field(default=None, max_length=50)
-    tags: List[str] = Field(default_factory=list, sa_column=Column(JSON))
+    due_date: datetime | None = Field(default=None)
+    category: str | None = Field(default=None, max_length=50)
+    tags: list[str] = Field(default_factory=list, sa_column=Column(JSON))
     position: int = Field(default=0, index=True)
     archived: bool = Field(default=False, index=True)
     created_at: datetime = Field(default_factory=datetime.utcnow)

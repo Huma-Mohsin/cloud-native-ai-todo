@@ -22,11 +22,9 @@ const sortOptions: { value: SortOption; label: string; icon: string }[] = [
 ];
 
 export function SortDropdown({ value, onChange, disabled = false }: SortDropdownProps) {
-  const selectedOption = sortOptions.find((opt) => opt.value === value);
-
   return (
     <div className="flex items-center gap-2">
-      <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+      <label className="text-sm font-medium text-[#b2bac2] whitespace-nowrap">
         Sort by:
       </label>
       <div className="relative">

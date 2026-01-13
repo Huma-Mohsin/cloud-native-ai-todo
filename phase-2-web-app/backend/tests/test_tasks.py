@@ -178,14 +178,14 @@ class TestTaskUpdates:
     async def test_update_task_title_and_description_succeeds(self, authenticated_client, sample_task_data):
         """
         Given: Existing task
-        When: PUT /tasks/{id} with updated data
+        When: PATCH /tasks/{id} with updated data
         Then: Should return 200 and reflect changes
         """
         create_response = await authenticated_client.post("/tasks", json=sample_task_data)
         task_id = create_response.json()["id"]
 
         updated_data = {"title": "Updated Title", "description": "Updated Description"}
-        response = await authenticated_client.put(f"/tasks/{task_id}", json=updated_data)
+        response = await authenticated_client.patch(f"/tasks/{task_id}", json=updated_data)
 
         assert response.status_code == 200
         data = response.json()
@@ -203,7 +203,7 @@ class TestTaskUpdates:
         task_id = create_response.json()["id"]
 
         updated_data = {"title": "Persisted Update"}
-        await authenticated_client.put(f"/tasks/{task_id}", json=updated_data)
+        await authenticated_client.patch(f"/tasks/{task_id}", json=updated_data)
 
         # Verify persistence
         response = await authenticated_client.get(f"/tasks/{task_id}")
@@ -215,11 +215,11 @@ class TestTaskUpdates:
     async def test_update_nonexistent_task_returns_404(self, authenticated_client):
         """
         Given: Task ID does not exist
-        When: PUT /tasks/{id}
+        When: PATCH /tasks/{id}
         Then: Should return 404 Not Found
         """
         updated_data = {"title": "Updated"}
-        response = await authenticated_client.put("/tasks/99999", json=updated_data)
+        response = await authenticated_client.patch("/tasks/99999", json=updated_data)
 
         assert response.status_code == 404
 
@@ -231,13 +231,13 @@ class TestTaskCompletion:
     async def test_mark_task_as_complete_succeeds(self, authenticated_client, sample_task_data):
         """
         Given: Pending task
-        When: PATCH /tasks/{id}/complete
+        When: PATCH /tasks/{id} with completed=true
         Then: Should mark task as completed
         """
         create_response = await authenticated_client.post("/tasks", json=sample_task_data)
         task_id = create_response.json()["id"]
 
-        response = await authenticated_client.patch(f"/tasks/{task_id}/complete")
+        response = await authenticated_client.patch(f"/tasks/{task_id}", json={"completed": True})
 
         assert response.status_code == 200
         data = response.json()
@@ -247,17 +247,17 @@ class TestTaskCompletion:
     async def test_toggle_completed_task_back_to_pending(self, authenticated_client, sample_task_data):
         """
         Given: Completed task
-        When: PATCH /tasks/{id}/complete again
+        When: PATCH /tasks/{id} with completed=false
         Then: Should toggle back to pending
         """
         create_response = await authenticated_client.post("/tasks", json=sample_task_data)
         task_id = create_response.json()["id"]
 
         # Mark complete
-        await authenticated_client.patch(f"/tasks/{task_id}/complete")
+        await authenticated_client.patch(f"/tasks/{task_id}", json={"completed": True})
 
         # Toggle back to pending
-        response = await authenticated_client.patch(f"/tasks/{task_id}/complete")
+        response = await authenticated_client.patch(f"/tasks/{task_id}", json={"completed": False})
 
         assert response.status_code == 200
         data = response.json()
@@ -277,7 +277,7 @@ class TestTaskCompletion:
         await authenticated_client.post("/tasks", json={**sample_task_data, "title": "Task 2"})
 
         # Mark first task complete
-        await authenticated_client.patch(f"/tasks/{task1_id}/complete")
+        await authenticated_client.patch(f"/tasks/{task1_id}", json={"completed": True})
 
         # Get all tasks
         response = await authenticated_client.get("/tasks")

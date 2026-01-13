@@ -5,14 +5,12 @@ and creating/verifying JWT tokens for authentication.
 """
 
 from datetime import datetime, timedelta
-from typing import Optional, Dict, Any
-from passlib.context import CryptContext
+from typing import Any
+
+import bcrypt
 from jose import JWTError, jwt
 
 from ..config import settings
-
-# Password hashing context using bcrypt
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def hash_password(password: str) -> str:
@@ -29,7 +27,13 @@ def hash_password(password: str) -> str:
         >>> hashed.startswith("$2b$")
         True
     """
-    return pwd_context.hash(password)
+    # Encode password to bytes
+    password_bytes = password.encode("utf-8")
+    # Generate salt and hash
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password_bytes, salt)
+    # Return as string
+    return hashed.decode("utf-8")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -49,7 +53,11 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
         >>> verify_password("WrongPassword", hashed)
         False
     """
-    return pwd_context.verify(plain_password, hashed_password)
+    # Encode password and hash to bytes
+    password_bytes = plain_password.encode("utf-8")
+    hashed_bytes = hashed_password.encode("utf-8")
+    # Verify
+    return bcrypt.checkpw(password_bytes, hashed_bytes)
 
 
 def create_jwt_token(user_id: int, email: str) -> str:
@@ -71,18 +79,20 @@ def create_jwt_token(user_id: int, email: str) -> str:
     """
     expires_at = datetime.utcnow() + timedelta(minutes=settings.JWT_EXPIRATION_MINUTES)
 
-    payload: Dict[str, Any] = {
+    payload: dict[str, Any] = {
         "sub": str(user_id),  # Subject (user ID)
         "email": email,
         "exp": expires_at,  # Expiration time
         "iat": datetime.utcnow(),  # Issued at
     }
 
-    token = jwt.encode(payload, settings.BETTER_AUTH_SECRET, algorithm=settings.JWT_ALGORITHM)
+    token = jwt.encode(
+        payload, settings.BETTER_AUTH_SECRET, algorithm=settings.JWT_ALGORITHM
+    )
     return token
 
 
-def verify_jwt_token(token: str) -> Optional[Dict[str, Any]]:
+def verify_jwt_token(token: str) -> dict[str, Any] | None:
     """Verify and decode a JWT token.
 
     Args:
@@ -103,16 +113,14 @@ def verify_jwt_token(token: str) -> Optional[Dict[str, Any]]:
     """
     try:
         payload = jwt.decode(
-            token,
-            settings.BETTER_AUTH_SECRET,
-            algorithms=[settings.JWT_ALGORITHM]
+            token, settings.BETTER_AUTH_SECRET, algorithms=[settings.JWT_ALGORITHM]
         )
         return payload
     except JWTError:
         return None
 
 
-def get_user_id_from_token(token: str) -> Optional[int]:
+def get_user_id_from_token(token: str) -> int | None:
     """Extract user ID from a JWT token.
 
     Args:

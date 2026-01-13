@@ -4,7 +4,7 @@ This module defines the Subtask SQLModel for checklist items within tasks.
 """
 
 from datetime import datetime
-from typing import Optional
+
 from sqlmodel import Field, SQLModel
 
 
@@ -23,7 +23,7 @@ class Subtask(SQLModel, table=True):
 
     __tablename__ = "subtasks"
 
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     task_id: int = Field(foreign_key="tasks.id", index=True, ondelete="CASCADE")
     title: str = Field(min_length=1, max_length=200)
     completed: bool = Field(default=False)

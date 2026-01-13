@@ -4,22 +4,21 @@ This module provides JWT token verification middleware and FastAPI
 dependencies for protecting routes that require authentication.
 """
 
-from typing import Optional
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..database import get_session
-from ..utils.security import get_user_id_from_token
-from ..services.auth_service import AuthService
 from ..models.user import User
+from ..services.auth_service import AuthService
+from ..utils.security import get_user_id_from_token
 
 # HTTP Bearer security scheme for Swagger UI
 security = HTTPBearer()
 
 
 async def get_current_user_id(
-    credentials: HTTPAuthorizationCredentials = Depends(security)
+    credentials: HTTPAuthorizationCredentials = Depends(security),
 ) -> int:
     """Extract and verify user ID from JWT token.
 
@@ -57,7 +56,7 @@ async def get_current_user_id(
 
 async def get_current_user(
     user_id: int = Depends(get_current_user_id),
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
 ) -> User:
     """Get the current authenticated user from the database.
 
@@ -91,10 +90,7 @@ async def get_current_user(
     return user
 
 
-def verify_user_id_match(
-    path_user_id: int,
-    current_user_id: int
-) -> None:
+def verify_user_id_match(path_user_id: int, current_user_id: int) -> None:
     """Verify that the user ID in the path matches the authenticated user.
 
     This function is used in route handlers to ensure users can only
@@ -120,16 +116,16 @@ def verify_user_id_match(
     if path_user_id != current_user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You can only access your own resources"
+            detail="You can only access your own resources",
         )
 
 
 # Optional authentication dependency (doesn't raise error if no token)
 async def get_optional_user_id(
-    credentials: Optional[HTTPAuthorizationCredentials] = Depends(
+    credentials: HTTPAuthorizationCredentials | None = Depends(
         HTTPBearer(auto_error=False)
-    )
-) -> Optional[int]:
+    ),
+) -> int | None:
     """Extract user ID from JWT token if present (optional authentication).
 
     This dependency allows endpoints to handle both authenticated and

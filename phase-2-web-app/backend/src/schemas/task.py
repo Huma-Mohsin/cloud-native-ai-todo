@@ -4,7 +4,8 @@ This module defines Pydantic schemas for task-related API operations.
 """
 
 from datetime import datetime
-from typing import Optional, List, Literal
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 # Type alias for priority values
@@ -13,7 +14,8 @@ PriorityType = Literal["low", "medium", "high"]
 
 class SubtaskSchema(BaseModel):
     """Schema for subtask data."""
-    id: Optional[int] = None
+
+    id: int | None = None
     title: str = Field(min_length=1, max_length=200)
     completed: bool = False
     position: int = 0
@@ -32,13 +34,17 @@ class CreateTaskRequest(BaseModel):
     """
 
     title: str = Field(min_length=1, max_length=200, description="Task title")
-    description: Optional[str] = Field(
+    description: str | None = Field(
         default=None, max_length=1000, description="Optional task description"
     )
-    priority: Optional[str] = Field(default="medium", description="Task priority (low/medium/high)")
-    due_date: Optional[datetime] = Field(default=None, description="Optional deadline")
-    category: Optional[str] = Field(default=None, max_length=50, description="Task category")
-    tags: Optional[List[str]] = Field(default_factory=list, description="Task tags")
+    priority: str | None = Field(
+        default="medium", description="Task priority (low/medium/high)"
+    )
+    due_date: datetime | None = Field(default=None, description="Optional deadline")
+    category: str | None = Field(
+        default=None, max_length=50, description="Task category"
+    )
+    tags: list[str] | None = Field(default_factory=list, description="Task tags")
 
     class Config:
         """Pydantic model configuration."""
@@ -50,7 +56,7 @@ class CreateTaskRequest(BaseModel):
                 "priority": "high",
                 "due_date": "2024-12-31T23:59:59Z",
                 "category": "Work",
-                "tags": ["development", "urgent"]
+                "tags": ["development", "urgent"],
             }
         }
 
@@ -72,21 +78,25 @@ class UpdateTaskRequest(BaseModel):
         archived: Archive status
     """
 
-    title: Optional[str] = Field(
+    title: str | None = Field(
         default=None, min_length=1, max_length=200, description="Updated task title"
     )
-    description: Optional[str] = Field(
+    description: str | None = Field(
         default=None, max_length=1000, description="Updated task description"
     )
-    completed: Optional[bool] = Field(
+    completed: bool | None = Field(
         default=None, description="Updated completion status"
     )
-    priority: Optional[str] = Field(default=None, description="Updated priority (low/medium/high)")
-    due_date: Optional[datetime] = Field(default=None, description="Updated deadline")
-    category: Optional[str] = Field(default=None, max_length=50, description="Updated category")
-    tags: Optional[List[str]] = Field(default=None, description="Updated tags")
-    position: Optional[int] = Field(default=None, description="Updated position")
-    archived: Optional[bool] = Field(default=None, description="Archive status")
+    priority: str | None = Field(
+        default=None, description="Updated priority (low/medium/high)"
+    )
+    due_date: datetime | None = Field(default=None, description="Updated deadline")
+    category: str | None = Field(
+        default=None, max_length=50, description="Updated category"
+    )
+    tags: list[str] | None = Field(default=None, description="Updated tags")
+    position: int | None = Field(default=None, description="Updated position")
+    archived: bool | None = Field(default=None, description="Archive status")
 
     class Config:
         """Pydantic model configuration."""
@@ -97,7 +107,7 @@ class UpdateTaskRequest(BaseModel):
                 "description": "Implement backend, frontend, and tests",
                 "completed": True,
                 "priority": "medium",
-                "category": "Development"
+                "category": "Development",
             }
         }
 
@@ -125,15 +135,15 @@ class TaskResponse(BaseModel):
     id: int
     user_id: int
     title: str
-    description: Optional[str]
+    description: str | None
     completed: bool
     priority: str
-    due_date: Optional[datetime]
-    category: Optional[str]
-    tags: List[str]
+    due_date: datetime | None
+    category: str | None
+    tags: list[str]
     position: int
     archived: bool
-    subtasks: Optional[List[SubtaskSchema]] = []
+    subtasks: list[SubtaskSchema] | None = []
     created_at: datetime
     updated_at: datetime
 

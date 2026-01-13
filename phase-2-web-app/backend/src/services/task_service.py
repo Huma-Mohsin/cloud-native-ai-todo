@@ -4,8 +4,8 @@ This module provides the TaskService class for managing task CRUD operations.
 """
 
 from datetime import datetime, timedelta
-from typing import List, Optional
-from sqlalchemy import select, or_, and_
+
+from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..models.task import Task
@@ -21,9 +21,7 @@ class TaskService:
 
     @staticmethod
     async def create_task(
-        user_id: int,
-        task_data: CreateTaskRequest,
-        session: AsyncSession
+        user_id: int, task_data: CreateTaskRequest, session: AsyncSession
     ) -> Task:
         """Create a new task for a user.
 
@@ -58,12 +56,12 @@ class TaskService:
     async def get_user_tasks(
         user_id: int,
         session: AsyncSession,
-        completed: Optional[bool] = None,
+        completed: bool | None = None,
         archived: bool = False,
-        category: Optional[str] = None,
-        search: Optional[str] = None,
-        sort_by: str = "created_at"
-    ) -> List[Task]:
+        category: str | None = None,
+        search: str | None = None,
+        sort_by: str = "created_at",
+    ) -> list[Task]:
         """Get all tasks for a user, with filtering and sorting options.
 
         Args:
@@ -100,10 +98,7 @@ class TaskService:
             statement = statement.order_by(Task.due_date.desc().nullslast())
         elif sort_by == "priority":
             # Sort by priority: high > medium > low
-            statement = statement.order_by(
-                Task.priority.desc(),
-                Task.created_at.desc()
-            )
+            statement = statement.order_by(Task.priority.desc(), Task.created_at.desc())
         elif sort_by == "position":
             statement = statement.order_by(Task.position.asc())
         else:  # default: created_at
@@ -115,10 +110,7 @@ class TaskService:
         return list(tasks)
 
     @staticmethod
-    async def get_task_by_id(
-        task_id: int,
-        session: AsyncSession
-    ) -> Optional[Task]:
+    async def get_task_by_id(task_id: int, session: AsyncSession) -> Task | None:
         """Get a task by its ID.
 
         Args:
@@ -136,11 +128,8 @@ class TaskService:
 
     @staticmethod
     async def update_task(
-        task_id: int,
-        user_id: int,
-        task_data: UpdateTaskRequest,
-        session: AsyncSession
-    ) -> Optional[Task]:
+        task_id: int, user_id: int, task_data: UpdateTaskRequest, session: AsyncSession
+    ) -> Task | None:
         """Update a task's fields.
 
         Args:
@@ -195,11 +184,7 @@ class TaskService:
         return task
 
     @staticmethod
-    async def delete_task(
-        task_id: int,
-        user_id: int,
-        session: AsyncSession
-    ) -> bool:
+    async def delete_task(task_id: int, user_id: int, session: AsyncSession) -> bool:
         """Delete a task.
 
         Args:
@@ -222,10 +207,7 @@ class TaskService:
         return True
 
     @staticmethod
-    async def get_task_stats(
-        user_id: int,
-        session: AsyncSession
-    ) -> dict:
+    async def get_task_stats(user_id: int, session: AsyncSession) -> dict:
         """Get task statistics for a user.
 
         Args:
@@ -242,14 +224,23 @@ class TaskService:
         pending = total - completed
 
         # Priority breakdown
-        high_priority = sum(1 for task in all_tasks if task.priority == "high" and not task.completed)
-        medium_priority = sum(1 for task in all_tasks if task.priority == "medium" and not task.completed)
-        low_priority = sum(1 for task in all_tasks if task.priority == "low" and not task.completed)
+        high_priority = sum(
+            1 for task in all_tasks if task.priority == "high" and not task.completed
+        )
+        medium_priority = sum(
+            1 for task in all_tasks if task.priority == "medium" and not task.completed
+        )
+        low_priority = sum(
+            1 for task in all_tasks if task.priority == "low" and not task.completed
+        )
 
         # Overdue tasks
         now = datetime.utcnow()
-        overdue = sum(1 for task in all_tasks
-                     if task.due_date and task.due_date < now and not task.completed)
+        overdue = sum(
+            1
+            for task in all_tasks
+            if task.due_date and task.due_date < now and not task.completed
+        )
 
         return {
             "total": total,
@@ -259,14 +250,11 @@ class TaskService:
             "high_priority": high_priority,
             "medium_priority": medium_priority,
             "low_priority": low_priority,
-            "overdue": overdue
+            "overdue": overdue,
         }
 
     @staticmethod
-    async def get_today_tasks(
-        user_id: int,
-        session: AsyncSession
-    ) -> List[Task]:
+    async def get_today_tasks(user_id: int, session: AsyncSession) -> list[Task]:
         """Get tasks due today.
 
         Args:
@@ -276,7 +264,9 @@ class TaskService:
         Returns:
             List of tasks due today
         """
-        today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        today_start = datetime.utcnow().replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
         today_end = today_start + timedelta(days=1)
 
         statement = (
@@ -292,10 +282,7 @@ class TaskService:
         return list(result.scalars().all())
 
     @staticmethod
-    async def get_overdue_tasks(
-        user_id: int,
-        session: AsyncSession
-    ) -> List[Task]:
+    async def get_overdue_tasks(user_id: int, session: AsyncSession) -> list[Task]:
         """Get overdue tasks.
 
         Args:
@@ -321,10 +308,8 @@ class TaskService:
 
     @staticmethod
     async def get_upcoming_tasks(
-        user_id: int,
-        days: int,
-        session: AsyncSession
-    ) -> List[Task]:
+        user_id: int, days: int, session: AsyncSession
+    ) -> list[Task]:
         """Get tasks due in the next N days.
 
         Args:
@@ -351,10 +336,7 @@ class TaskService:
         return list(result.scalars().all())
 
     @staticmethod
-    async def get_categories(
-        user_id: int,
-        session: AsyncSession
-    ) -> List[str]:
+    async def get_categories(user_id: int, session: AsyncSession) -> list[str]:
         """Get all unique categories used by user.
 
         Args:
@@ -377,9 +359,7 @@ class TaskService:
 
     @staticmethod
     async def bulk_update_positions(
-        user_id: int,
-        task_positions: dict,
-        session: AsyncSession
+        user_id: int, task_positions: dict, session: AsyncSession
     ) -> bool:
         """Update positions of multiple tasks (for drag & drop).
 

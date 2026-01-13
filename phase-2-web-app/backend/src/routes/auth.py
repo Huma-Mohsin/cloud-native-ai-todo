@@ -7,14 +7,11 @@ from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..database import get_session
-from ..schemas.user import SignupRequest, LoginRequest, TokenResponse
+from ..schemas.user import LoginRequest, SignupRequest, TokenResponse
 from ..services.auth_service import AuthService
 
 # Create router
-router = APIRouter(
-    prefix="/auth",
-    tags=["Authentication"]
-)
+router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post(
@@ -22,11 +19,10 @@ router = APIRouter(
     response_model=TokenResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Register a new user",
-    description="Create a new user account with name, email, and password. Returns JWT token for immediate authentication."
+    description="Create a new user account with name, email, and password. Returns JWT token for immediate authentication.",
 )
 async def signup(
-    signup_data: SignupRequest,
-    session: AsyncSession = Depends(get_session)
+    signup_data: SignupRequest, session: AsyncSession = Depends(get_session)
 ) -> TokenResponse:
     """Register a new user account.
 
@@ -53,11 +49,10 @@ async def signup(
     response_model=TokenResponse,
     status_code=status.HTTP_200_OK,
     summary="Login to existing account",
-    description="Authenticate user with email and password. Returns JWT token."
+    description="Authenticate user with email and password. Returns JWT token.",
 )
 async def login(
-    login_data: LoginRequest,
-    session: AsyncSession = Depends(get_session)
+    login_data: LoginRequest, session: AsyncSession = Depends(get_session)
 ) -> TokenResponse:
     """Authenticate user and generate JWT token.
 
@@ -80,7 +75,7 @@ async def login(
     "/logout",
     status_code=status.HTTP_200_OK,
     summary="Logout current user",
-    description="Logout endpoint (client-side token removal). Server does not invalidate token."
+    description="Logout endpoint (client-side token removal). Server does not invalidate token.",
 )
 async def logout() -> dict:
     """Logout current user.
@@ -95,5 +90,5 @@ async def logout() -> dict:
     """
     return {
         "message": "Logout successful",
-        "detail": "Remove the JWT token from client storage"
+        "detail": "Remove the JWT token from client storage",
     }

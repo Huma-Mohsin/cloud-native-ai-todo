@@ -4,7 +4,8 @@ This module provides async database engine, session management, and
 database initialization functionality using SQLModel.
 """
 
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
+
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel
@@ -30,7 +31,7 @@ AsyncSessionLocal = sessionmaker(
 )
 
 
-async def get_session() -> AsyncGenerator[AsyncSession, None]:
+async def get_session() -> AsyncGenerator[AsyncSession]:
     """Dependency for getting async database sessions.
 
     This function is used as a FastAPI dependency to provide database

@@ -4,7 +4,7 @@ This module provides the SubtaskService class for managing subtask CRUD operatio
 """
 
 from datetime import datetime
-from typing import List, Optional
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -17,9 +17,7 @@ class SubtaskService:
 
     @staticmethod
     async def create_subtask(
-        task_id: int,
-        subtask_data: CreateSubtaskRequest,
-        session: AsyncSession
+        task_id: int, subtask_data: CreateSubtaskRequest, session: AsyncSession
     ) -> Subtask:
         """Create a new subtask for a task.
 
@@ -45,10 +43,7 @@ class SubtaskService:
         return subtask
 
     @staticmethod
-    async def get_task_subtasks(
-        task_id: int,
-        session: AsyncSession
-    ) -> List[Subtask]:
+    async def get_task_subtasks(task_id: int, session: AsyncSession) -> list[Subtask]:
         """Get all subtasks for a task.
 
         Args:
@@ -71,9 +66,8 @@ class SubtaskService:
 
     @staticmethod
     async def get_subtask_by_id(
-        subtask_id: int,
-        session: AsyncSession
-    ) -> Optional[Subtask]:
+        subtask_id: int, session: AsyncSession
+    ) -> Subtask | None:
         """Get a subtask by its ID.
 
         Args:
@@ -91,10 +85,8 @@ class SubtaskService:
 
     @staticmethod
     async def update_subtask(
-        subtask_id: int,
-        subtask_data: UpdateSubtaskRequest,
-        session: AsyncSession
-    ) -> Optional[Subtask]:
+        subtask_id: int, subtask_data: UpdateSubtaskRequest, session: AsyncSession
+    ) -> Subtask | None:
         """Update a subtask's fields.
 
         Args:
@@ -129,10 +121,7 @@ class SubtaskService:
         return subtask
 
     @staticmethod
-    async def delete_subtask(
-        subtask_id: int,
-        session: AsyncSession
-    ) -> bool:
+    async def delete_subtask(subtask_id: int, session: AsyncSession) -> bool:
         """Delete a subtask.
 
         Args:

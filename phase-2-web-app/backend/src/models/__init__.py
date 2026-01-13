@@ -3,8 +3,8 @@
 This package contains SQLModel database models for the application.
 """
 
-from .user import User
-from .task import Task
 from .subtask import Subtask
+from .task import Task
+from .user import User
 
-__all__ = ["User", "Task", "Subtask"]
+__all__ = ["Subtask", "Task", "User"]

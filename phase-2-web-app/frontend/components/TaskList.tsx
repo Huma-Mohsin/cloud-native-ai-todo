@@ -8,13 +8,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Task } from '@/lib/types';
+import { Task, UpdateTaskRequest } from '@/lib/types';
 import { TaskItem } from './TaskItem';
 
 interface TaskListProps {
   tasks: Task[];
   onToggle: (task: Task) => Promise<void>;
-  onUpdate: (taskId: number, title: string, description: string) => Promise<void>;
+  onUpdate: (taskId: number, data: UpdateTaskRequest) => Promise<void>;
   onDelete: (taskId: number) => Promise<void>;
   isLoading?: boolean;
 }

@@ -4,6 +4,7 @@ This module defines Pydantic schemas for user-related API operations.
 """
 
 from datetime import datetime
+
 from pydantic import BaseModel, EmailStr, Field
 
 

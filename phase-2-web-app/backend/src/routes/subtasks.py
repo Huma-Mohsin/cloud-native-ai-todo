@@ -4,34 +4,34 @@ This module defines REST API endpoints for subtask CRUD operations.
 All endpoints require authentication via JWT token.
 """
 
-from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..database import get_session
 from ..middleware.auth import get_current_user_id
-from ..schemas.subtask import CreateSubtaskRequest, UpdateSubtaskRequest, SubtaskResponse
+from ..schemas.subtask import (
+    CreateSubtaskRequest,
+    SubtaskResponse,
+    UpdateSubtaskRequest,
+)
 from ..services.subtask_service import SubtaskService
 from ..services.task_service import TaskService
 
-
 # Create router with /tasks/{task_id}/subtasks prefix
-router = APIRouter(
-    tags=["Subtasks"]
-)
+router = APIRouter(tags=["Subtasks"])
 
 
 @router.post(
     "/tasks/{task_id}/subtasks",
     response_model=SubtaskResponse,
     status_code=status.HTTP_201_CREATED,
-    summary="Create a new subtask"
+    summary="Create a new subtask",
 )
 async def create_subtask(
     task_id: int,
     subtask_data: CreateSubtaskRequest,
     user_id: int = Depends(get_current_user_id),
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
 ):
     """Create a new subtask for a task.
 
@@ -53,8 +53,7 @@ async def create_subtask(
     task = await TaskService.get_task_by_id(task_id, session)
     if not task or task.user_id != user_id:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Task not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Task not found"
         )
 
     subtask = await SubtaskService.create_subtask(task_id, subtask_data, session)
@@ -63,13 +62,13 @@ async def create_subtask(
 
 @router.get(
     "/tasks/{task_id}/subtasks",
-    response_model=List[SubtaskResponse],
-    summary="Get all subtasks for a task"
+    response_model=list[SubtaskResponse],
+    summary="Get all subtasks for a task",
 )
 async def get_subtasks(
     task_id: int,
     user_id: int = Depends(get_current_user_id),
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
 ):
     """Get all subtasks for a task.
 
@@ -89,8 +88,7 @@ async def get_subtasks(
     task = await TaskService.get_task_by_id(task_id, session)
     if not task or task.user_id != user_id:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Task not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Task not found"
         )
 
     subtasks = await SubtaskService.get_task_subtasks(task_id, session)
@@ -98,15 +96,13 @@ async def get_subtasks(
 
 
 @router.patch(
-    "/subtasks/{subtask_id}",
-    response_model=SubtaskResponse,
-    summary="Update a subtask"
+    "/subtasks/{subtask_id}", response_model=SubtaskResponse, summary="Update a subtask"
 )
 async def update_subtask(
     subtask_id: int,
     subtask_data: UpdateSubtaskRequest,
     user_id: int = Depends(get_current_user_id),
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
 ):
     """Update a subtask's fields.
 
@@ -128,30 +124,31 @@ async def update_subtask(
     subtask = await SubtaskService.get_subtask_by_id(subtask_id, session)
     if not subtask:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Subtask not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Subtask not found"
         )
 
     task = await TaskService.get_task_by_id(subtask.task_id, session)
     if not task or task.user_id != user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You don't have permission to update this subtask"
+            detail="You don't have permission to update this subtask",
         )
 
-    updated_subtask = await SubtaskService.update_subtask(subtask_id, subtask_data, session)
+    updated_subtask = await SubtaskService.update_subtask(
+        subtask_id, subtask_data, session
+    )
     return updated_subtask
 
 
 @router.delete(
     "/subtasks/{subtask_id}",
     status_code=status.HTTP_204_NO_CONTENT,
-    summary="Delete a subtask"
+    summary="Delete a subtask",
 )
 async def delete_subtask(
     subtask_id: int,
     user_id: int = Depends(get_current_user_id),
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
 ):
     """Delete a subtask.
 
@@ -171,22 +168,18 @@ async def delete_subtask(
     subtask = await SubtaskService.get_subtask_by_id(subtask_id, session)
     if not subtask:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Subtask not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Subtask not found"
         )
 
     task = await TaskService.get_task_by_id(subtask.task_id, session)
     if not task or task.user_id != user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You don't have permission to delete this subtask"
+            detail="You don't have permission to delete this subtask",
         )
 
     success = await SubtaskService.delete_subtask(subtask_id, session)
     if not success:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Subtask not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Subtask not found"
         )
-
-    return None

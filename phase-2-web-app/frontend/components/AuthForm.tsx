@@ -15,12 +15,21 @@ import { Input } from './ui/Input';
 import { Button } from './ui/Button';
 import type { SignupRequest, LoginRequest } from '@/lib/types';
 
-interface AuthFormProps {
-  mode: 'login' | 'signup';
-  onSubmit: (data: SignupRequest | LoginRequest) => Promise<void>;
+interface SignupFormProps {
+  mode: 'signup';
+  onSubmit: (data: SignupRequest) => Promise<void>;
   error?: string | null;
   isLoading?: boolean;
 }
+
+interface LoginFormProps {
+  mode: 'login';
+  onSubmit: (data: LoginRequest) => Promise<void>;
+  error?: string | null;
+  isLoading?: boolean;
+}
+
+type AuthFormProps = SignupFormProps | LoginFormProps;
 
 export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormProps) {
   const [formData, setFormData] = useState({
@@ -76,18 +85,20 @@ export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormP
       return;
     }
 
-    const submitData = mode === 'signup'
-      ? {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }
-      : {
-          email: formData.email,
-          password: formData.password,
-        };
-
-    await onSubmit(submitData as SignupRequest | LoginRequest);
+    if (mode === 'signup') {
+      const submitData: SignupRequest = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      };
+      await onSubmit(submitData);
+    } else {
+      const submitData: LoginRequest = {
+        email: formData.email,
+        password: formData.password,
+      };
+      await onSubmit(submitData);
+    }
   };
 
   const handleChange = (field: keyof typeof formData) => (

@@ -131,13 +131,13 @@ export function TaskItem({
   // EDIT MODE
   if (isEditing) {
     return (
-      <div className="bg-white border-2 border-blue-500 rounded-lg p-5 sm:p-6 shadow-md">
+      <div className="bg-[#132f4c] border-2 border-[#66b2ff] rounded-lg p-5 sm:p-6 shadow-lg">
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-sm font-semibold text-gray-700">Edit Task</h4>
+            <h4 className="text-sm font-semibold text-[#66b2ff]">Edit Task</h4>
             <button
               onClick={handleCancel}
-              className="text-sm text-gray-500 hover:text-gray-700"
+              className="text-sm text-[#b2bac2] hover:text-[#66b2ff]"
             >
               ✕
             </button>
@@ -184,7 +184,7 @@ export function TaskItem({
 
           {/* Error */}
           {error && (
-            <p className="text-sm text-red-600" role="alert">
+            <p className="text-sm text-red-400" role="alert">
               {error}
             </p>
           )}
@@ -206,28 +206,45 @@ export function TaskItem({
   // VIEW MODE
   return (
     <div
-      className={`bg-white border rounded-lg shadow-sm transition-all hover:shadow-md ${
-        task.completed ? 'opacity-70 border-gray-300' : isOverdue ? 'border-red-400' : 'border-gray-200'
+      className={`bg-[#132f4c] border rounded-lg shadow-lg transition-all hover:shadow-xl ${
+        task.completed ? 'opacity-70 border-[#2a4a6f]' : isOverdue ? 'border-red-400' : 'border-[#2a4a6f]'
       }`}
     >
       <div className="p-5 sm:p-6">
         <div className="flex items-start gap-4 sm:gap-5">
-          {/* Checkbox */}
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={handleToggle}
-            disabled={isLoading}
-            className="mt-1.5 h-6 w-6 sm:h-6 sm:w-6 rounded-md border-2 border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500 cursor-pointer disabled:cursor-not-allowed flex-shrink-0"
-            aria-label={`Mark "${task.title}" as ${task.completed ? 'incomplete' : 'complete'}`}
-          />
+          {/* Checkbox - Custom Green Checkmark */}
+          <div className="relative mt-1.5 flex-shrink-0">
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={handleToggle}
+              disabled={isLoading}
+              className="h-6 w-6 sm:h-7 sm:w-7 rounded-md border-2 border-gray-300 appearance-none cursor-pointer disabled:cursor-wait focus:ring-2 focus:ring-green-500 transition-all hover:border-green-500 checked:bg-green-600 checked:border-green-600"
+              aria-label={`Mark "${task.title}" as ${task.completed ? 'incomplete' : 'complete'}`}
+            />
+            {task.completed && (
+              <svg
+                className="absolute top-0 left-0 h-6 w-6 sm:h-7 sm:w-7 text-white pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={3}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            )}
+          </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             {/* Title */}
             <h3
-              className={`text-base sm:text-lg font-semibold text-gray-900 mb-3 break-words leading-relaxed ${
-                task.completed ? 'line-through text-gray-500' : ''
+              className={`text-base sm:text-lg font-semibold text-[#b2bac2] mb-3 break-words leading-relaxed ${
+                task.completed ? 'line-through text-[#7a8592]' : ''
               }`}
             >
               {task.title}
@@ -249,20 +266,20 @@ export function TaskItem({
 
             {/* Description */}
             {task.description && (
-              <p className="text-sm sm:text-base text-gray-700 break-words mt-3 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#8b9ab0] break-words mt-3 leading-relaxed">
                 {task.description}
               </p>
             )}
 
             {/* Subtasks Summary */}
             {hasSubtasks && (
-              <div className="mt-3 text-sm sm:text-base text-gray-600 font-medium">
+              <div className="mt-3 text-sm sm:text-base text-[#8b9ab0] font-medium">
                 ☑ {subtasksCompleted}/{subtasksTotal} subtasks completed
               </div>
             )}
 
             {/* Metadata */}
-            <p className="mt-3 text-xs sm:text-sm text-gray-500">
+            <p className="mt-3 text-xs sm:text-sm text-[#7a8592]">
               Created {new Date(task.created_at).toLocaleDateString()}
               {task.updated_at !== task.created_at && (
                 <span> • Updated {new Date(task.updated_at).toLocaleDateString()}</span>
@@ -275,7 +292,7 @@ export function TaskItem({
             {hasSubtasks && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="px-3 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors touch-manipulation text-base font-medium"
+                className="px-3 py-2 text-[#b2bac2] hover:text-[#66b2ff] hover:bg-[#1e3a5f] rounded-lg transition-colors touch-manipulation text-base font-medium"
                 title="Show subtasks"
                 aria-label={isExpanded ? "Hide subtasks" : "Show subtasks"}
               >
@@ -285,7 +302,7 @@ export function TaskItem({
             <button
               onClick={() => setIsEditing(true)}
               disabled={isLoading}
-              className="px-3 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 disabled:opacity-50 rounded-lg transition-colors touch-manipulation text-sm font-medium"
+              className="px-3 py-2 text-[#66b2ff] hover:text-[#b2bac2] hover:bg-[#1e3a5f] disabled:opacity-50 rounded-lg transition-colors touch-manipulation text-sm font-medium"
               aria-label="Edit task"
             >
               <span className="hidden sm:inline">Edit</span>
@@ -294,7 +311,7 @@ export function TaskItem({
             <button
               onClick={handleDelete}
               disabled={isLoading}
-              className="px-3 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 disabled:opacity-50 rounded-lg transition-colors touch-manipulation text-sm font-medium"
+              className="px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 disabled:opacity-50 rounded-lg transition-colors touch-manipulation text-sm font-medium"
               aria-label="Delete task"
             >
               <span className="hidden sm:inline">Delete</span>
@@ -305,7 +322,7 @@ export function TaskItem({
 
         {/* Error Message */}
         {error && (
-          <p className="mt-4 text-sm sm:text-base text-red-600 font-medium" role="alert">
+          <p className="mt-4 text-sm sm:text-base text-red-400 font-medium" role="alert">
             {error}
           </p>
         )}
@@ -313,7 +330,7 @@ export function TaskItem({
 
       {/* Expanded Subtasks Section */}
       {isExpanded && hasSubtasks && (
-        <div className="border-t-2 border-gray-200 p-5 sm:p-6 bg-gray-50">
+        <div className="border-t-2 border-[#1e3a5f] p-5 sm:p-6 bg-[#0f2335]">
           <SubtasksList
             taskId={task.id}
             subtasks={task.subtasks || []}
