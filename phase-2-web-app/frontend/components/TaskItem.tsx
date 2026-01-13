@@ -206,11 +206,26 @@ export function TaskItem({
   // VIEW MODE
   return (
     <div
-      className={`bg-[#132f4c] border rounded-lg shadow-lg transition-all hover:shadow-xl ${
+      className={`relative bg-[#132f4c] border rounded-2xl shadow-[0_0_15px_rgba(59,130,246,0.1)] transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] ${
         task.completed ? 'opacity-70 border-[#2a4a6f]' : isOverdue ? 'border-red-400' : 'border-[#2a4a6f]'
       }`}
     >
-      <div className="p-5 sm:p-6">
+      {/* Status Indicator Line - Left Edge */}
+      <div
+        className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl ${
+          task.completed
+            ? 'bg-green-500'
+            : isOverdue
+            ? 'bg-red-500'
+            : task.priority === 'high'
+            ? 'bg-red-400'
+            : task.priority === 'medium'
+            ? 'bg-orange-400'
+            : 'bg-slate-400'
+        }`}
+      />
+
+      <div className="p-5 sm:p-6 pl-7">
         <div className="flex items-start gap-4 sm:gap-5">
           {/* Checkbox - Custom Green Checkmark */}
           <div className="relative mt-1.5 flex-shrink-0">
@@ -287,35 +302,35 @@ export function TaskItem({
             </p>
           </div>
 
-          {/* Action Buttons - Mobile: Icon only, Desktop: Text */}
-          <div className="flex sm:flex-col gap-2 flex-shrink-0">
+          {/* Action Buttons - Show on hover with icons only */}
+          <div className="flex sm:flex-col gap-2 flex-shrink-0 opacity-0 hover:opacity-100 transition-opacity group-hover:opacity-100">
             {hasSubtasks && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="px-3 py-2 text-[#b2bac2] hover:text-[#66b2ff] hover:bg-[#1e3a5f] rounded-lg transition-colors touch-manipulation text-base font-medium"
-                title="Show subtasks"
+                className="p-2 text-[#b2bac2] hover:text-[#66b2ff] hover:bg-[#1e3a5f] rounded-lg transition-colors"
+                title={isExpanded ? "Hide subtasks" : "Show subtasks"}
                 aria-label={isExpanded ? "Hide subtasks" : "Show subtasks"}
               >
-                <span className="text-base">{isExpanded ? '▲' : '▼'}</span>
+                <span className="text-lg">{isExpanded ? '▲' : '▼'}</span>
               </button>
             )}
             <button
               onClick={() => setIsEditing(true)}
               disabled={isLoading}
-              className="px-3 py-2 text-[#66b2ff] hover:text-[#b2bac2] hover:bg-[#1e3a5f] disabled:opacity-50 rounded-lg transition-colors touch-manipulation text-sm font-medium"
+              className="p-2 text-[#66b2ff] hover:text-[#b2bac2] hover:bg-[#1e3a5f] disabled:opacity-50 rounded-lg transition-colors"
               aria-label="Edit task"
+              title="Edit task"
             >
-              <span className="hidden sm:inline">Edit</span>
-              <span className="sm:hidden text-lg">✏️</span>
+              <span className="text-lg">✏️</span>
             </button>
             <button
               onClick={handleDelete}
               disabled={isLoading}
-              className="px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 disabled:opacity-50 rounded-lg transition-colors touch-manipulation text-sm font-medium"
+              className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 disabled:opacity-50 rounded-lg transition-colors"
               aria-label="Delete task"
+              title="Delete task"
             >
-              <span className="hidden sm:inline">Delete</span>
-              <span className="sm:hidden text-lg">🗑️</span>
+              <span className="text-lg">🗑️</span>
             </button>
           </div>
         </div>
