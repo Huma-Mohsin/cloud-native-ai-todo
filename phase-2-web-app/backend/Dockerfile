@@ -33,11 +33,14 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY --chown=appuser:appuser . .
 
+# Make startup script executable
+RUN chmod +x start.sh
+
 # Switch to non-root user
 USER appuser
 
 # Expose port 8000
 EXPOSE 8000
 
-# Start application on port 8000 (Railway will auto-map external port)
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start application using startup script (reads Railway's PORT variable)
+CMD ["/bin/sh", "./start.sh"]
