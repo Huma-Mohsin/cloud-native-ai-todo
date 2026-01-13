@@ -222,7 +222,7 @@ export default function DashboardPage() {
             </h1>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
               {user && (
                 <div className="flex items-center gap-2 px-4 py-2 bg-[#1e3a5f] rounded-lg border border-[#2a4a6f]">
                   <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold ${showSidebar ? 'bg-[#1e3a5f] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-[#1e3a5f] border-[#66b2ff] text-[#66b2ff]' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold"
+                  className="border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold"
+                  className="border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-[#2a4a6f] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-700 transition-all font-semibold"
+                  className="border-[#2a4a6f] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-700 transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>
