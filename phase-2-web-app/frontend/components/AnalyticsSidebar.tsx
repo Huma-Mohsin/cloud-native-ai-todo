@@ -180,16 +180,22 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
 
         {/* Content - Proper Heights */}
         <div className="p-5 space-y-5 pb-12">
-          {/* Quick Stats Cards - All 8 cards in 2 columns with pastel fills */}
+          {/* Quick Stats Cards - Glassmorphism with soft glow */}
           <div className="grid grid-cols-2 gap-3">
             {quickStats.map((stat, index) => (
               <div
                 key={index}
                 className={`
-                  ${stat.bgColor} border-2 ${stat.borderColor}
-                  rounded-lg p-3 shadow-lg
-                  transition-all duration-200 hover:shadow-xl hover:scale-105
+                  ${stat.bgColor} border ${stat.borderColor}
+                  rounded-2xl p-3
+                  backdrop-blur-md bg-opacity-20
+                  transition-all duration-200 hover:scale-105
+                  shadow-[0_0_15px_rgba(0,0,0,0.3)]
+                  hover:shadow-[0_0_25px_rgba(0,0,0,0.5)]
                 `}
+                style={{
+                  boxShadow: `0 0 20px ${stat.borderColor.replace('border-', 'rgba(').replace('-500', ', 0.3)')}`,
+                }}
               >
                 <div className="text-center">
                   <span className={`text-xl block mb-1 ${stat.iconColor}`}>{stat.icon}</span>

@@ -47,7 +47,7 @@ export function SearchBar({
       {/* Search Icon */}
       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
         <svg
-          className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400"
+          className="h-5 w-5 text-slate-400"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -60,14 +60,14 @@ export function SearchBar({
         </svg>
       </div>
 
-      {/* Input */}
+      {/* Input - Dark Navy with 1px border */}
       <input
         type="text"
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
-        className="w-full pl-11 sm:pl-12 pr-12 sm:pr-14 py-3.5 sm:py-4 text-base sm:text-lg font-medium border-2 border-purple-200 rounded-xl bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
+        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-slate-600 rounded-xl bg-slate-800/90 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:bg-slate-800"
       />
 
       {/* Clear Button */}
@@ -75,11 +75,11 @@ export function SearchBar({
         <button
           type="button"
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none touch-manipulation p-2 transition-colors"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200 focus:outline-none transition-colors"
           aria-label="Clear search"
         >
           <svg
-            className="h-6 w-6 sm:h-6 sm:w-6"
+            className="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
