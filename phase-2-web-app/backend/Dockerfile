@@ -37,7 +37,8 @@ COPY --chown=appuser:appuser . .
 USER appuser
 
 # Expose port (Railway uses dynamic PORT environment variable)
-EXPOSE ${PORT:-8000}
+EXPOSE 8000
 
 # Run application with dynamic port from Railway
-CMD uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}
+# Using exec form with shell to properly expand environment variables
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
