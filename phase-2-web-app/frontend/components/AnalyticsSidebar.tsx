@@ -186,7 +186,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               <div
                 key={index}
                 className={`
-                  bg-[#1a1a1a] border-l-4 ${stat.borderColor}
+                  bg-[#1a1a1a] border border-[#3a3a3a] border-l-4 ${stat.borderColor}
                   rounded-lg p-3
                   transition-all duration-200 hover:bg-[#2d2d2d]
                   shadow-sm
