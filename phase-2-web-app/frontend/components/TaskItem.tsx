@@ -307,7 +307,7 @@ export function TaskItem({
             {hasSubtasks && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="p-2 text-[#b2bac2] hover:text-[#66b2ff] hover:bg-[#1e3a5f] rounded-lg transition-colors"
+                className="p-2 text-[#b2bac2] hover:text-[#66b2ff] hover:bg-[#2d2d2d] rounded-lg transition-colors"
                 title={isExpanded ? "Hide subtasks" : "Show subtasks"}
                 aria-label={isExpanded ? "Hide subtasks" : "Show subtasks"}
               >
@@ -317,7 +317,7 @@ export function TaskItem({
             <button
               onClick={() => setIsEditing(true)}
               disabled={isLoading}
-              className="p-2 text-[#66b2ff] hover:text-[#b2bac2] hover:bg-[#1e3a5f] disabled:opacity-50 rounded-lg transition-colors"
+              className="p-2 text-[#66b2ff] hover:text-[#b2bac2] hover:bg-[#2d2d2d] disabled:opacity-50 rounded-lg transition-colors"
               aria-label="Edit task"
               title="Edit task"
             >

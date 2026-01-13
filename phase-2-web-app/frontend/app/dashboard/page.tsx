@@ -272,7 +272,7 @@ export default function DashboardPage() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="md:hidden p-2 rounded-lg hover:bg-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#66b2ff] text-[#b2bac2]"
+              className="md:hidden p-2 rounded-lg hover:bg-[#2d2d2d] focus:outline-none focus:ring-2 focus:ring-[#66b2ff] text-[#b2bac2]"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -411,7 +411,7 @@ export default function DashboardPage() {
               {smartFilter === 'upcoming' && 'Upcoming Tasks'}
               {smartFilter === 'completed' && 'Completed Tasks'}
               {tasks.length > 0 && (
-                <span className="ml-2 px-3 py-1 text-sm font-medium bg-[#1e3a5f] text-[#66b2ff] rounded-lg border border-[#2a4a6f]">
+                <span className="ml-2 px-3 py-1 text-sm font-medium bg-[#2d2d2d] text-[#66b2ff] rounded-lg border border-[#3a3a3a]">
                   {tasks.length}
                 </span>
               )}
@@ -419,12 +419,12 @@ export default function DashboardPage() {
           </div>
 
           {isLoading ? (
-            <div className="bg-[#132f4c] border border-[#2a4a6f] rounded-lg shadow-lg text-center py-20">
+            <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-lg shadow-lg text-center py-20">
               <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#66b2ff] border-r-transparent"></div>
               <p className="mt-4 text-base font-medium text-[#b2bac2]">Loading tasks...</p>
             </div>
           ) : tasks.length === 0 ? (
-            <div className="bg-gradient-to-br from-[#132f4c] to-[#0f2335] border-2 border-[#2a4a6f] rounded-2xl shadow-[0_0_20px_rgba(59,130,246,0.1)] text-center py-16 px-6">
+            <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border-2 border-[#3a3a3a] rounded-2xl shadow-[0_0_20px_rgba(59,130,246,0.1)] text-center py-16 px-6">
               {/* Empty State SVG Illustration */}
               <div className="mb-6 flex justify-center">
                 <svg className="w-32 h-32 text-[#66b2ff] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">

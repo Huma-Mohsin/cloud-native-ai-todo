@@ -161,7 +161,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           <div className="flex items-center justify-between mb-1">
             <button
               onClick={onClose}
-              className="lg:hidden text-[#b2bac2] hover:bg-[#1e3a5f] rounded-lg p-2 transition-colors"
+              className="lg:hidden text-[#b2bac2] hover:bg-[#2d2d2d] rounded-lg p-2 transition-colors"
               aria-label="Close sidebar"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
