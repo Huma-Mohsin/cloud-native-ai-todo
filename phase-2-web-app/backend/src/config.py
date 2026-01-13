@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRATION_MINUTES: int = 1440  # 24 hours
 
+    def __init__(self, **data):
+        """Initialize settings and clean up whitespace in DATABASE_URL."""
+        if "DATABASE_URL" in data:
+            data["DATABASE_URL"] = data["DATABASE_URL"].strip()
+        super().__init__(**data)
+
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", case_sensitive=True, extra="ignore"
     )
