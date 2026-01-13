@@ -36,12 +36,8 @@ COPY --chown=appuser:appuser . .
 # Switch to non-root user
 USER appuser
 
-# Expose port
-EXPOSE 8000
+# Expose port (Railway uses dynamic PORT environment variable)
+EXPOSE ${PORT:-8000}
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/health')"
-
-# Run application
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run application with dynamic port from Railway
+CMD uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}
