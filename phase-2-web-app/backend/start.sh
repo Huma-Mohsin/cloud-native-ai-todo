@@ -1,10 +1,10 @@
 #!/bin/sh
 # Railway startup script with proper PORT handling
 
-# Railway expects port 8000 based on dashboard
+# Use Railway's PORT or default to 8000
 PORT=${PORT:-8000}
 
 echo "Starting uvicorn on port $PORT..."
 
-# Start uvicorn on the correct port
-exec uvicorn src.main:app --host 0.0.0.0 --port 8000
+# Start uvicorn
+exec uvicorn src.main:app --host 0.0.0.0 --port "$PORT"

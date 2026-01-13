@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Phase II Todo App - Next.js Frontend",
   "private": true,
+  "engines": {
+    "node": ">=18.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
