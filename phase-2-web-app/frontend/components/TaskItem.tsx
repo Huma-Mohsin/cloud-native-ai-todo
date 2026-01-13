@@ -221,7 +221,7 @@ export function TaskItem({
             ? 'bg-red-400'
             : task.priority === 'medium'
             ? 'bg-orange-400'
-            : 'bg-slate-400'
+            : 'bg-gray-400'
         }`}
       />
 
