@@ -4,6 +4,7 @@ This module handles loading and validating environment variables for the applica
 It uses Pydantic Settings for type-safe configuration management.
 """
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -26,11 +27,13 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRATION_MINUTES: int = 1440  # 24 hours
 
-    def __init__(self, **data):
-        """Initialize settings and clean up whitespace in DATABASE_URL."""
-        if "DATABASE_URL" in data:
-            data["DATABASE_URL"] = data["DATABASE_URL"].strip()
-        super().__init__(**data)
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def strip_database_url(cls, v: str) -> str:
+        """Strip whitespace from DATABASE_URL to handle Railway env var issues."""
+        if isinstance(v, str):
+            return v.strip()
+        return v
 
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", case_sensitive=True, extra="ignore"
