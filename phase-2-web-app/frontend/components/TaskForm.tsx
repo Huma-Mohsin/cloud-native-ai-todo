@@ -162,7 +162,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Advanced Options */}
       {showAdvanced && (
-        <div className="space-y-4 p-5 bg-[#0f2335] rounded-xl border-2 border-[#2a4a6f] shadow-lg">
+        <div className="space-y-4 p-5 bg-[#1a1a1a] rounded-xl border-2 border-[#3a3a3a] shadow-lg">
           {/* Priority Selector */}
           <PrioritySelector value={priority} onChange={setPriority} disabled={isLoading} />
 
@@ -200,7 +200,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Quick Summary */}
       {hasAdvancedFields && (
-        <div className="text-sm text-[#b2bac2] bg-[#1e3a5f] p-4 rounded-xl border-2 border-[#2a4a6f] shadow-lg">
+        <div className="text-sm text-[#b2bac2] bg-[#2d2d2d] p-4 rounded-xl border-2 border-[#3a3a3a] shadow-lg">
           <strong className="text-base text-[#66b2ff]">📝 Task Summary:</strong>
           {' '}
           <span className="font-semibold">{priority}</span> priority

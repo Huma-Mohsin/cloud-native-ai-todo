@@ -287,9 +287,9 @@ export default function DashboardPage() {
 
           {/* Mobile Menu Dropdown */}
           {showMobileMenu && (
-            <div className="md:hidden mt-4 pt-4 border-t border-[#1e3a5f] space-y-3">
+            <div className="md:hidden mt-4 pt-4 border-t border-[#3a3a3a] space-y-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-[#1e3a5f] rounded-lg border border-[#2a4a6f] mb-2">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-[#2d2d2d] rounded-lg border border-[#3a3a3a] mb-2">
                   <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                   onClick={() => { setShowSidebar(!showSidebar); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className={`w-full justify-center border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] font-semibold ${showSidebar ? 'bg-[#1e3a5f] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] font-semibold ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('json'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] font-semibold"
+                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] font-semibold"
                 >
                   📥 JSON
                 </Button>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('csv'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-[#2a4a6f] hover:border-[#66b2ff] hover:bg-[#1e3a5f] text-slate-700 hover:text-[#66b2ff] font-semibold"
+                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-slate-400 hover:text-[#66b2ff] font-semibold"
                 >
                   📊 CSV
                 </Button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="w-full justify-center border-[#2a4a6f] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-700 font-semibold"
+                  className="w-full justify-center border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-slate-400 font-semibold"
                 >
                   🚪 Logout
                 </Button>

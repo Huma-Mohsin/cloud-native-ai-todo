@@ -131,7 +131,7 @@ export function TaskItem({
   // EDIT MODE
   if (isEditing) {
     return (
-      <div className="bg-[#132f4c] border-2 border-[#66b2ff] rounded-lg p-5 sm:p-6 shadow-lg">
+      <div className="bg-[#1a1a1a] border-2 border-[#66b2ff] rounded-lg p-5 sm:p-6 shadow-lg">
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
             <h4 className="text-sm font-semibold text-[#66b2ff]">Edit Task</h4>
@@ -345,7 +345,7 @@ export function TaskItem({
 
       {/* Expanded Subtasks Section */}
       {isExpanded && hasSubtasks && (
-        <div className="border-t-2 border-[#1e3a5f] p-5 sm:p-6 bg-[#0f2335]">
+        <div className="border-t-2 border-[#3a3a3a] p-5 sm:p-6 bg-[#0a0a0a]">
           <SubtasksList
             taskId={task.id}
             subtasks={task.subtasks || []}
