@@ -180,29 +180,24 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
 
         {/* Content - Proper Heights */}
         <div className="p-5 space-y-5 pb-12">
-          {/* Quick Stats Cards - Glassmorphism with soft glow */}
+          {/* Quick Stats Cards - Clean & Minimal */}
           <div className="grid grid-cols-2 gap-3">
             {quickStats.map((stat, index) => (
               <div
                 key={index}
                 className={`
-                  ${stat.bgColor} border ${stat.borderColor}
-                  rounded-2xl p-3
-                  backdrop-blur-md bg-opacity-20
-                  transition-all duration-200 hover:scale-105
-                  shadow-[0_0_15px_rgba(0,0,0,0.3)]
-                  hover:shadow-[0_0_25px_rgba(0,0,0,0.5)]
+                  bg-[#1a1a1a] border-l-4 ${stat.borderColor}
+                  rounded-lg p-3
+                  transition-all duration-200 hover:bg-[#2d2d2d]
+                  shadow-sm
                 `}
-                style={{
-                  boxShadow: `0 0 20px ${stat.borderColor.replace('border-', 'rgba(').replace('-500', ', 0.3)')}`,
-                }}
               >
                 <div className="text-center">
                   <span className={`text-xl block mb-1 ${stat.iconColor}`}>{stat.icon}</span>
-                  <p className={`text-[10px] font-semibold uppercase tracking-wide ${stat.textColor} opacity-70 mb-1`}>
+                  <p className={`text-[10px] font-semibold uppercase tracking-wide ${stat.iconColor} opacity-80 mb-1`}>
                     {stat.label}
                   </p>
-                  <p className={`text-lg font-bold ${stat.textColor}`}>{stat.value}</p>
+                  <p className={`text-lg font-bold ${stat.iconColor}`}>{stat.value}</p>
                 </div>
               </div>
             ))}
