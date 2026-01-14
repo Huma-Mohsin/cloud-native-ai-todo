@@ -74,9 +74,9 @@ export function SubtasksList({ taskId, subtasks, onUpdate, disabled = false }: S
       {/* Header with progress */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <h4 className="text-sm font-medium text-gray-700">Subtasks</h4>
+          <h4 className="text-sm font-medium text-gray-300">Subtasks</h4>
           {totalCount > 0 && (
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-400">
               {completedCount}/{totalCount} completed
             </span>
           )}
@@ -86,7 +86,7 @@ export function SubtasksList({ taskId, subtasks, onUpdate, disabled = false }: S
           <button
             type="button"
             onClick={() => setIsAdding(true)}
-            className="text-xs text-blue-600 hover:text-blue-800 focus:outline-none"
+            className="text-xs text-emerald-400 hover:text-emerald-300 focus:outline-none"
           >
             + Add subtask
           </button>
@@ -95,9 +95,9 @@ export function SubtasksList({ taskId, subtasks, onUpdate, disabled = false }: S
 
       {/* Progress bar */}
       {totalCount > 0 && (
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
           <div
-            className="h-full bg-green-500 transition-all duration-300"
+            className="h-full bg-emerald-500 transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -127,13 +127,13 @@ export function SubtasksList({ taskId, subtasks, onUpdate, disabled = false }: S
             onChange={(e) => setNewSubtaskTitle(e.target.value)}
             placeholder="Subtask title..."
             disabled={isSubmitting}
-            className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
+            className="flex-1 px-3 py-2 text-sm border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 bg-gray-700 text-gray-200 placeholder-gray-500"
             autoFocus
           />
           <button
             type="submit"
             disabled={isSubmitting || !newSubtaskTitle.trim()}
-            className="px-3 py-2 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-2 text-sm text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Adding...' : 'Add'}
           </button>
@@ -145,7 +145,7 @@ export function SubtasksList({ taskId, subtasks, onUpdate, disabled = false }: S
               setError('');
             }}
             disabled={isSubmitting}
-            className="px-3 py-2 text-sm text-gray-600 hover:text-gray-800 focus:outline-none disabled:opacity-50"
+            className="px-3 py-2 text-sm text-gray-400 hover:text-gray-300 focus:outline-none disabled:opacity-50"
           >
             Cancel
           </button>
@@ -154,7 +154,7 @@ export function SubtasksList({ taskId, subtasks, onUpdate, disabled = false }: S
 
       {/* Error message */}
       {error && (
-        <p className="text-xs text-red-600">{error}</p>
+        <p className="text-xs text-red-400">{error}</p>
       )}
 
       {/* Empty state */}
@@ -192,13 +192,13 @@ function SubtaskItem({ subtask, onToggle, onDelete, disabled }: SubtaskItemProps
         checked={subtask.completed}
         onChange={() => onToggle(subtask)}
         disabled={disabled}
-        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 disabled:opacity-50 cursor-pointer"
+        className="w-4 h-4 text-emerald-600 border-gray-600 rounded focus:ring-emerald-500 focus:ring-2 disabled:opacity-50 cursor-pointer bg-gray-700"
       />
 
       {/* Title */}
       <span
         className={`flex-1 text-sm ${
-          subtask.completed ? 'line-through text-gray-500' : 'text-gray-700'
+          subtask.completed ? 'line-through text-gray-500' : 'text-gray-300'
         }`}
       >
         {subtask.title}
@@ -209,7 +209,7 @@ function SubtaskItem({ subtask, onToggle, onDelete, disabled }: SubtaskItemProps
         <button
           type="button"
           onClick={() => onDelete(subtask.id)}
-          className="text-xs text-red-600 hover:text-red-800 focus:outline-none"
+          className="text-xs text-red-400 hover:text-red-300 focus:outline-none"
           title="Delete subtask"
         >
           Delete
