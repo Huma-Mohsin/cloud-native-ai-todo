@@ -38,8 +38,8 @@ export function TaskList({ tasks, onToggle, onUpdate, onDelete, isLoading = fals
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
-        <p className="mt-2 text-sm text-gray-600">Loading tasks...</p>
+        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-emerald-500 border-r-transparent"></div>
+        <p className="mt-2 text-sm text-gray-300">Loading tasks...</p>
       </div>
     );
   }
@@ -47,13 +47,13 @@ export function TaskList({ tasks, onToggle, onUpdate, onDelete, isLoading = fals
   return (
     <div className="space-y-4">
       {/* Filter tabs */}
-      <div className="flex gap-2 border-b border-gray-200">
+      <div className="flex gap-2 border-b border-gray-700">
         <button
           onClick={() => setFilter('all')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'all'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              ? 'border-emerald-500 text-emerald-400'
+              : 'border-transparent text-gray-400 hover:text-gray-200'
           }`}
         >
           All ({tasks.length})
@@ -62,8 +62,8 @@ export function TaskList({ tasks, onToggle, onUpdate, onDelete, isLoading = fals
           onClick={() => setFilter('pending')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'pending'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              ? 'border-emerald-500 text-emerald-400'
+              : 'border-transparent text-gray-400 hover:text-gray-200'
           }`}
         >
           Pending ({pendingCount})
@@ -72,8 +72,8 @@ export function TaskList({ tasks, onToggle, onUpdate, onDelete, isLoading = fals
           onClick={() => setFilter('completed')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             filter === 'completed'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              ? 'border-emerald-500 text-emerald-400'
+              : 'border-transparent text-gray-400 hover:text-gray-200'
           }`}
         >
           Completed ({completedCount})
@@ -82,8 +82,8 @@ export function TaskList({ tasks, onToggle, onUpdate, onDelete, isLoading = fals
 
       {/* Task list */}
       {filteredTasks.length === 0 ? (
-        <div className="text-center py-12 bg-gray-50 rounded-lg">
-          <p className="text-gray-600">
+        <div className="text-center py-12 bg-gray-800 rounded-lg">
+          <p className="text-gray-300">
             {filter === 'all' && 'No tasks yet. Create your first task above!'}
             {filter === 'pending' && 'No pending tasks. Great job!'}
             {filter === 'completed' && 'No completed tasks yet.'}
