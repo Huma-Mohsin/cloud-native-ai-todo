@@ -302,8 +302,8 @@ export function TaskItem({
             </p>
           </div>
 
-          {/* Action Buttons - Show on hover with icons only */}
-          <div className="flex sm:flex-col gap-2 flex-shrink-0 opacity-0 hover:opacity-100 transition-opacity group-hover:opacity-100">
+          {/* Action Buttons - Always visible */}
+          <div className="flex sm:flex-col gap-2 flex-shrink-0">
             {hasSubtasks && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
