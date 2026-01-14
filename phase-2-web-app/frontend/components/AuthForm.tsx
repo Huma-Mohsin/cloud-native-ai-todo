@@ -13,6 +13,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Input } from './ui/Input';
 import { Button } from './ui/Button';
+import { PasswordStrength } from './ui/PasswordStrength';
 import type { SignupRequest, LoginRequest } from '@/lib/types';
 
 interface SignupFormProps {
@@ -153,6 +154,8 @@ export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormP
         disabled={isLoading}
         required
       />
+
+      {mode === 'signup' && <PasswordStrength password={formData.password} />}
 
       {mode === 'login' && (
         <div className="text-right">
