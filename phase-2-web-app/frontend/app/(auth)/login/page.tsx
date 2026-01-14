@@ -25,10 +25,8 @@ export default function LoginPage() {
         <div className="relative z-10 w-full max-w-lg">
           {/* App Branding */}
           <div className="text-center mb-12 animate-slide-up">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-2xl shadow-emerald-500/30 mb-6">
-              <span className="text-4xl">✓</span>
-            </div>
-            <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-4">
+            <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-4 flex items-center justify-center gap-4">
+              <span className="text-6xl">📋</span>
               TaskFlow
             </h1>
             <p className="text-xl text-gray-400 font-medium">
