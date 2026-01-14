@@ -228,11 +228,12 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#4b5563',
-                    border: '2px solid #6b7280',
+                    backgroundColor: '#6b7280',
+                    border: '2px solid #9ca3af',
                     borderRadius: '8px',
                     fontSize: '13px',
                     color: '#ffffff',
+                    fontWeight: '600',
                   }}
                 />
                 <Legend
@@ -255,11 +256,12 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 <YAxis stroke="#9ca3af" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#4b5563',
-                    border: '2px solid #6b7280',
+                    backgroundColor: '#6b7280',
+                    border: '2px solid #9ca3af',
                     borderRadius: '8px',
                     fontSize: '13px',
                     color: '#ffffff',
+                    fontWeight: '600',
                   }}
                 />
                 <Bar dataKey="value" radius={[8, 8, 0, 0]}>
@@ -283,11 +285,12 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 <YAxis stroke="#9ca3af" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#4b5563',
-                    border: '2px solid #6b7280',
+                    backgroundColor: '#6b7280',
+                    border: '2px solid #9ca3af',
                     borderRadius: '8px',
                     fontSize: '13px',
                     color: '#ffffff',
+                    fontWeight: '600',
                   }}
                 />
                 <Legend wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#f3f4f6' }} />
