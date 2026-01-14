@@ -87,8 +87,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       label: 'Success Rate',
       value: `${stats.completion_rate}%`,
       icon: '📈',
-      borderColor: 'border-blue-400',
-      iconColor: 'text-blue-400',
+      borderColor: 'border-cyan-400',
+      iconColor: 'text-cyan-400',
     },
     {
       label: 'High',
@@ -108,8 +108,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       label: 'Low',
       value: stats.low_priority,
       icon: '⚪',
-      borderColor: 'border-gray-400',
-      iconColor: 'text-gray-400',
+      borderColor: 'border-indigo-400',
+      iconColor: 'text-indigo-400',
     },
     {
       label: 'Overdue',
