@@ -60,79 +60,63 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
     { day: 'Sun', completed: 3, created: 4 },
   ];
 
-  // Stats cards data - Light theme with emerald accents
+  // Stats cards data - Dark theme with colored borders
   const quickStats = [
     {
       label: 'Total',
       value: stats.total,
       icon: '📋',
-      bgColor: 'bg-purple-50',
       borderColor: 'border-purple-400',
-      iconColor: 'text-purple-600',
-      textColor: 'text-purple-700',
+      iconColor: 'text-purple-400',
     },
     {
       label: 'Pending',
       value: stats.pending,
       icon: '⏳',
-      bgColor: 'bg-orange-50',
       borderColor: 'border-orange-400',
-      iconColor: 'text-orange-600',
-      textColor: 'text-orange-700',
+      iconColor: 'text-orange-400',
     },
     {
       label: 'Completed',
       value: stats.completed,
       icon: '✅',
-      bgColor: 'bg-green-50',
       borderColor: 'border-green-400',
-      iconColor: 'text-green-600',
-      textColor: 'text-green-700',
+      iconColor: 'text-green-400',
     },
     {
       label: 'Success Rate',
       value: `${stats.completion_rate}%`,
       icon: '📈',
-      bgColor: 'bg-emerald-50',
-      borderColor: 'border-emerald-500',
-      iconColor: 'text-emerald-600',
-      textColor: 'text-emerald-700',
+      borderColor: 'border-emerald-400',
+      iconColor: 'text-emerald-400',
     },
     {
       label: 'High',
       value: stats.high_priority,
       icon: '🔴',
-      bgColor: 'bg-red-50',
       borderColor: 'border-red-400',
-      iconColor: 'text-red-600',
-      textColor: 'text-red-700',
+      iconColor: 'text-red-400',
     },
     {
       label: 'Medium',
       value: stats.medium_priority,
       icon: '🟡',
-      bgColor: 'bg-amber-50',
       borderColor: 'border-amber-400',
-      iconColor: 'text-amber-600',
-      textColor: 'text-amber-700',
+      iconColor: 'text-amber-400',
     },
     {
       label: 'Low',
       value: stats.low_priority,
       icon: '⚪',
-      bgColor: 'bg-gray-50',
       borderColor: 'border-gray-400',
-      iconColor: 'text-gray-600',
-      textColor: 'text-gray-700',
+      iconColor: 'text-gray-400',
     },
     {
       label: 'Overdue',
       value: stats.overdue,
       icon: '⚠️',
-      bgColor: 'bg-pink-50',
       borderColor: 'border-pink-400',
-      iconColor: 'text-pink-600',
-      textColor: 'text-pink-700',
+      iconColor: 'text-pink-400',
     },
   ];
 
@@ -180,24 +164,24 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
 
         {/* Content - Dark Background */}
         <div className="p-5 space-y-5 pb-12 bg-gray-800">
-          {/* Quick Stats Cards - Clean & Minimal */}
+          {/* Quick Stats Cards - Dark theme with colored borders */}
           <div className="grid grid-cols-2 gap-3">
             {quickStats.map((stat, index) => (
               <div
                 key={index}
                 className={`
-                  bg-white border border-gray-200 border-l-4 ${stat.borderColor}
+                  bg-gray-800 border-l-4 ${stat.borderColor}
                   rounded-lg p-3
-                  transition-all duration-200 hover:shadow-md hover:scale-105
+                  transition-all duration-200 hover:bg-gray-700
                   shadow-sm
                 `}
               >
                 <div className="text-center">
                   <span className={`text-xl block mb-1 ${stat.iconColor}`}>{stat.icon}</span>
-                  <p className={`text-[10px] font-semibold uppercase tracking-wide ${stat.iconColor} opacity-80 mb-1`}>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400 mb-1">
                     {stat.label}
                   </p>
-                  <p className={`text-lg font-bold ${stat.textColor}`}>{stat.value}</p>
+                  <p className="text-lg font-bold text-white">{stat.value}</p>
                 </div>
               </div>
             ))}
