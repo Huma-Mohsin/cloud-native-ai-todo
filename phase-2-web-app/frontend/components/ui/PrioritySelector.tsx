@@ -15,13 +15,16 @@ interface PrioritySelectorProps {
   disabled?: boolean;
 }
 
-const priorities: { value: Priority; label: string; color: string; bg: string; border: string }[] = [
+const priorities: { value: Priority; label: string; color: string; bg: string; border: string; unselectedBg: string; unselectedBorder: string; unselectedColor: string }[] = [
   {
     value: 'low',
     label: 'Low',
     color: 'text-gray-700',
     bg: 'bg-gray-100 hover:bg-gray-200',
     border: 'border-gray-400',
+    unselectedBg: 'bg-gray-700 hover:bg-gray-600',
+    unselectedBorder: 'border-gray-500',
+    unselectedColor: 'text-gray-300',
   },
   {
     value: 'medium',
@@ -29,6 +32,9 @@ const priorities: { value: Priority; label: string; color: string; bg: string; b
     color: 'text-orange-700',
     bg: 'bg-yellow-100 hover:bg-orange-100',
     border: 'border-yellow-400',
+    unselectedBg: 'bg-yellow-900/30 hover:bg-yellow-800/40',
+    unselectedBorder: 'border-yellow-600/50',
+    unselectedColor: 'text-yellow-400',
   },
   {
     value: 'high',
@@ -36,6 +42,9 @@ const priorities: { value: Priority; label: string; color: string; bg: string; b
     color: 'text-red-700',
     bg: 'bg-red-100 hover:bg-pink-100',
     border: 'border-red-400',
+    unselectedBg: 'bg-red-900/30 hover:bg-red-800/40',
+    unselectedBorder: 'border-red-600/50',
+    unselectedColor: 'text-red-400',
   },
 ];
 
@@ -57,7 +66,7 @@ export function PrioritySelector({ value, onChange, disabled = false }: Priority
               className={`
                 flex-1 px-4 py-2 rounded-lg border-2 font-medium text-sm
                 transition-all duration-200 ease-in-out
-                ${isSelected ? `${priority.bg} ${priority.border} ${priority.color} shadow-sm` : 'bg-gray-800 border-gray-600 text-gray-400 hover:border-gray-500'}
+                ${isSelected ? `${priority.bg} ${priority.border} ${priority.color} shadow-sm` : `${priority.unselectedBg} ${priority.unselectedBorder} ${priority.unselectedColor}`}
                 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500
               `}
