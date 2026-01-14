@@ -44,7 +44,7 @@ export function DatePicker({ value, onChange, disabled = false, showTime = true 
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-gray-300">
         Due Date {value && <span className="text-gray-500">(optional)</span>}
       </label>
 
@@ -55,7 +55,7 @@ export function DatePicker({ value, onChange, disabled = false, showTime = true 
           value={inputValue}
           onChange={(e) => onChange(e.target.value || null)}
           disabled={disabled}
-          className="w-full px-3 py-2 pr-20 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-3 py-2 pr-20 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed bg-gray-800 text-gray-200"
         />
 
         {/* Action buttons */}
@@ -65,7 +65,7 @@ export function DatePicker({ value, onChange, disabled = false, showTime = true 
               type="button"
               onClick={handleClear}
               disabled={disabled}
-              className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 focus:outline-none disabled:opacity-50"
+              className="px-2 py-1 text-xs text-gray-400 hover:text-gray-300 focus:outline-none disabled:opacity-50"
               title="Clear date"
             >
               Clear
@@ -75,7 +75,7 @@ export function DatePicker({ value, onChange, disabled = false, showTime = true 
             type="button"
             onClick={() => setShowPresets(!showPresets)}
             disabled={disabled}
-            className="px-2 py-1 text-xs text-blue-600 hover:text-blue-800 focus:outline-none disabled:opacity-50"
+            className="px-2 py-1 text-xs text-emerald-400 hover:text-emerald-300 focus:outline-none disabled:opacity-50"
             title="Quick presets"
           >
             Presets
@@ -84,13 +84,13 @@ export function DatePicker({ value, onChange, disabled = false, showTime = true 
 
         {/* Presets dropdown */}
         {showPresets && !disabled && (
-          <div className="absolute z-10 top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+          <div className="absolute z-10 top-full mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
             {presets.map((preset) => (
               <button
                 key={preset.label}
                 type="button"
                 onClick={() => handlePresetClick(preset)}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-100 first:rounded-t-lg last:rounded-b-lg"
+                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-700 focus:outline-none focus:bg-gray-700 first:rounded-t-lg last:rounded-b-lg text-gray-300"
               >
                 <span className="font-medium">{preset.label}</span>
                 <span className="ml-2 text-xs text-gray-500">
@@ -104,7 +104,7 @@ export function DatePicker({ value, onChange, disabled = false, showTime = true 
 
       {/* Display formatted date */}
       {value && (
-        <p className="text-xs text-gray-600">
+        <p className="text-xs text-gray-400">
           📅 {displayValue}
         </p>
       )}
