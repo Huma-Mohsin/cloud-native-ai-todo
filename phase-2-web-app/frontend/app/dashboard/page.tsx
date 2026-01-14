@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-gray-700 border-emerald-400 text-emerald-400' : ''}`}
+                  className={`border-gray-600 hover:border-emerald-400 hover:bg-gray-600 text-white hover:text-emerald-400 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-gray-600 border-emerald-400 text-emerald-400' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2"
+                  className="border-gray-600 hover:border-emerald-400 hover:bg-gray-600 text-white hover:text-emerald-400 transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2"
+                  className="border-gray-600 hover:border-emerald-400 hover:bg-gray-600 text-white hover:text-emerald-400 transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-gray-600 hover:border-red-400 hover:bg-red-900/30 hover:text-red-400 text-gray-200 transition-all font-semibold px-4 py-2"
+                  className="border-gray-600 hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-white transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                   onClick={() => { setShowSidebar(!showSidebar); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className={`w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 font-semibold ${showSidebar ? 'bg-gray-700 border-emerald-400 text-emerald-400' : ''}`}
+                  className={`w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-600 text-white hover:text-emerald-400 font-semibold ${showSidebar ? 'bg-gray-600 border-emerald-400 text-emerald-400' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('json'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 font-semibold"
+                  className="w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-600 text-white hover:text-emerald-400 font-semibold"
                 >
                   📥 JSON
                 </Button>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('csv'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 font-semibold"
+                  className="w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-600 text-white hover:text-emerald-400 font-semibold"
                 >
                   📊 CSV
                 </Button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="w-full justify-center border-gray-600 hover:border-red-400 hover:bg-red-900/30 hover:text-red-400 text-gray-200 font-semibold"
+                  className="w-full justify-center border-gray-600 hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-white font-semibold"
                 >
                   🚪 Logout
                 </Button>
