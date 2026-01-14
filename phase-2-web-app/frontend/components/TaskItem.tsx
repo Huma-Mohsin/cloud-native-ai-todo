@@ -131,13 +131,13 @@ export function TaskItem({
   // EDIT MODE
   if (isEditing) {
     return (
-      <div className="bg-[#1a1a1a] border-2 border-[#66b2ff] rounded-lg p-5 sm:p-6 shadow-lg">
+      <div className="bg-white border-2 border-teal-400 rounded-xl p-5 sm:p-6 shadow-xl">
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-sm font-semibold text-[#66b2ff]">Edit Task</h4>
+            <h4 className="text-sm font-semibold text-teal-600">Edit Task</h4>
             <button
               onClick={handleCancel}
-              className="text-sm text-[#b2bac2] hover:text-[#66b2ff]"
+              className="text-sm text-gray-600 hover:text-teal-600"
             >
               ✕
             </button>
@@ -184,7 +184,7 @@ export function TaskItem({
 
           {/* Error */}
           {error && (
-            <p className="text-sm text-red-400" role="alert">
+            <p className="text-sm text-red-600" role="alert">
               {error}
             </p>
           )}
@@ -206,13 +206,13 @@ export function TaskItem({
   // VIEW MODE
   return (
     <div
-      className={`relative bg-[#1a1a1a] border rounded-2xl shadow-[0_0_15px_rgba(59,130,246,0.1)] transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] ${
-        task.completed ? 'opacity-70 border-[#3a3a3a]' : isOverdue ? 'border-red-400' : 'border-[#3a3a3a]'
+      className={`relative bg-white border rounded-xl shadow-lg transition-all hover:shadow-xl ${
+        task.completed ? 'opacity-70 border-gray-300' : isOverdue ? 'border-red-400' : 'border-gray-200'
       }`}
     >
       {/* Status Indicator Line - Left Edge */}
       <div
-        className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl ${
+        className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-xl ${
           task.completed
             ? 'bg-green-500'
             : isOverdue
@@ -258,8 +258,8 @@ export function TaskItem({
           <div className="flex-1 min-w-0">
             {/* Title */}
             <h3
-              className={`text-base sm:text-lg font-semibold text-[#b2bac2] mb-3 break-words leading-relaxed ${
-                task.completed ? 'line-through text-[#7a8592]' : ''
+              className={`text-base sm:text-lg font-semibold text-gray-800 mb-3 break-words leading-relaxed ${
+                task.completed ? 'line-through text-gray-500' : ''
               }`}
             >
               {task.title}
@@ -281,20 +281,20 @@ export function TaskItem({
 
             {/* Description */}
             {task.description && (
-              <p className="text-sm sm:text-base text-[#8b9ab0] break-words mt-3 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 break-words mt-3 leading-relaxed">
                 {task.description}
               </p>
             )}
 
             {/* Subtasks Summary */}
             {hasSubtasks && (
-              <div className="mt-3 text-sm sm:text-base text-[#8b9ab0] font-medium">
+              <div className="mt-3 text-sm sm:text-base text-gray-600 font-medium">
                 ☑ {subtasksCompleted}/{subtasksTotal} subtasks completed
               </div>
             )}
 
             {/* Metadata */}
-            <p className="mt-3 text-xs sm:text-sm text-[#7a8592]">
+            <p className="mt-3 text-xs sm:text-sm text-gray-500">
               Created {new Date(task.created_at).toLocaleDateString()}
               {task.updated_at !== task.created_at && (
                 <span> • Updated {new Date(task.updated_at).toLocaleDateString()}</span>
@@ -307,7 +307,7 @@ export function TaskItem({
             {hasSubtasks && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="p-2 text-[#b2bac2] hover:text-[#66b2ff] hover:bg-[#2d2d2d] rounded-lg transition-colors"
+                className="p-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors"
                 title={isExpanded ? "Hide subtasks" : "Show subtasks"}
                 aria-label={isExpanded ? "Hide subtasks" : "Show subtasks"}
               >
@@ -317,7 +317,7 @@ export function TaskItem({
             <button
               onClick={() => setIsEditing(true)}
               disabled={isLoading}
-              className="p-2 text-[#66b2ff] hover:text-[#b2bac2] hover:bg-[#2d2d2d] disabled:opacity-50 rounded-lg transition-colors"
+              className="p-2 text-teal-600 hover:text-teal-700 hover:bg-teal-50 disabled:opacity-50 rounded-lg transition-colors"
               aria-label="Edit task"
               title="Edit task"
             >
@@ -326,7 +326,7 @@ export function TaskItem({
             <button
               onClick={handleDelete}
               disabled={isLoading}
-              className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 disabled:opacity-50 rounded-lg transition-colors"
+              className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 disabled:opacity-50 rounded-lg transition-colors"
               aria-label="Delete task"
               title="Delete task"
             >
@@ -337,7 +337,7 @@ export function TaskItem({
 
         {/* Error Message */}
         {error && (
-          <p className="mt-4 text-sm sm:text-base text-red-400 font-medium" role="alert">
+          <p className="mt-4 text-sm sm:text-base text-red-600 font-medium" role="alert">
             {error}
           </p>
         )}
@@ -345,7 +345,7 @@ export function TaskItem({
 
       {/* Expanded Subtasks Section */}
       {isExpanded && hasSubtasks && (
-        <div className="border-t-2 border-[#3a3a3a] p-5 sm:p-6 bg-[#0a0a0a]">
+        <div className="border-t-2 border-gray-200 p-5 sm:p-6 bg-gray-50">
           <SubtasksList
             taskId={task.id}
             subtasks={task.subtasks || []}

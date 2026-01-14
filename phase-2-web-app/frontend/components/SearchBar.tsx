@@ -47,7 +47,7 @@ export function SearchBar({
       {/* Search Icon */}
       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
         <svg
-          className="h-5 w-5 text-[#8b9ab0]"
+          className="h-5 w-5 text-gray-400"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -60,14 +60,14 @@ export function SearchBar({
         </svg>
       </div>
 
-      {/* Input - Charcoal Black */}
+      {/* Input - Light theme with teal accents */}
       <input
         type="text"
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
-        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-[#3a3a3a] rounded-xl bg-[#2d2d2d] text-[#b2bac2] placeholder-[#8b9ab0] focus:outline-none focus:ring-2 focus:ring-[#66b2ff] focus:border-[#66b2ff] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:bg-[#1a1a1a]"
+        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:border-teal-300"
       />
 
       {/* Clear Button */}
@@ -75,7 +75,7 @@ export function SearchBar({
         <button
           type="button"
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#8b9ab0] hover:text-[#b2bac2] focus:outline-none transition-colors"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-teal-600 focus:outline-none transition-colors"
           aria-label="Clear search"
         >
           <svg

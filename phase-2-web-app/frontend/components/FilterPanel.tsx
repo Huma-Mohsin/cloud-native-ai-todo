@@ -26,7 +26,7 @@ export function FilterPanel({
   onShowArchivedChange,
 }: FilterPanelProps) {
   return (
-    <div className="p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-lg animate-in">
+    <div className="p-3 sm:p-4 bg-white border border-gray-200 rounded-xl animate-in shadow-sm">
       <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
         {/* Category Filter */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
@@ -36,7 +36,7 @@ export function FilterPanel({
           <select
             value={selectedCategory || ''}
             onChange={(e) => onCategoryChange(e.target.value || null)}
-            className="flex-1 sm:flex-initial px-3 py-2 sm:py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white cursor-pointer"
+            className="flex-1 sm:flex-initial px-3 py-2 sm:py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent bg-white cursor-pointer hover:border-teal-300 transition-colors"
           >
             <option value="">All Categories</option>
             {availableCategories.map((cat) => (
@@ -55,7 +55,7 @@ export function FilterPanel({
               type="checkbox"
               checked={showCompleted}
               onChange={(e) => onShowCompletedChange(e.target.checked)}
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+              className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-400 cursor-pointer"
             />
             <span className="text-sm text-gray-700">Show completed</span>
           </label>
@@ -66,7 +66,7 @@ export function FilterPanel({
               type="checkbox"
               checked={showArchived}
               onChange={(e) => onShowArchivedChange(e.target.checked)}
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+              className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-400 cursor-pointer"
             />
             <span className="text-sm text-gray-700">Show archived</span>
           </label>
@@ -80,7 +80,7 @@ export function FilterPanel({
               onShowCompletedChange(false);
               onShowArchivedChange(false);
             }}
-            className="sm:ml-auto text-sm text-blue-600 hover:text-blue-800 focus:outline-none self-start"
+            className="sm:ml-auto text-sm text-teal-600 hover:text-teal-700 focus:outline-none self-start font-medium"
           >
             Reset filters
           </button>

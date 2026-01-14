@@ -60,79 +60,79 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
     { day: 'Sun', completed: 3, created: 4 },
   ];
 
-  // Stats cards data - All 8 cards with dark backgrounds
+  // Stats cards data - Light theme with teal accents
   const quickStats = [
     {
       label: 'Total',
       value: stats.total,
       icon: '📋',
-      bgColor: 'bg-purple-900',
-      borderColor: 'border-purple-500',
-      iconColor: 'text-purple-300',
-      textColor: 'text-purple-100',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-400',
+      iconColor: 'text-purple-600',
+      textColor: 'text-purple-700',
     },
     {
       label: 'Pending',
       value: stats.pending,
       icon: '⏳',
-      bgColor: 'bg-orange-900',
-      borderColor: 'border-orange-500',
-      iconColor: 'text-orange-300',
-      textColor: 'text-orange-100',
+      bgColor: 'bg-orange-50',
+      borderColor: 'border-orange-400',
+      iconColor: 'text-orange-600',
+      textColor: 'text-orange-700',
     },
     {
       label: 'Completed',
       value: stats.completed,
       icon: '✅',
-      bgColor: 'bg-green-900',
-      borderColor: 'border-green-500',
-      iconColor: 'text-green-300',
-      textColor: 'text-green-100',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-400',
+      iconColor: 'text-green-600',
+      textColor: 'text-green-700',
     },
     {
       label: 'Success Rate',
       value: `${stats.completion_rate}%`,
       icon: '📈',
-      bgColor: 'bg-blue-900',
-      borderColor: 'border-blue-500',
-      iconColor: 'text-blue-300',
-      textColor: 'text-blue-100',
+      bgColor: 'bg-teal-50',
+      borderColor: 'border-teal-400',
+      iconColor: 'text-teal-600',
+      textColor: 'text-teal-700',
     },
     {
       label: 'High',
       value: stats.high_priority,
       icon: '🔴',
-      bgColor: 'bg-red-900',
-      borderColor: 'border-red-500',
-      iconColor: 'text-red-300',
-      textColor: 'text-red-100',
+      bgColor: 'bg-red-50',
+      borderColor: 'border-red-400',
+      iconColor: 'text-red-600',
+      textColor: 'text-red-700',
     },
     {
       label: 'Medium',
       value: stats.medium_priority,
       icon: '🟡',
-      bgColor: 'bg-amber-900',
-      borderColor: 'border-amber-500',
-      iconColor: 'text-amber-300',
-      textColor: 'text-amber-100',
+      bgColor: 'bg-amber-50',
+      borderColor: 'border-amber-400',
+      iconColor: 'text-amber-600',
+      textColor: 'text-amber-700',
     },
     {
       label: 'Low',
       value: stats.low_priority,
       icon: '⚪',
-      bgColor: 'bg-gray-800',
-      borderColor: 'border-gray-500',
-      iconColor: 'text-gray-300',
-      textColor: 'text-gray-100',
+      bgColor: 'bg-gray-50',
+      borderColor: 'border-gray-400',
+      iconColor: 'text-gray-600',
+      textColor: 'text-gray-700',
     },
     {
       label: 'Overdue',
       value: stats.overdue,
       icon: '⚠️',
-      bgColor: 'bg-pink-900',
-      borderColor: 'border-pink-500',
-      iconColor: 'text-pink-300',
-      textColor: 'text-pink-100',
+      bgColor: 'bg-pink-50',
+      borderColor: 'border-pink-400',
+      iconColor: 'text-pink-600',
+      textColor: 'text-pink-700',
     },
   ];
 
@@ -141,7 +141,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/10 backdrop-blur-sm z-40 lg:hidden"
           onClick={onClose}
         />
       )}
@@ -150,18 +150,18 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       <aside
         className={`
           fixed lg:sticky top-0 left-0 h-screen lg:h-auto lg:min-h-screen w-96 xl:w-[450px]
-          bg-[#1a1a1a] border-r border-[#3a3a3a]
-          shadow-lg z-50 overflow-y-auto scrollbar-thin
+          bg-white border-r border-gray-200
+          shadow-xl z-50 overflow-y-auto scrollbar-thin
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        {/* Header - Charcoal Black */}
-        <div className="flex-shrink-0 bg-[#0a0a0a] border-b border-[#3a3a3a] p-5">
+        {/* Header - Light theme */}
+        <div className="flex-shrink-0 bg-gradient-to-r from-teal-50 to-white border-b border-gray-200 p-5">
           <div className="flex items-center justify-between mb-1">
             <button
               onClick={onClose}
-              className="lg:hidden text-[#b2bac2] hover:bg-[#2d2d2d] rounded-lg p-2 transition-colors"
+              className="lg:hidden text-gray-600 hover:bg-gray-100 rounded-lg p-2 transition-colors"
               aria-label="Close sidebar"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,26 +169,26 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               </svg>
             </button>
             <div className="flex items-center gap-2 flex-1 justify-center lg:justify-start">
-              <div className="w-8 h-8 rounded-lg bg-[#66b2ff] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center shadow-md">
                 <span className="text-lg">📊</span>
               </div>
-              <h2 className="text-lg font-semibold text-[#b2bac2]">Analytics</h2>
+              <h2 className="text-lg font-semibold text-gray-800">Analytics</h2>
             </div>
           </div>
-          <p className="text-xs text-[#7a8592] font-medium text-center lg:text-left">Real-time insights</p>
+          <p className="text-xs text-gray-600 font-medium text-center lg:text-left">Real-time insights</p>
         </div>
 
         {/* Content - Proper Heights */}
-        <div className="p-5 space-y-5 pb-12">
+        <div className="p-5 space-y-5 pb-12 bg-gray-50">
           {/* Quick Stats Cards - Clean & Minimal */}
           <div className="grid grid-cols-2 gap-3">
             {quickStats.map((stat, index) => (
               <div
                 key={index}
                 className={`
-                  bg-[#1a1a1a] border border-[#3a3a3a] border-l-4 ${stat.borderColor}
+                  bg-white border border-gray-200 border-l-4 ${stat.borderColor}
                   rounded-lg p-3
-                  transition-all duration-200 hover:bg-[#2d2d2d]
+                  transition-all duration-200 hover:shadow-md hover:scale-105
                   shadow-sm
                 `}
               >
@@ -197,15 +197,15 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                   <p className={`text-[10px] font-semibold uppercase tracking-wide ${stat.iconColor} opacity-80 mb-1`}>
                     {stat.label}
                   </p>
-                  <p className={`text-lg font-bold ${stat.iconColor}`}>{stat.value}</p>
+                  <p className={`text-lg font-bold ${stat.textColor}`}>{stat.value}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Task Status Distribution */}
-          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#3a3a3a]">
-            <h3 className="text-sm font-semibold text-[#b2bac2] mb-4 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-5 shadow-lg border border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
               <span>Task Status</span>
             </h3>
@@ -228,15 +228,15 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1a1a1a',
-                    border: '2px solid #3a3a3a',
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #e5e7eb',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#b2bac2',
+                    color: '#374151',
                   }}
                 />
                 <Legend
-                  wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#b2bac2' }}
+                  wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#374151' }}
                   iconType="circle"
                 />
               </PieChart>
@@ -244,22 +244,22 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Priority Distribution */}
-          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#3a3a3a]">
-            <h3 className="text-sm font-semibold text-[#b2bac2] mb-4 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-5 shadow-lg border border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
               <span>Priority Breakdown</span>
             </h3>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={priorityData}>
-                <XAxis dataKey="name" stroke="#8b9ab0" style={{ fontSize: '13px', fontWeight: '500' }} />
-                <YAxis stroke="#8b9ab0" style={{ fontSize: '13px' }} />
+                <XAxis dataKey="name" stroke="#6b7280" style={{ fontSize: '13px', fontWeight: '500' }} />
+                <YAxis stroke="#6b7280" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1a1a1a',
-                    border: '2px solid #3a3a3a',
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #e5e7eb',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#b2bac2',
+                    color: '#374151',
                   }}
                 />
                 <Bar dataKey="value" radius={[8, 8, 0, 0]}>
@@ -272,25 +272,25 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Weekly Activity */}
-          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#3a3a3a]">
-            <h3 className="text-sm font-semibold text-[#b2bac2] mb-4 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-5 shadow-lg border border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
               <span className="text-lg">📈</span>
               <span>Weekly Activity</span>
             </h3>
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={weeklyData}>
-                <XAxis dataKey="day" stroke="#8b9ab0" style={{ fontSize: '13px', fontWeight: '500' }} />
-                <YAxis stroke="#8b9ab0" style={{ fontSize: '13px' }} />
+                <XAxis dataKey="day" stroke="#6b7280" style={{ fontSize: '13px', fontWeight: '500' }} />
+                <YAxis stroke="#6b7280" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1a1a1a',
-                    border: '2px solid #3a3a3a',
+                    backgroundColor: '#ffffff',
+                    border: '2px solid #e5e7eb',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#b2bac2',
+                    color: '#374151',
                   }}
                 />
-                <Legend wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#b2bac2' }} />
+                <Legend wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#374151' }} />
                 <Line
                   type="monotone"
                   dataKey="completed"
@@ -312,32 +312,32 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Productivity Insights */}
-          <div className="bg-[#2d2d2d] rounded-lg p-5 shadow-lg border-2 border-[#66b2ff]">
-            <h3 className="text-sm font-semibold text-[#b2bac2] mb-3 flex items-center gap-2">
+          <div className="bg-white rounded-xl p-5 shadow-lg border-2 border-teal-400">
+            <h3 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
               <span className="text-lg">💡</span>
               <span>Insights</span>
             </h3>
             <ul className="space-y-2 text-sm">
               {stats.completion_rate >= 70 && (
-                <li className="flex items-start gap-2 text-green-400">
+                <li className="flex items-start gap-2 text-green-600">
                   <span className="text-base">✅</span>
                   <span>Great job! Completion rate is excellent.</span>
                 </li>
               )}
               {stats.overdue > 0 && (
-                <li className="flex items-start gap-2 text-orange-400">
+                <li className="flex items-start gap-2 text-orange-600">
                   <span className="text-base">⚠️</span>
                   <span>{stats.overdue} overdue task{stats.overdue > 1 ? 's' : ''} need attention.</span>
                 </li>
               )}
               {stats.high_priority > 0 && (
-                <li className="flex items-start gap-2 text-red-400">
+                <li className="flex items-start gap-2 text-red-600">
                   <span className="text-base">🔴</span>
                   <span>Focus on {stats.high_priority} high-priority task{stats.high_priority > 1 ? 's' : ''}.</span>
                 </li>
               )}
               {stats.pending === 0 && (
-                <li className="flex items-start gap-2 text-[#66b2ff]">
+                <li className="flex items-start gap-2 text-teal-600">
                   <span className="text-base">🎉</span>
                   <span>All caught up! Time to add new goals.</span>
                 </li>

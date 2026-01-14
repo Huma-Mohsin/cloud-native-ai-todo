@@ -24,7 +24,7 @@ const sortOptions: { value: SortOption; label: string; icon: string }[] = [
 export function SortDropdown({ value, onChange, disabled = false }: SortDropdownProps) {
   return (
     <div className="flex items-center gap-2">
-      <label className="text-sm font-medium text-[#b2bac2] whitespace-nowrap">
+      <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
         Sort by:
       </label>
       <div className="relative">
@@ -32,7 +32,7 @@ export function SortDropdown({ value, onChange, disabled = false }: SortDropdown
           value={value}
           onChange={(e) => onChange(e.target.value as SortOption)}
           disabled={disabled}
-          className="appearance-none pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed bg-white cursor-pointer text-sm"
+          className="appearance-none pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed bg-white cursor-pointer text-sm hover:border-teal-300 transition-colors text-gray-700"
         >
           {sortOptions.map((option) => (
             <option key={option.value} value={option.value}>

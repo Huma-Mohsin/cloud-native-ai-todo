@@ -116,7 +116,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           type="submit"
           isLoading={isLoading}
           disabled={!title.trim()}
-          className="sm:w-auto w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold px-6 py-3 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] transition-all duration-200 text-base transform hover:scale-105"
+          className="sm:w-auto w-full bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-600 hover:to-teal-500 text-white font-bold px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-base transform hover:scale-105"
         >
           ➕ Add Task
         </Button>
@@ -140,7 +140,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-base font-medium text-[#66b2ff] hover:text-[#b2bac2] focus:outline-none flex items-center gap-2 transition-colors"
+          className="text-base font-medium text-teal-600 hover:text-teal-700 focus:outline-none flex items-center gap-2 transition-colors"
         >
           <span className="text-lg">{showAdvanced ? '🔽' : '▶️'}</span>
           <span>
@@ -153,7 +153,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           <button
             type="button"
             onClick={handleReset}
-            className="text-sm font-medium text-[#8b9ab0] hover:text-red-400 focus:outline-none transition-colors"
+            className="text-sm font-medium text-gray-500 hover:text-red-500 focus:outline-none transition-colors"
           >
             🔄 Reset all fields
           </button>
@@ -162,7 +162,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Advanced Options */}
       {showAdvanced && (
-        <div className="space-y-4 p-5 bg-[#1a1a1a] rounded-xl border-2 border-[#3a3a3a] shadow-lg">
+        <div className="space-y-4 p-5 bg-gray-50 rounded-xl border-2 border-gray-200 shadow-md">
           {/* Priority Selector */}
           <PrioritySelector value={priority} onChange={setPriority} disabled={isLoading} />
 
@@ -190,8 +190,8 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-900/20 border-2 border-red-400 rounded-xl p-4">
-          <p className="text-sm font-medium text-red-400 flex items-center gap-2" role="alert">
+        <div className="bg-red-50 border-2 border-red-300 rounded-xl p-4">
+          <p className="text-sm font-medium text-red-700 flex items-center gap-2" role="alert">
             <span className="text-lg">⚠️</span>
             {error}
           </p>
@@ -200,8 +200,8 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Quick Summary */}
       {hasAdvancedFields && (
-        <div className="text-sm text-[#b2bac2] bg-[#2d2d2d] p-4 rounded-xl border-2 border-[#3a3a3a] shadow-lg">
-          <strong className="text-base text-[#66b2ff]">📝 Task Summary:</strong>
+        <div className="text-sm text-gray-700 bg-teal-50 p-4 rounded-xl border-2 border-teal-200 shadow-md">
+          <strong className="text-base text-teal-700">📝 Task Summary:</strong>
           {' '}
           <span className="font-semibold">{priority}</span> priority
           {dueDate && <span>, due {new Date(dueDate).toLocaleDateString()}</span>}

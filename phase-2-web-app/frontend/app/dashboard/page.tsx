@@ -196,11 +196,11 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
-      {/* Charcoal Black Background Pattern */}
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-gray-50 relative overflow-hidden">
+      {/* Light Background Pattern */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-[#66b2ff] rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-        <div className="absolute bottom-0 -right-4 w-72 h-72 bg-[#66b2ff] rounded-full mix-blend-multiply filter blur-3xl opacity-5"></div>
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div className="absolute bottom-0 -right-4 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-15"></div>
       </div>
 
       {/* Main Layout with Sidebar */}
@@ -210,12 +210,12 @@ export default function DashboardPage() {
 
         {/* Main Content */}
         <div className="flex-1 min-w-0">
-          {/* Header - Charcoal Black Design */}
-          <header className="sticky top-0 z-10 border-b border-[#3a3a3a] shadow-lg bg-[#1a1a1a]">
+          {/* Header - Light Design with Teal Accents */}
+          <header className="sticky top-0 z-10 border-b border-gray-200 shadow-lg bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#b2bac2] flex items-center gap-3">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-[#66b2ff]" fill="currentColor" viewBox="0 0 20 20">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 flex items-center gap-3">
+              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
               </svg>
               My Tasks
@@ -224,12 +224,12 @@ export default function DashboardPage() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#2d2d2d] rounded-lg border border-[#3a3a3a]">
-                  <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                  <svg className="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-medium text-[#b2bac2]">
-                    Welcome, <span className="font-semibold text-[#66b2ff]">{user.name || user.email}</span>
+                  <p className="text-sm font-medium text-gray-700">
+                    Welcome, <span className="font-semibold text-teal-600">{user.name || user.email}</span>
                   </p>
                 </div>
               )}
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-teal-50 border-teal-400 text-teal-600' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
+                  className="border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] transition-all font-semibold px-4 py-2"
+                  className="border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-[#8b9ab0] transition-all font-semibold px-4 py-2"
+                  className="border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 text-gray-600 transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>
@@ -272,7 +272,7 @@ export default function DashboardPage() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="md:hidden p-2 rounded-lg hover:bg-[#2d2d2d] focus:outline-none focus:ring-2 focus:ring-[#66b2ff] text-[#b2bac2]"
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 text-gray-700"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -287,14 +287,14 @@ export default function DashboardPage() {
 
           {/* Mobile Menu Dropdown */}
           {showMobileMenu && (
-            <div className="md:hidden mt-4 pt-4 border-t border-[#3a3a3a] space-y-3">
+            <div className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-[#2d2d2d] rounded-lg border border-[#3a3a3a] mb-2">
-                  <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-50 rounded-lg border border-gray-200 mb-2">
+                  <svg className="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-medium text-[#b2bac2]">
-                    Welcome, <span className="font-semibold text-[#66b2ff]">{user.name || user.email}</span>
+                  <p className="text-sm font-medium text-gray-700">
+                    Welcome, <span className="font-semibold text-teal-600">{user.name || user.email}</span>
                   </p>
                 </div>
               )}
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                   onClick={() => { setShowSidebar(!showSidebar); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className={`w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] font-semibold ${showSidebar ? 'bg-[#2d2d2d] border-[#66b2ff] text-[#66b2ff]' : ''}`}
+                  className={`w-full justify-center border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 font-semibold ${showSidebar ? 'bg-teal-50 border-teal-400 text-teal-600' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('json'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] font-semibold"
+                  className="w-full justify-center border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 font-semibold"
                 >
                   📥 JSON
                 </Button>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('csv'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-[#3a3a3a] hover:border-[#66b2ff] hover:bg-[#2d2d2d] text-[#8b9ab0] hover:text-[#66b2ff] font-semibold"
+                  className="w-full justify-center border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 font-semibold"
                 >
                   📊 CSV
                 </Button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="w-full justify-center border-[#3a3a3a] hover:border-red-400 hover:bg-red-900/20 hover:text-red-400 text-[#8b9ab0] font-semibold"
+                  className="w-full justify-center border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 text-gray-600 font-semibold"
                 >
                   🚪 Logout
                 </Button>
@@ -339,13 +339,13 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Create Task Form - Charcoal Black card */}
-        <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+        {/* Create Task Form - Light card with teal accents */}
+        <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 sm:p-8 mb-8 hover:shadow-xl transition-shadow">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-[#66b2ff] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-teal-500 flex items-center justify-center shadow-md">
               <span className="text-2xl text-white">+</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#b2bac2]">Create New Task</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Create New Task</h2>
           </div>
           <TaskForm
             onSubmit={handleCreateTask}
@@ -371,7 +371,7 @@ export default function DashboardPage() {
             <SortDropdown value={sortBy} onChange={setSortBy} />
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="text-base font-medium text-[#66b2ff] hover:text-[#b2bac2] focus:outline-none whitespace-nowrap transition-colors"
+              className="text-base font-medium text-teal-600 hover:text-teal-700 focus:outline-none whitespace-nowrap transition-colors"
             >
               {showFilters ? '🔼 Hide' : '🔽 Show'} advanced filters
             </button>
@@ -393,10 +393,10 @@ export default function DashboardPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-900/20 border border-red-400 rounded-lg p-4 mb-6">
+          <div className="bg-red-50 border border-red-300 rounded-lg p-4 mb-6">
             <div className="flex items-center gap-3">
               <span className="text-xl">⚠️</span>
-              <p className="text-sm font-medium text-red-400">{error}</p>
+              <p className="text-sm font-medium text-red-700">{error}</p>
             </div>
           </div>
         )}
@@ -404,14 +404,14 @@ export default function DashboardPage() {
         {/* Tasks List */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#b2bac2]">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
               {smartFilter === 'all' && 'All Tasks'}
               {smartFilter === 'today' && "Today's Tasks"}
               {smartFilter === 'overdue' && 'Overdue Tasks'}
               {smartFilter === 'upcoming' && 'Upcoming Tasks'}
               {smartFilter === 'completed' && 'Completed Tasks'}
               {tasks.length > 0 && (
-                <span className="ml-2 px-3 py-1 text-sm font-medium bg-[#2d2d2d] text-[#66b2ff] rounded-lg border border-[#3a3a3a]">
+                <span className="ml-2 px-3 py-1 text-sm font-medium bg-teal-100 text-teal-700 rounded-lg border border-teal-200">
                   {tasks.length}
                 </span>
               )}
@@ -419,26 +419,26 @@ export default function DashboardPage() {
           </div>
 
           {isLoading ? (
-            <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-lg shadow-lg text-center py-20">
-              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#66b2ff] border-r-transparent"></div>
-              <p className="mt-4 text-base font-medium text-[#b2bac2]">Loading tasks...</p>
+            <div className="bg-white border border-gray-200 rounded-xl shadow-lg text-center py-20">
+              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-teal-500 border-r-transparent"></div>
+              <p className="mt-4 text-base font-medium text-gray-700">Loading tasks...</p>
             </div>
           ) : tasks.length === 0 ? (
-            <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border-2 border-[#3a3a3a] rounded-2xl shadow-[0_0_20px_rgba(59,130,246,0.1)] text-center py-16 px-6">
+            <div className="bg-gradient-to-br from-white to-teal-50 border-2 border-gray-200 rounded-2xl shadow-lg text-center py-16 px-6">
               {/* Empty State SVG Illustration */}
               <div className="mb-6 flex justify-center">
-                <svg className="w-32 h-32 text-[#66b2ff] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-32 h-32 text-teal-400 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#b2bac2] mb-3">
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">
                 {smartFilter === 'all' && 'No Tasks Yet'}
                 {smartFilter === 'today' && 'Nothing Due Today'}
                 {smartFilter === 'overdue' && 'All Caught Up!'}
                 {smartFilter === 'upcoming' && 'No Upcoming Tasks'}
                 {smartFilter === 'completed' && 'No Completed Tasks'}
               </h3>
-              <p className="text-base text-[#8b9ab0] max-w-md mx-auto">
+              <p className="text-base text-gray-600 max-w-md mx-auto">
                 {smartFilter === 'all' && 'Start organizing your work by creating your first task above. Stay productive! 🚀'}
                 {smartFilter === 'today' && 'You have no tasks scheduled for today. Enjoy your free time! ☀️'}
                 {smartFilter === 'overdue' && 'Great job! You have no overdue tasks. Keep up the excellent work! 🎉'}
