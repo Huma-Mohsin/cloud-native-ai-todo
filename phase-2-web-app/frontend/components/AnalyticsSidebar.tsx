@@ -228,11 +228,11 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1f2937',
-                    border: '2px solid #374151',
+                    backgroundColor: '#4b5563',
+                    border: '2px solid #6b7280',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#f3f4f6',
+                    color: '#ffffff',
                   }}
                 />
                 <Legend
@@ -255,11 +255,11 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 <YAxis stroke="#9ca3af" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1f2937',
-                    border: '2px solid #374151',
+                    backgroundColor: '#4b5563',
+                    border: '2px solid #6b7280',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#f3f4f6',
+                    color: '#ffffff',
                   }}
                 />
                 <Bar dataKey="value" radius={[8, 8, 0, 0]}>
@@ -283,11 +283,11 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 <YAxis stroke="#9ca3af" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1f2937',
-                    border: '2px solid #374151',
+                    backgroundColor: '#4b5563',
+                    border: '2px solid #6b7280',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#f3f4f6',
+                    color: '#ffffff',
                   }}
                 />
                 <Legend wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#f3f4f6' }} />
