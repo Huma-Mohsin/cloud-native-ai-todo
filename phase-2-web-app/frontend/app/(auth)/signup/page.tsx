@@ -8,48 +8,92 @@
 
 import Link from 'next/link';
 import { AuthForm } from '@/components/AuthForm';
+import { OrbitingTasks } from '@/components/OrbitingTasks';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function SignupPage() {
   const { signup, isLoading, error } = useAuth();
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a]">
-      <div className="max-w-md w-full space-y-8 animate-slide-up">
-        {/* Logo/Icon */}
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-600 to-emerald-500 shadow-lg shadow-emerald-500/30 mb-6 animate-scale-in">
-            <span className="text-4xl">🚀</span>
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#0a0a0a]">
+      {/* Left Side - Branding & Animation */}
+      <div className="lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"></div>
+
+        <div className="relative z-10 w-full max-w-lg">
+          {/* App Branding */}
+          <div className="text-center mb-12 animate-slide-up">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-2xl shadow-emerald-500/30 mb-6">
+              <span className="text-4xl">🚀</span>
+            </div>
+            <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-4">
+              TaskFlow
+            </h1>
+            <p className="text-xl text-gray-400 font-medium">
+              Organize. Prioritize. Achieve.
+            </p>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#b2bac2] font-poppins">
-            Get Started
-          </h2>
-          <p className="mt-3 text-base text-[#8b9ab0] font-medium">
-            Create your account and start managing tasks
-          </p>
-        </div>
 
-        {/* Auth Form Card */}
-        <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-2xl shadow-lg p-8 sm:p-10">
-          <AuthForm
-            mode="signup"
-            onSubmit={signup}
-            error={error}
-            isLoading={isLoading}
-          />
-        </div>
+          {/* Orbiting Animation */}
+          <div className="h-96 flex items-center justify-center">
+            <OrbitingTasks />
+          </div>
 
-        {/* Login link */}
-        <div className="text-center">
-          <p className="text-sm text-[#8b9ab0]">
-            Already have an account?{' '}
-            <Link
-              href="/login"
-              className="font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
-            >
-              Log in →
-            </Link>
-          </p>
+          {/* Features */}
+          <div className="mt-12 space-y-4 text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
+              <span className="text-2xl">🎯</span>
+              <span className="text-lg">Smart task management</span>
+            </div>
+            <div className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
+              <span className="text-2xl">📊</span>
+              <span className="text-lg">Real-time analytics</span>
+            </div>
+            <div className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
+              <span className="text-2xl">⚡</span>
+              <span className="text-lg">Lightning fast performance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side - Signup Form */}
+      <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-12">
+        <div className="w-full max-w-md space-y-8 animate-slide-up">
+          {/* Form Header */}
+          <div className="text-center">
+            <h2 className="text-4xl font-extrabold text-white mb-2">
+              Get Started
+            </h2>
+            <p className="text-base text-gray-400">
+              Create your account and start managing tasks
+            </p>
+          </div>
+
+          {/* Auth Form Card */}
+          <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-2xl shadow-2xl p-8">
+            <AuthForm
+              mode="signup"
+              onSubmit={signup}
+              error={error}
+              isLoading={isLoading}
+            />
+          </div>
+
+          {/* Login link */}
+          <div className="text-center">
+            <p className="text-sm text-gray-400">
+              Already have an account?{' '}
+              <Link
+                href="/login"
+                className="font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+              >
+                Log in →
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

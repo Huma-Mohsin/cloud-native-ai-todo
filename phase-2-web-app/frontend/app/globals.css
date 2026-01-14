@@ -303,4 +303,37 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
   }
+
+  /* Orbiting animations for auth pages */
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin 15s linear infinite reverse;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  }
 }
