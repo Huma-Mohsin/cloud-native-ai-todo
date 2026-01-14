@@ -447,17 +447,19 @@ export default function DashboardPage() {
               </p>
             </div>
           ) : (
-            tasks.map((task) => (
-              <TaskItem
-                key={task.id}
-                task={task}
-                onToggle={handleToggleTask}
-                onUpdate={handleUpdateTask}
-                onDelete={handleDeleteTask}
-                onSubtasksUpdate={loadAllData}
-                availableCategories={categories}
-              />
-            ))
+            <div className="space-y-4">
+              {tasks.map((task) => (
+                <TaskItem
+                  key={task.id}
+                  task={task}
+                  onToggle={handleToggleTask}
+                  onUpdate={handleUpdateTask}
+                  onDelete={handleDeleteTask}
+                  onSubtasksUpdate={loadAllData}
+                  availableCategories={categories}
+                />
+              ))}
+            </div>
           )}
         </div>
       </main>
