@@ -212,7 +212,7 @@ export default function DashboardPage() {
         <div className="flex-1 min-w-0">
           {/* Header - Dark Gradient Menu Bar */}
           <header className="sticky top-0 z-10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-xl border-b border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
               <svg className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
