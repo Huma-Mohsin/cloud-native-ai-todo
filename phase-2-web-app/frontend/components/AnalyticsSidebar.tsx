@@ -175,7 +175,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               <h2 className="text-lg font-semibold text-white">Analytics</h2>
             </div>
           </div>
-          <p className="text-xs text-gray-400 font-medium text-center lg:text-left">Real-time insights</p>
+          <p className="text-sm text-gray-400 font-medium text-center lg:text-left">Real-time insights</p>
         </div>
 
         {/* Content - Dark Background */}
