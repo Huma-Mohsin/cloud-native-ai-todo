@@ -170,9 +170,9 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               <div
                 key={index}
                 className={`
-                  bg-gray-800 border-l-4 ${stat.borderColor}
+                  bg-gray-800 border border-gray-700 border-l-4 ${stat.borderColor}
                   rounded-lg p-3
-                  transition-all duration-200 hover:bg-gray-700
+                  transition-all duration-200 hover:bg-gray-700 hover:border-gray-600
                   shadow-sm
                 `}
               >
