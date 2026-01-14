@@ -15,9 +15,9 @@ export default function SignupPage() {
   const { signup, isLoading, error } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-gray-800">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#0a0a0a]">
       {/* Left Side - Branding & Animation */}
-      <div className="lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 bg-gray-900 relative overflow-hidden border-r border-gray-700">
+      <div className="lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
@@ -60,7 +60,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right Side - Signup Form */}
-      <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-12 bg-gray-800 relative overflow-hidden">
+      <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-12 relative overflow-hidden">
         {/* Background decorative elements for right side */}
         <div className="absolute top-40 right-20 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '0.5s' }}></div>
         <div className="absolute bottom-40 left-20 w-80 h-80 bg-emerald-600/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>

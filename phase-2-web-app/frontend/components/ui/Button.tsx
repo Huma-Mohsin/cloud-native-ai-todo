@@ -34,10 +34,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const variants = {
-      default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-      outline: 'border border-input bg-background hover:bg-accent',
-      ghost: 'hover:bg-accent',
-      destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+      default: 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg hover:shadow-xl transition-all duration-200',
+      outline: 'border-2 border-gray-600 bg-gray-800 text-white hover:border-emerald-400 hover:bg-gray-700 hover:text-emerald-400 transition-all duration-200',
+      ghost: 'hover:bg-gray-700 text-gray-300 hover:text-emerald-400 transition-all duration-200',
+      destructive: 'bg-red-600 text-white hover:bg-red-700 transition-all duration-200',
     };
 
     const sizes = {
