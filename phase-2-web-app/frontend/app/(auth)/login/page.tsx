@@ -15,12 +15,12 @@ export default function LoginPage() {
   const { login, isLoading, error } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-gray-800">
       {/* Left Side - Branding & Animation */}
-      <div className="lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 relative overflow-hidden">
+      <div className="lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 bg-gray-900 relative overflow-hidden border-r border-gray-700">
         {/* Background decorative elements */}
-        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
 
         <div className="relative z-10 w-full max-w-lg">
           {/* App Branding */}
@@ -60,10 +60,10 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Login Form */}
-      <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-12 relative overflow-hidden">
+      <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-12 bg-gray-800 relative overflow-hidden">
         {/* Background decorative elements for right side */}
-        <div className="absolute top-40 right-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-20 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-40 right-20 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-40 left-20 w-80 h-80 bg-emerald-600/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
 
         <div className="w-full max-w-md space-y-8 animate-slide-up relative z-10">
           {/* Form Header */}
