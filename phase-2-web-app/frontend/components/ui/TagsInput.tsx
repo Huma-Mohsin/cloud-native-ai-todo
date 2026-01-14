@@ -99,13 +99,13 @@ interface TagChipProps {
 
 function TagChip({ tag, onRemove, disabled = false }: TagChipProps) {
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-xs font-medium border border-blue-200">
+    <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-900/30 text-blue-400 rounded-md text-xs font-medium border border-blue-500">
       🏷️ {tag}
       {onRemove && !disabled && (
         <button
           type="button"
           onClick={onRemove}
-          className="ml-1 text-blue-600 hover:text-blue-800 focus:outline-none"
+          className="ml-1 text-blue-400 hover:text-blue-300 focus:outline-none"
         >
           ×
         </button>

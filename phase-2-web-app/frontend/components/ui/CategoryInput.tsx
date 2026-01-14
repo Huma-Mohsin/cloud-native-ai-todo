@@ -116,16 +116,16 @@ interface CategoryBadgeProps {
 }
 
 const categoryColors: Record<string, string> = {
-  Work: 'bg-purple-100 text-purple-700 border-purple-200',
-  Personal: 'bg-green-100 text-green-700 border-green-200',
-  Shopping: 'bg-orange-100 text-orange-700 border-orange-200',
-  Health: 'bg-pink-100 text-pink-700 border-pink-200',
-  Learning: 'bg-blue-100 text-blue-700 border-blue-200',
-  Other: 'bg-gray-100 text-gray-700 border-gray-200',
+  Work: 'bg-purple-900/30 text-purple-400 border-purple-500',
+  Personal: 'bg-green-900/30 text-green-400 border-green-500',
+  Shopping: 'bg-orange-900/30 text-orange-400 border-orange-500',
+  Health: 'bg-pink-900/30 text-pink-400 border-pink-500',
+  Learning: 'bg-blue-900/30 text-blue-400 border-blue-500',
+  Other: 'bg-gray-700 text-gray-300 border-gray-500',
 };
 
 export function CategoryBadge({ category, onRemove }: CategoryBadgeProps) {
-  const colorClass = categoryColors[category] || 'bg-indigo-100 text-indigo-700 border-indigo-200';
+  const colorClass = categoryColors[category] || 'bg-indigo-900/30 text-indigo-400 border-indigo-500';
 
   return (
     <span
