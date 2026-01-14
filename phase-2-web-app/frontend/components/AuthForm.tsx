@@ -154,8 +154,8 @@ export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormP
       />
 
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-          <p className="text-sm text-red-600">{error}</p>
+        <div className="p-3 bg-red-900/20 border border-red-400 rounded-md">
+          <p className="text-sm text-red-400">{error}</p>
         </div>
       )}
 
