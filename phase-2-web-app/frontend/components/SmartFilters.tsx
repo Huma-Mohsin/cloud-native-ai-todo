@@ -20,12 +20,12 @@ interface SmartFiltersProps {
   };
 }
 
-const filters: { value: SmartFilterType; label: string; icon: string; color: string }[] = [
-  { value: 'all', label: 'All Tasks', icon: '📋', color: 'text-gray-700' },
-  { value: 'today', label: 'Today', icon: '📅', color: 'text-blue-700' },
-  { value: 'overdue', label: 'Overdue', icon: '⚠️', color: 'text-red-700' },
-  { value: 'upcoming', label: 'Upcoming', icon: '📆', color: 'text-purple-700' },
-  { value: 'completed', label: 'Completed', icon: '✅', color: 'text-green-700' },
+const filters: { value: SmartFilterType; label: string; icon: string }[] = [
+  { value: 'all', label: 'All Tasks', icon: '📋' },
+  { value: 'today', label: 'Today', icon: '📅' },
+  { value: 'overdue', label: 'Overdue', icon: '⚠️' },
+  { value: 'upcoming', label: 'Upcoming', icon: '📆' },
+  { value: 'completed', label: 'Completed', icon: '✅' },
 ];
 
 export function SmartFilters({ activeFilter, onChange, counts }: SmartFiltersProps) {

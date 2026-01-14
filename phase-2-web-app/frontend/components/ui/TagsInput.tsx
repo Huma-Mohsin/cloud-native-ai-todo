@@ -134,7 +134,7 @@ export function TagList({ tags, maxDisplay = 3 }: TagListProps) {
         <TagChip key={tag} tag={tag} disabled />
       ))}
       {remainingCount > 0 && (
-        <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-md text-xs font-medium">
+        <span className="px-2 py-1 bg-gray-700 text-gray-300 rounded-md text-xs font-medium">
           +{remainingCount}
         </span>
       )}

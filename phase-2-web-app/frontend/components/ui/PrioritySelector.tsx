@@ -19,8 +19,8 @@ const priorities: { value: Priority; label: string; color: string; bg: string; b
   {
     value: 'low',
     label: 'Low',
-    color: 'text-gray-700',
-    bg: 'bg-gray-100 hover:bg-gray-200',
+    color: 'text-gray-300',
+    bg: 'bg-gray-700 hover:bg-gray-600',
     border: 'border-gray-400',
     unselectedBg: 'bg-gray-700 hover:bg-gray-600',
     unselectedBorder: 'border-gray-500',
@@ -29,8 +29,8 @@ const priorities: { value: Priority; label: string; color: string; bg: string; b
   {
     value: 'medium',
     label: 'Medium',
-    color: 'text-orange-700',
-    bg: 'bg-yellow-100 hover:bg-orange-100',
+    color: 'text-yellow-300',
+    bg: 'bg-yellow-900/50 hover:bg-yellow-800/60',
     border: 'border-yellow-400',
     unselectedBg: 'bg-yellow-900/30 hover:bg-yellow-800/40',
     unselectedBorder: 'border-yellow-600/50',
@@ -39,8 +39,8 @@ const priorities: { value: Priority; label: string; color: string; bg: string; b
   {
     value: 'high',
     label: 'High',
-    color: 'text-red-700',
-    bg: 'bg-red-100 hover:bg-pink-100',
+    color: 'text-red-300',
+    bg: 'bg-red-900/50 hover:bg-red-800/60',
     border: 'border-red-400',
     unselectedBg: 'bg-red-900/30 hover:bg-red-800/40',
     unselectedBorder: 'border-red-600/50',
