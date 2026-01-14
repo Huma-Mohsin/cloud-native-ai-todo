@@ -210,12 +210,12 @@ export default function DashboardPage() {
 
         {/* Main Content */}
         <div className="flex-1 min-w-0">
-          {/* Header - Light Menu Bar with Emerald Accents */}
-          <header className="sticky top-0 z-10 bg-white shadow-xl border-b border-gray-200">
+          {/* Header - Dark Gradient Menu Bar */}
+          <header className="sticky top-0 z-10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-xl border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 flex items-center gap-3">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
               </svg>
               My Tasks
@@ -224,12 +224,12 @@ export default function DashboardPage() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 rounded-lg border border-emerald-200">
-                  <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-lg border border-gray-600">
+                  <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-medium text-gray-700">
-                    Welcome, <span className="font-semibold text-emerald-600">{user.name || user.email}</span>
+                  <p className="text-sm font-medium text-gray-300">
+                    Welcome, <span className="font-semibold text-emerald-400">{user.name || user.email}</span>
                   </p>
                 </div>
               )}
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-gray-300 hover:border-emerald-500 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-emerald-50 border-emerald-500 text-emerald-600' : ''}`}
+                  className={`border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-gray-700 border-emerald-400 text-emerald-400' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-gray-300 hover:border-emerald-500 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 transition-all font-semibold px-4 py-2"
+                  className="border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-gray-300 hover:border-emerald-500 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 transition-all font-semibold px-4 py-2"
+                  className="border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 text-gray-700 transition-all font-semibold px-4 py-2"
+                  className="border-gray-600 hover:border-red-400 hover:bg-red-900/30 hover:text-red-400 text-gray-200 transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>
@@ -272,7 +272,7 @@ export default function DashboardPage() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-700"
+              className="md:hidden p-2 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-200"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -287,14 +287,14 @@ export default function DashboardPage() {
 
           {/* Mobile Menu Dropdown */}
           {showMobileMenu && (
-            <div className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
+            <div className="md:hidden mt-4 pt-4 border-t border-gray-700 space-y-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 rounded-lg border border-emerald-200 mb-2">
-                  <svg className="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-700 rounded-lg border border-gray-600 mb-2">
+                  <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-medium text-gray-700">
-                    Welcome, <span className="font-semibold text-emerald-600">{user.name || user.email}</span>
+                  <p className="text-sm font-medium text-gray-300">
+                    Welcome, <span className="font-semibold text-emerald-400">{user.name || user.email}</span>
                   </p>
                 </div>
               )}
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                   onClick={() => { setShowSidebar(!showSidebar); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className={`w-full justify-center border-gray-300 hover:border-emerald-500 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 font-semibold ${showSidebar ? 'bg-emerald-50 border-emerald-500 text-emerald-600' : ''}`}
+                  className={`w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 font-semibold ${showSidebar ? 'bg-gray-700 border-emerald-400 text-emerald-400' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('json'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-gray-300 hover:border-emerald-500 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 font-semibold"
+                  className="w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 font-semibold"
                 >
                   📥 JSON
                 </Button>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('csv'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-gray-300 hover:border-emerald-500 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 font-semibold"
+                  className="w-full justify-center border-gray-600 hover:border-emerald-400 hover:bg-gray-700 text-gray-200 hover:text-emerald-400 font-semibold"
                 >
                   📊 CSV
                 </Button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="w-full justify-center border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 text-gray-700 font-semibold"
+                  className="w-full justify-center border-gray-600 hover:border-red-400 hover:bg-red-900/30 hover:text-red-400 text-gray-200 font-semibold"
                 >
                   🚪 Logout
                 </Button>
@@ -371,7 +371,7 @@ export default function DashboardPage() {
             <SortDropdown value={sortBy} onChange={setSortBy} />
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="text-base font-medium text-emerald-600 hover:text-emerald-700 focus:outline-none whitespace-nowrap transition-colors"
+              className="text-base font-medium text-emerald-400 hover:text-emerald-300 focus:outline-none whitespace-nowrap transition-colors"
             >
               {showFilters ? '🔼 Hide' : '🔽 Show'} advanced filters
             </button>
@@ -404,14 +404,14 @@ export default function DashboardPage() {
         {/* Tasks List */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-semibold text-white">
               {smartFilter === 'all' && 'All Tasks'}
               {smartFilter === 'today' && "Today's Tasks"}
               {smartFilter === 'overdue' && 'Overdue Tasks'}
               {smartFilter === 'upcoming' && 'Upcoming Tasks'}
               {smartFilter === 'completed' && 'Completed Tasks'}
               {tasks.length > 0 && (
-                <span className="ml-2 px-3 py-1 text-sm font-medium bg-emerald-100 text-emerald-700 rounded-lg border border-emerald-200">
+                <span className="ml-2 px-3 py-1 text-sm font-medium bg-emerald-600 text-white rounded-lg border border-emerald-500">
                   {tasks.length}
                 </span>
               )}

@@ -150,18 +150,18 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       <aside
         className={`
           fixed lg:sticky top-0 left-0 h-screen lg:h-auto lg:min-h-screen w-96 xl:w-[450px]
-          bg-white border-r border-gray-200
+          bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 border-r border-gray-700
           shadow-xl z-50 overflow-y-auto scrollbar-thin
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        {/* Header - Light theme with emerald */}
-        <div className="flex-shrink-0 bg-gradient-to-r from-emerald-50 to-white border-b border-gray-200 p-5">
+        {/* Header - Dark theme with emerald */}
+        <div className="flex-shrink-0 bg-gradient-to-r from-gray-800 to-gray-900 border-b border-gray-700 p-5">
           <div className="flex items-center justify-between mb-1">
             <button
               onClick={onClose}
-              className="lg:hidden text-gray-600 hover:bg-gray-100 rounded-lg p-2 transition-colors"
+              className="lg:hidden text-gray-300 hover:bg-gray-700 rounded-lg p-2 transition-colors"
               aria-label="Close sidebar"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,14 +172,14 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center shadow-md">
                 <span className="text-lg">📊</span>
               </div>
-              <h2 className="text-lg font-semibold text-gray-800">Analytics</h2>
+              <h2 className="text-lg font-semibold text-white">Analytics</h2>
             </div>
           </div>
-          <p className="text-xs text-gray-600 font-medium text-center lg:text-left">Real-time insights</p>
+          <p className="text-xs text-gray-400 font-medium text-center lg:text-left">Real-time insights</p>
         </div>
 
-        {/* Content - Proper Heights */}
-        <div className="p-5 space-y-5 pb-12 bg-gray-50">
+        {/* Content - Dark Background */}
+        <div className="p-5 space-y-5 pb-12 bg-gray-800">
           {/* Quick Stats Cards - Clean & Minimal */}
           <div className="grid grid-cols-2 gap-3">
             {quickStats.map((stat, index) => (
@@ -204,8 +204,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Task Status Distribution */}
-          <div className="bg-white rounded-xl p-5 shadow-lg border border-gray-200">
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <div className="bg-gray-900 rounded-xl p-5 shadow-lg border border-gray-700">
+            <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
               <span>Task Status</span>
             </h3>
@@ -228,15 +228,15 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '2px solid #e5e7eb',
+                    backgroundColor: '#1f2937',
+                    border: '2px solid #374151',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#374151',
+                    color: '#f3f4f6',
                   }}
                 />
                 <Legend
-                  wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#374151' }}
+                  wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#f3f4f6' }}
                   iconType="circle"
                 />
               </PieChart>
@@ -244,22 +244,22 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Priority Distribution */}
-          <div className="bg-white rounded-xl p-5 shadow-lg border border-gray-200">
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <div className="bg-gray-900 rounded-xl p-5 shadow-lg border border-gray-700">
+            <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
               <span>Priority Breakdown</span>
             </h3>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={priorityData}>
-                <XAxis dataKey="name" stroke="#6b7280" style={{ fontSize: '13px', fontWeight: '500' }} />
-                <YAxis stroke="#6b7280" style={{ fontSize: '13px' }} />
+                <XAxis dataKey="name" stroke="#9ca3af" style={{ fontSize: '13px', fontWeight: '500' }} />
+                <YAxis stroke="#9ca3af" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '2px solid #e5e7eb',
+                    backgroundColor: '#1f2937',
+                    border: '2px solid #374151',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#374151',
+                    color: '#f3f4f6',
                   }}
                 />
                 <Bar dataKey="value" radius={[8, 8, 0, 0]}>
@@ -272,25 +272,25 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Weekly Activity */}
-          <div className="bg-white rounded-xl p-5 shadow-lg border border-gray-200">
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <div className="bg-gray-900 rounded-xl p-5 shadow-lg border border-gray-700">
+            <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
               <span className="text-lg">📈</span>
               <span>Weekly Activity</span>
             </h3>
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={weeklyData}>
-                <XAxis dataKey="day" stroke="#6b7280" style={{ fontSize: '13px', fontWeight: '500' }} />
-                <YAxis stroke="#6b7280" style={{ fontSize: '13px' }} />
+                <XAxis dataKey="day" stroke="#9ca3af" style={{ fontSize: '13px', fontWeight: '500' }} />
+                <YAxis stroke="#9ca3af" style={{ fontSize: '13px' }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    border: '2px solid #e5e7eb',
+                    backgroundColor: '#1f2937',
+                    border: '2px solid #374151',
                     borderRadius: '8px',
                     fontSize: '13px',
-                    color: '#374151',
+                    color: '#f3f4f6',
                   }}
                 />
-                <Legend wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#374151' }} />
+                <Legend wrapperStyle={{ fontSize: '13px', fontWeight: '500', color: '#f3f4f6' }} />
                 <Line
                   type="monotone"
                   dataKey="completed"
@@ -312,32 +312,32 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Productivity Insights */}
-          <div className="bg-white rounded-xl p-5 shadow-lg border-2 border-emerald-500">
-            <h3 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+          <div className="bg-gray-900 rounded-xl p-5 shadow-lg border-2 border-emerald-600">
+            <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
               <span className="text-lg">💡</span>
               <span>Insights</span>
             </h3>
             <ul className="space-y-2 text-sm">
               {stats.completion_rate >= 70 && (
-                <li className="flex items-start gap-2 text-green-600">
+                <li className="flex items-start gap-2 text-green-400">
                   <span className="text-base">✅</span>
                   <span>Great job! Completion rate is excellent.</span>
                 </li>
               )}
               {stats.overdue > 0 && (
-                <li className="flex items-start gap-2 text-orange-600">
+                <li className="flex items-start gap-2 text-orange-400">
                   <span className="text-base">⚠️</span>
                   <span>{stats.overdue} overdue task{stats.overdue > 1 ? 's' : ''} need attention.</span>
                 </li>
               )}
               {stats.high_priority > 0 && (
-                <li className="flex items-start gap-2 text-red-600">
+                <li className="flex items-start gap-2 text-red-400">
                   <span className="text-base">🔴</span>
                   <span>Focus on {stats.high_priority} high-priority task{stats.high_priority > 1 ? 's' : ''}.</span>
                 </li>
               )}
               {stats.pending === 0 && (
-                <li className="flex items-start gap-2 text-emerald-600">
+                <li className="flex items-start gap-2 text-emerald-400">
                   <span className="text-base">🎉</span>
                   <span>All caught up! Time to add new goals.</span>
                 </li>
