@@ -116,7 +116,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           type="submit"
           isLoading={isLoading}
           disabled={!title.trim()}
-          className="sm:w-auto w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-bold px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-base transform hover:scale-105"
+          className="sm:w-auto w-full bg-emerald-600 text-white font-bold px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-base hover:bg-emerald-700"
         >
           ➕ Add Task
         </Button>
