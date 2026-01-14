@@ -18,7 +18,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8 animate-slide-up">
         {/* Logo/Icon */}
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/30 mb-6 animate-scale-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-600 to-emerald-500 shadow-lg shadow-emerald-500/30 mb-6 animate-scale-in">
             <span className="text-4xl">✨</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#b2bac2] font-poppins">
@@ -45,7 +45,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{' '}
             <Link
               href="/signup"
-              className="font-semibold text-[#66b2ff] hover:text-[#b2bac2] transition-colors"
+              className="font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               Sign up now →
             </Link>
