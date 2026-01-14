@@ -26,7 +26,7 @@ export default function LoginPage() {
           {/* App Branding */}
           <div className="text-center mb-12 animate-slide-up">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-2xl shadow-emerald-500/30 mb-6">
-              <span className="text-4xl">✨</span>
+              <span className="text-4xl">✓</span>
             </div>
             <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-4">
               TaskFlow
