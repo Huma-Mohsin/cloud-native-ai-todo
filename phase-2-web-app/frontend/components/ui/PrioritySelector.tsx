@@ -42,7 +42,7 @@ const priorities: { value: Priority; label: string; color: string; bg: string; b
 export function PrioritySelector({ value, onChange, disabled = false }: PrioritySelectorProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-gray-300">
         Priority
       </label>
       <div className="flex gap-2">
@@ -57,9 +57,9 @@ export function PrioritySelector({ value, onChange, disabled = false }: Priority
               className={`
                 flex-1 px-4 py-2 rounded-lg border-2 font-medium text-sm
                 transition-all duration-200 ease-in-out
-                ${isSelected ? `${priority.bg} ${priority.border} ${priority.color} shadow-sm` : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'}
+                ${isSelected ? `${priority.bg} ${priority.border} ${priority.color} shadow-sm` : 'bg-gray-800 border-gray-600 text-gray-400 hover:border-gray-500'}
                 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500
               `}
             >
               {priority.label}
