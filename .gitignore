@@ -193,8 +193,8 @@ temp/
 .cache/
 
 # Claude Code temporary directories (cleanup leftover files)
-tmpclaude-*-cwd/
-**/tmpclaude-*-cwd/
+tmpclaude-*-cwd
+**/tmpclaude-*-cwd
 
 # ============================================
 # Build Outputs
