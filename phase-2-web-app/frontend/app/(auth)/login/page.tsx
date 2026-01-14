@@ -15,12 +15,12 @@ export default function LoginPage() {
   const { login, isLoading, error } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#0a0a0a]">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Left Side - Branding & Animation */}
       <div className="lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+        {/* Background decorative elements - subtle */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-gray-700/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gray-700/15 rounded-full blur-3xl"></div>
 
         <div className="relative z-10 w-full max-w-lg">
           {/* App Branding */}
@@ -52,9 +52,9 @@ export default function LoginPage() {
 
       {/* Right Side - Login Form */}
       <div className="lg:w-1/2 flex items-center justify-center p-8 lg:p-12 relative overflow-hidden">
-        {/* Background decorative elements for right side */}
-        <div className="absolute top-40 right-20 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '0.5s' }}></div>
-        <div className="absolute bottom-40 left-20 w-80 h-80 bg-emerald-600/15 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+        {/* Background decorative elements for right side - subtle */}
+        <div className="absolute top-40 right-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 left-20 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl"></div>
 
         <div className="w-full max-w-md space-y-8 animate-slide-up relative z-10">
           {/* Form Header */}
@@ -68,7 +68,7 @@ export default function LoginPage() {
           </div>
 
           {/* Auth Form Card */}
-          <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-2xl shadow-2xl p-8">
+          <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl p-8">
             <AuthForm
               mode="login"
               onSubmit={login}
