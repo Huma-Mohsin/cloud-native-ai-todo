@@ -59,7 +59,7 @@ export function CategoryInput({
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-gray-300">
         Category
       </label>
 
@@ -68,7 +68,7 @@ export function CategoryInput({
           value={value || ''}
           onChange={handleSelectChange}
           disabled={disabled}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed bg-gray-800 text-gray-200"
         >
           <option value="">No category</option>
           {availableCategories.map((cat) => (
@@ -86,7 +86,7 @@ export function CategoryInput({
             onChange={handleCustomInput}
             placeholder="Enter custom category"
             disabled={disabled}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
+            className="flex-1 px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 bg-gray-800 text-gray-200 placeholder-gray-500"
             autoFocus
           />
           <button
@@ -97,7 +97,7 @@ export function CategoryInput({
               onChange(null);
             }}
             disabled={disabled}
-            className="px-3 py-2 text-sm text-gray-600 hover:text-gray-800 focus:outline-none disabled:opacity-50"
+            className="px-3 py-2 text-sm text-gray-400 hover:text-gray-300 focus:outline-none disabled:opacity-50"
           >
             Cancel
           </button>
