@@ -45,7 +45,7 @@ export function SmartFilters({ activeFilter, onChange, counts }: SmartFiltersPro
               ${
                 isActive
                   ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-2 border-emerald-400 shadow-lg scale-105'
-                  : 'bg-gray-800 text-gray-300 border-2 border-gray-600 hover:border-emerald-500 hover:shadow-md hover:scale-[1.02]'
+                  : 'bg-gray-800 text-gray-300 border-2 border-gray-600 hover:border-emerald-400 hover:bg-gray-600'
               }
               focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2'
             `}
