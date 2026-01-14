@@ -60,7 +60,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
     { day: 'Sun', completed: 3, created: 4 },
   ];
 
-  // Stats cards data - Light theme with teal accents
+  // Stats cards data - Light theme with emerald accents
   const quickStats = [
     {
       label: 'Total',
@@ -93,10 +93,10 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
       label: 'Success Rate',
       value: `${stats.completion_rate}%`,
       icon: '📈',
-      bgColor: 'bg-teal-50',
-      borderColor: 'border-teal-400',
-      iconColor: 'text-teal-600',
-      textColor: 'text-teal-700',
+      bgColor: 'bg-emerald-50',
+      borderColor: 'border-emerald-500',
+      iconColor: 'text-emerald-600',
+      textColor: 'text-emerald-700',
     },
     {
       label: 'High',
@@ -156,8 +156,8 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        {/* Header - Light theme */}
-        <div className="flex-shrink-0 bg-gradient-to-r from-teal-50 to-white border-b border-gray-200 p-5">
+        {/* Header - Light theme with emerald */}
+        <div className="flex-shrink-0 bg-gradient-to-r from-emerald-50 to-white border-b border-gray-200 p-5">
           <div className="flex items-center justify-between mb-1">
             <button
               onClick={onClose}
@@ -169,7 +169,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               </svg>
             </button>
             <div className="flex items-center gap-2 flex-1 justify-center lg:justify-start">
-              <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center shadow-md">
+              <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center shadow-md">
                 <span className="text-lg">📊</span>
               </div>
               <h2 className="text-lg font-semibold text-gray-800">Analytics</h2>
@@ -312,7 +312,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           </div>
 
           {/* Productivity Insights */}
-          <div className="bg-white rounded-xl p-5 shadow-lg border-2 border-teal-400">
+          <div className="bg-white rounded-xl p-5 shadow-lg border-2 border-emerald-500">
             <h3 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
               <span className="text-lg">💡</span>
               <span>Insights</span>
@@ -337,7 +337,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                 </li>
               )}
               {stats.pending === 0 && (
-                <li className="flex items-start gap-2 text-teal-600">
+                <li className="flex items-start gap-2 text-emerald-600">
                   <span className="text-base">🎉</span>
                   <span>All caught up! Time to add new goals.</span>
                 </li>

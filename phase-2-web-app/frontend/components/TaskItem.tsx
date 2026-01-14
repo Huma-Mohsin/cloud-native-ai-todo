@@ -131,13 +131,13 @@ export function TaskItem({
   // EDIT MODE
   if (isEditing) {
     return (
-      <div className="bg-white border-2 border-teal-400 rounded-xl p-5 sm:p-6 shadow-xl">
+      <div className="bg-white border-2 border-emerald-500 rounded-xl p-5 sm:p-6 shadow-xl">
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-sm font-semibold text-teal-600">Edit Task</h4>
+            <h4 className="text-sm font-semibold text-emerald-600">Edit Task</h4>
             <button
               onClick={handleCancel}
-              className="text-sm text-gray-600 hover:text-teal-600"
+              className="text-sm text-gray-600 hover:text-emerald-600"
             >
               ✕
             </button>
@@ -307,7 +307,7 @@ export function TaskItem({
             {hasSubtasks && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="p-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors"
+                className="p-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                 title={isExpanded ? "Hide subtasks" : "Show subtasks"}
                 aria-label={isExpanded ? "Hide subtasks" : "Show subtasks"}
               >
@@ -317,7 +317,7 @@ export function TaskItem({
             <button
               onClick={() => setIsEditing(true)}
               disabled={isLoading}
-              className="p-2 text-teal-600 hover:text-teal-700 hover:bg-teal-50 disabled:opacity-50 rounded-lg transition-colors"
+              className="p-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 rounded-lg transition-colors"
               aria-label="Edit task"
               title="Edit task"
             >

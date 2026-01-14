@@ -116,7 +116,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           type="submit"
           isLoading={isLoading}
           disabled={!title.trim()}
-          className="sm:w-auto w-full bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-600 hover:to-teal-500 text-white font-bold px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-base transform hover:scale-105"
+          className="sm:w-auto w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-bold px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-base transform hover:scale-105"
         >
           ➕ Add Task
         </Button>
@@ -140,7 +140,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-base font-medium text-teal-600 hover:text-teal-700 focus:outline-none flex items-center gap-2 transition-colors"
+          className="text-base font-medium text-emerald-600 hover:text-emerald-700 focus:outline-none flex items-center gap-2 transition-colors"
         >
           <span className="text-lg">{showAdvanced ? '🔽' : '▶️'}</span>
           <span>
@@ -200,8 +200,8 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Quick Summary */}
       {hasAdvancedFields && (
-        <div className="text-sm text-gray-700 bg-teal-50 p-4 rounded-xl border-2 border-teal-200 shadow-md">
-          <strong className="text-base text-teal-700">📝 Task Summary:</strong>
+        <div className="text-sm text-gray-700 bg-emerald-50 p-4 rounded-xl border-2 border-emerald-200 shadow-md">
+          <strong className="text-base text-emerald-700">📝 Task Summary:</strong>
           {' '}
           <span className="font-semibold">{priority}</span> priority
           {dueDate && <span>, due {new Date(dueDate).toLocaleDateString()}</span>}

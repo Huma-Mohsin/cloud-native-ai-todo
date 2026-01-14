@@ -44,10 +44,10 @@ export function SmartFilters({ activeFilter, onChange, counts }: SmartFiltersPro
               transition-all duration-200 whitespace-nowrap
               ${
                 isActive
-                  ? 'bg-gradient-to-r from-teal-100 to-teal-50 text-teal-700 border-2 border-teal-400 shadow-lg scale-105'
-                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-teal-300 hover:shadow-md hover:scale-[1.02]'
+                  ? 'bg-gradient-to-r from-emerald-100 to-emerald-50 text-emerald-700 border-2 border-emerald-500 shadow-lg scale-105'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-emerald-400 hover:shadow-md hover:scale-[1.02]'
               }
-              focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2
+              focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2'
             `}
           >
             <span className="text-xl">{filter.icon}</span>
@@ -56,7 +56,7 @@ export function SmartFilters({ activeFilter, onChange, counts }: SmartFiltersPro
               <span
                 className={`
                   px-2.5 py-1 rounded-full text-sm font-bold
-                  ${isActive ? 'bg-teal-200 text-teal-800' : 'bg-gray-200 text-gray-700'}
+                  ${isActive ? 'bg-emerald-200 text-emerald-800' : 'bg-gray-200 text-gray-700'}
                 `}
               >
                 {count}

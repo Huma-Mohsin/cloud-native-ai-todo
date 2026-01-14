@@ -114,7 +114,7 @@
 @layer components {
   /* Custom component classes can be added here */
 
-  /* Card component base - Teal theme from BlogSpace */
+  /* Card component base - Emerald theme from BlogSpace */
   .card {
     @apply rounded-xl border border-gray-200 bg-white text-gray-800 shadow-lg;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
@@ -122,8 +122,8 @@
   }
 
   .card:hover {
-    @apply border-teal-400 shadow-xl;
-    box-shadow: 0 10px 15px rgba(20, 184, 166, 0.15), 0 4px 6px rgba(20, 184, 166, 0.08);
+    @apply border-emerald-500 shadow-xl;
+    box-shadow: 0 10px 15px rgba(16, 185, 129, 0.15), 0 4px 6px rgba(16, 185, 129, 0.08);
     transform: translateY(-2px);
   }
 
@@ -134,44 +134,44 @@
     @apply disabled:pointer-events-none disabled:opacity-50;
   }
 
-  /* Button variants - Teal from BlogSpace */
+  /* Button variants - Emerald from BlogSpace */
   .btn-primary {
-    @apply bg-teal-500 text-white shadow-lg;
-    @apply hover:bg-teal-600;
-    box-shadow: 0 4px 6px rgba(20, 184, 166, 0.25);
+    @apply bg-emerald-600 text-white shadow-lg;
+    @apply hover:bg-emerald-700;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.25);
     transition: all 0.3s ease;
   }
 
   .btn-primary:hover {
-    box-shadow: 0 6px 10px rgba(20, 184, 166, 0.35);
+    box-shadow: 0 6px 10px rgba(16, 185, 129, 0.35);
     transform: translateY(-1px);
   }
 
   .btn-secondary {
     @apply bg-white border-2 border-gray-300 text-gray-700;
-    @apply hover:bg-gray-50 hover:border-teal-400 hover:text-teal-600;
+    @apply hover:bg-gray-50 hover:border-emerald-500 hover:text-emerald-600;
     transition: all 0.3s ease;
   }
 
-  /* Input base styles - Light theme with teal accents */
+  /* Input base styles - Light theme with emerald accents */
   .input {
     @apply flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800;
     @apply ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium;
     @apply placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2;
-    @apply focus-visible:ring-teal-400 focus-visible:border-teal-400;
+    @apply focus-visible:ring-emerald-500 focus-visible:border-emerald-500;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply transition-all duration-200;
   }
 
-  /* Stat card - Light theme with teal accents */
+  /* Stat card - Light theme with emerald accents */
   .stat-card {
     @apply rounded-lg p-6 border border-gray-200 bg-white shadow-sm;
-    @apply transition-all duration-200 hover:shadow-md hover:border-teal-300;
+    @apply transition-all duration-200 hover:shadow-md hover:border-emerald-400;
   }
 
-  /* Gradient text for headings - Teal gradient */
+  /* Gradient text for headings - Emerald gradient */
   .gradient-text {
-    @apply bg-gradient-to-r from-teal-500 to-teal-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent;
   }
 }
 

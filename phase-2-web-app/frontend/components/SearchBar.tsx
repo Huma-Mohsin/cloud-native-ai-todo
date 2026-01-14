@@ -60,14 +60,14 @@ export function SearchBar({
         </svg>
       </div>
 
-      {/* Input - Light theme with teal accents */}
+      {/* Input - Light theme with emerald accents */}
       <input
         type="text"
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
-        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:border-teal-300"
+        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:border-emerald-400"
       />
 
       {/* Clear Button */}
@@ -75,7 +75,7 @@ export function SearchBar({
         <button
           type="button"
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-teal-600 focus:outline-none transition-colors"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-emerald-600 focus:outline-none transition-colors"
           aria-label="Clear search"
         >
           <svg

@@ -210,12 +210,12 @@ export default function DashboardPage() {
 
         {/* Main Content */}
         <div className="flex-1 min-w-0">
-          {/* Header - Light Design with Teal Accents */}
-          <header className="sticky top-0 z-10 border-b border-gray-200 shadow-lg bg-white/95 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          {/* Header - Dark Menu Bar with Teal Accents */}
+          <header className="sticky top-0 z-10 bg-gray-700 shadow-xl border-b border-gray-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 flex items-center gap-3">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
               </svg>
               My Tasks
@@ -224,12 +224,12 @@ export default function DashboardPage() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
-                  <svg className="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 px-4 py-2 bg-gray-600 rounded-lg border border-gray-500">
+                  <svg className="w-5 h-5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-medium text-gray-700">
-                    Welcome, <span className="font-semibold text-teal-600">{user.name || user.email}</span>
+                  <p className="text-sm font-medium text-gray-200">
+                    Welcome, <span className="font-semibold text-emerald-400">{user.name || user.email}</span>
                   </p>
                 </div>
               )}
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   onClick={() => setShowSidebar(!showSidebar)}
                   variant="outline"
                   size="sm"
-                  className={`border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-teal-50 border-teal-400 text-teal-600' : ''}`}
+                  className={`border-gray-500 hover:border-emerald-500 hover:bg-gray-600 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2 ${showSidebar ? 'bg-gray-600 border-emerald-500 text-emerald-400' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('json')}
                   variant="outline"
                   size="sm"
-                  className="border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 transition-all font-semibold px-4 py-2"
+                  className="border-gray-500 hover:border-emerald-500 hover:bg-gray-600 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2"
                 >
                   📥 JSON
                 </Button>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                   onClick={() => handleExport('csv')}
                   variant="outline"
                   size="sm"
-                  className="border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 transition-all font-semibold px-4 py-2"
+                  className="border-gray-500 hover:border-emerald-500 hover:bg-gray-600 text-gray-200 hover:text-emerald-400 transition-all font-semibold px-4 py-2"
                 >
                   📊 CSV
                 </Button>
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 text-gray-600 transition-all font-semibold px-4 py-2"
+                  className="border-gray-500 hover:border-red-400 hover:bg-red-900/30 hover:text-red-400 text-gray-200 transition-all font-semibold px-4 py-2"
                 >
                   🚪 Logout
                 </Button>
@@ -272,7 +272,7 @@ export default function DashboardPage() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 text-gray-700"
+              className="md:hidden p-2 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-200"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -287,14 +287,14 @@ export default function DashboardPage() {
 
           {/* Mobile Menu Dropdown */}
           {showMobileMenu && (
-            <div className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
+            <div className="md:hidden mt-4 pt-4 border-t border-gray-600 space-y-3">
               {user && (
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-50 rounded-lg border border-gray-200 mb-2">
-                  <svg className="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-600 rounded-lg border border-gray-500 mb-2">
+                  <svg className="w-5 h-5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-medium text-gray-700">
-                    Welcome, <span className="font-semibold text-teal-600">{user.name || user.email}</span>
+                  <p className="text-sm font-medium text-gray-200">
+                    Welcome, <span className="font-semibold text-emerald-400">{user.name || user.email}</span>
                   </p>
                 </div>
               )}
@@ -303,7 +303,7 @@ export default function DashboardPage() {
                   onClick={() => { setShowSidebar(!showSidebar); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className={`w-full justify-center border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 font-semibold ${showSidebar ? 'bg-teal-50 border-teal-400 text-teal-600' : ''}`}
+                  className={`w-full justify-center border-gray-500 hover:border-emerald-500 hover:bg-gray-600 text-gray-200 hover:text-emerald-400 font-semibold ${showSidebar ? 'bg-gray-600 border-emerald-500 text-emerald-400' : ''}`}
                 >
                   📈 Analytics
                 </Button>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('json'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 font-semibold"
+                  className="w-full justify-center border-gray-500 hover:border-emerald-500 hover:bg-gray-600 text-gray-200 hover:text-emerald-400 font-semibold"
                 >
                   📥 JSON
                 </Button>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                   onClick={() => { handleExport('csv'); setShowMobileMenu(false); }}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-center border-gray-300 hover:border-teal-400 hover:bg-teal-50 text-gray-600 hover:text-teal-600 font-semibold"
+                  className="w-full justify-center border-gray-500 hover:border-emerald-500 hover:bg-gray-600 text-gray-200 hover:text-emerald-400 font-semibold"
                 >
                   📊 CSV
                 </Button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
                   onClick={logout}
                   variant="outline"
                   isLoading={authLoading}
-                  className="w-full justify-center border-gray-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 text-gray-600 font-semibold"
+                  className="w-full justify-center border-gray-500 hover:border-red-400 hover:bg-red-900/30 hover:text-red-400 text-gray-200 font-semibold"
                 >
                   🚪 Logout
                 </Button>
@@ -337,12 +337,35 @@ export default function DashboardPage() {
         </div>
       </header>
 
+      {/* Dark Hero Section Below Menu */}
+      <div className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 border-b border-gray-600 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">
+                Welcome to Your Productivity Hub
+              </h2>
+              <p className="text-sm sm:text-base text-gray-300">
+                Organize, prioritize, and accomplish your goals with ease
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-emerald-400">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+              </svg>
+              <span className="text-sm font-semibold">{stats?.total || 0} Total Tasks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Create Task Form - Light card with teal accents */}
+        {/* Create Task Form - Light card with emerald accents */}
         <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 sm:p-8 mb-8 hover:shadow-xl transition-shadow">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-teal-500 flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center shadow-md">
               <span className="text-2xl text-white">+</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Create New Task</h2>
@@ -371,7 +394,7 @@ export default function DashboardPage() {
             <SortDropdown value={sortBy} onChange={setSortBy} />
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="text-base font-medium text-teal-600 hover:text-teal-700 focus:outline-none whitespace-nowrap transition-colors"
+              className="text-base font-medium text-emerald-600 hover:text-emerald-700 focus:outline-none whitespace-nowrap transition-colors"
             >
               {showFilters ? '🔼 Hide' : '🔽 Show'} advanced filters
             </button>
@@ -411,7 +434,7 @@ export default function DashboardPage() {
               {smartFilter === 'upcoming' && 'Upcoming Tasks'}
               {smartFilter === 'completed' && 'Completed Tasks'}
               {tasks.length > 0 && (
-                <span className="ml-2 px-3 py-1 text-sm font-medium bg-teal-100 text-teal-700 rounded-lg border border-teal-200">
+                <span className="ml-2 px-3 py-1 text-sm font-medium bg-emerald-100 text-emerald-700 rounded-lg border border-emerald-200">
                   {tasks.length}
                 </span>
               )}
@@ -420,14 +443,14 @@ export default function DashboardPage() {
 
           {isLoading ? (
             <div className="bg-white border border-gray-200 rounded-xl shadow-lg text-center py-20">
-              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-teal-500 border-r-transparent"></div>
+              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent"></div>
               <p className="mt-4 text-base font-medium text-gray-700">Loading tasks...</p>
             </div>
           ) : tasks.length === 0 ? (
-            <div className="bg-gradient-to-br from-white to-teal-50 border-2 border-gray-200 rounded-2xl shadow-lg text-center py-16 px-6">
+            <div className="bg-gradient-to-br from-white to-emerald-50 border-2 border-gray-200 rounded-2xl shadow-lg text-center py-16 px-6">
               {/* Empty State SVG Illustration */}
               <div className="mb-6 flex justify-center">
-                <svg className="w-32 h-32 text-teal-400 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-32 h-32 text-emerald-500 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
