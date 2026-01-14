@@ -138,6 +138,7 @@ export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormP
         onChange={handleChange('email')}
         error={validationErrors.email}
         disabled={isLoading}
+        autoFocus
         required
       />
 
@@ -152,6 +153,14 @@ export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormP
         disabled={isLoading}
         required
       />
+
+      {mode === 'login' && (
+        <div className="text-right">
+          <a href="#" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
+            Forgot password?
+          </a>
+        </div>
+      )}
 
       {error && (
         <div className="p-3 bg-red-900/20 border border-red-400 rounded-md">
@@ -168,6 +177,19 @@ export function AuthForm({ mode, onSubmit, error, isLoading = false }: AuthFormP
       >
         {mode === 'signup' ? 'Sign Up' : 'Log In'}
       </Button>
+
+      {mode === 'signup' && (
+        <p className="text-xs text-center text-gray-500 mt-3">
+          By signing up, you agree to our{' '}
+          <a href="#" className="text-emerald-400 hover:text-emerald-300 transition-colors">
+            Terms of Service
+          </a>{' '}
+          and{' '}
+          <a href="#" className="text-emerald-400 hover:text-emerald-300 transition-colors">
+            Privacy Policy
+          </a>
+        </p>
+      )}
     </form>
   );
 }
