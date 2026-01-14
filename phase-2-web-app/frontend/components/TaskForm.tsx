@@ -140,7 +140,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-base font-medium text-emerald-600 hover:text-emerald-700 focus:outline-none flex items-center gap-2 transition-colors"
+          className="text-base font-medium text-emerald-400 hover:text-emerald-300 focus:outline-none flex items-center gap-2 transition-colors"
         >
           <span className="text-lg">{showAdvanced ? '🔽' : '▶️'}</span>
           <span>
@@ -153,7 +153,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           <button
             type="button"
             onClick={handleReset}
-            className="text-sm font-medium text-gray-500 hover:text-red-500 focus:outline-none transition-colors"
+            className="text-sm font-medium text-gray-400 hover:text-red-400 focus:outline-none transition-colors"
           >
             🔄 Reset all fields
           </button>
@@ -162,7 +162,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Advanced Options */}
       {showAdvanced && (
-        <div className="space-y-4 p-5 bg-gray-50 rounded-xl border-2 border-gray-200 shadow-md">
+        <div className="space-y-4 p-5 bg-gray-800 rounded-xl border-2 border-gray-700 shadow-md">
           {/* Priority Selector */}
           <PrioritySelector value={priority} onChange={setPriority} disabled={isLoading} />
 
@@ -190,8 +190,8 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border-2 border-red-300 rounded-xl p-4">
-          <p className="text-sm font-medium text-red-700 flex items-center gap-2" role="alert">
+        <div className="bg-red-900/30 border-2 border-red-500 rounded-xl p-4">
+          <p className="text-sm font-medium text-red-400 flex items-center gap-2" role="alert">
             <span className="text-lg">⚠️</span>
             {error}
           </p>
@@ -200,8 +200,8 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Quick Summary */}
       {hasAdvancedFields && (
-        <div className="text-sm text-gray-700 bg-emerald-50 p-4 rounded-xl border-2 border-emerald-200 shadow-md">
-          <strong className="text-base text-emerald-700">📝 Task Summary:</strong>
+        <div className="text-sm text-gray-300 bg-emerald-900/30 p-4 rounded-xl border-2 border-emerald-600 shadow-md">
+          <strong className="text-base text-emerald-400">📝 Task Summary:</strong>
           {' '}
           <span className="font-semibold">{priority}</span> priority
           {dueDate && <span>, due {new Date(dueDate).toLocaleDateString()}</span>}
