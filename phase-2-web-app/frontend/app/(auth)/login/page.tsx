@@ -42,19 +42,10 @@ export default function LoginPage() {
           </div>
 
           {/* Features */}
-          <div className="mt-12 space-y-4 text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
-              <span className="text-2xl">🎯</span>
-              <span className="text-lg">Smart task management</span>
-            </div>
-            <div className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
-              <span className="text-2xl">📊</span>
-              <span className="text-lg">Real-time analytics</span>
-            </div>
-            <div className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
-              <span className="text-2xl">⚡</span>
-              <span className="text-lg">Lightning fast performance</span>
-            </div>
+          <div className="mt-12 text-center lg:text-left">
+            <p className="text-lg text-gray-400 font-medium">
+              Smart task management <span className="text-gray-600 mx-3">|</span> Real-time analytics <span className="text-gray-600 mx-3">|</span> Lightning fast performance
+            </p>
           </div>
         </div>
       </div>
