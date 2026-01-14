@@ -153,11 +153,11 @@
     transition: all 0.3s ease;
   }
 
-  /* Input base styles - Light theme with emerald accents */
+  /* Input base styles - Dark theme with emerald accents */
   .input {
-    @apply flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800;
+    @apply flex h-10 w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-sm text-gray-200;
     @apply ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium;
-    @apply placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2;
+    @apply placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2;
     @apply focus-visible:ring-emerald-500 focus-visible:border-emerald-500;
     @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply transition-all duration-200;

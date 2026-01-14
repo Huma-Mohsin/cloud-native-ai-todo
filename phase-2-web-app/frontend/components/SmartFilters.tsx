@@ -44,8 +44,8 @@ export function SmartFilters({ activeFilter, onChange, counts }: SmartFiltersPro
               transition-all duration-200 whitespace-nowrap
               ${
                 isActive
-                  ? 'bg-gradient-to-r from-emerald-100 to-emerald-50 text-emerald-700 border-2 border-emerald-500 shadow-lg scale-105'
-                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-emerald-400 hover:shadow-md hover:scale-[1.02]'
+                  ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-2 border-emerald-400 shadow-lg scale-105'
+                  : 'bg-gray-800 text-gray-300 border-2 border-gray-600 hover:border-emerald-500 hover:shadow-md hover:scale-[1.02]'
               }
               focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2'
             `}
@@ -56,7 +56,7 @@ export function SmartFilters({ activeFilter, onChange, counts }: SmartFiltersPro
               <span
                 className={`
                   px-2.5 py-1 rounded-full text-sm font-bold
-                  ${isActive ? 'bg-emerald-200 text-emerald-800' : 'bg-gray-200 text-gray-700'}
+                  ${isActive ? 'bg-emerald-800 text-emerald-100' : 'bg-gray-700 text-gray-300'}
                 `}
               >
                 {count}

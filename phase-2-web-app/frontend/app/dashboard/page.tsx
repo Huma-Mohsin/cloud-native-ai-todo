@@ -339,13 +339,13 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Create Task Form - Light card with emerald accents */}
-        <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 sm:p-8 mb-8 hover:shadow-xl transition-shadow">
+        {/* Create Task Form - Dark card with emerald accents */}
+        <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 mb-8 hover:shadow-xl transition-shadow">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center shadow-md">
               <span className="text-2xl text-white">+</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Create New Task</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-white">Create New Task</h2>
           </div>
           <TaskForm
             onSubmit={handleCreateTask}
@@ -419,26 +419,26 @@ export default function DashboardPage() {
           </div>
 
           {isLoading ? (
-            <div className="bg-white border border-gray-200 rounded-xl shadow-lg text-center py-20">
-              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-emerald-600 border-r-transparent"></div>
-              <p className="mt-4 text-base font-medium text-gray-700">Loading tasks...</p>
+            <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg text-center py-20">
+              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-emerald-500 border-r-transparent"></div>
+              <p className="mt-4 text-base font-medium text-gray-300">Loading tasks...</p>
             </div>
           ) : tasks.length === 0 ? (
-            <div className="bg-gradient-to-br from-white to-emerald-50 border-2 border-gray-200 rounded-2xl shadow-lg text-center py-16 px-6">
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-gray-700 rounded-2xl shadow-lg text-center py-16 px-6">
               {/* Empty State SVG Illustration */}
               <div className="mb-6 flex justify-center">
                 <svg className="w-32 h-32 text-emerald-500 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">
+              <h3 className="text-2xl font-bold text-white mb-3">
                 {smartFilter === 'all' && 'No Tasks Yet'}
                 {smartFilter === 'today' && 'Nothing Due Today'}
                 {smartFilter === 'overdue' && 'All Caught Up!'}
                 {smartFilter === 'upcoming' && 'No Upcoming Tasks'}
                 {smartFilter === 'completed' && 'No Completed Tasks'}
               </h3>
-              <p className="text-base text-gray-600 max-w-md mx-auto">
+              <p className="text-base text-gray-400 max-w-md mx-auto">
                 {smartFilter === 'all' && 'Start organizing your work by creating your first task above. Stay productive! 🚀'}
                 {smartFilter === 'today' && 'You have no tasks scheduled for today. Enjoy your free time! ☀️'}
                 {smartFilter === 'overdue' && 'Great job! You have no overdue tasks. Keep up the excellent work! 🎉'}
