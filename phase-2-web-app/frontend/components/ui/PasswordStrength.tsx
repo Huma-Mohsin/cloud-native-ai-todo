@@ -13,7 +13,7 @@ interface PasswordStrengthProps {
 export function PasswordStrength({ password }: PasswordStrengthProps) {
   if (!password) return null;
 
-  const getStrength = (pwd: string): { level: number; label: string; color: string } => {
+  const getStrength = (pwd: string): { level: number; label: string } => {
     let strength = 0;
 
     // Length check
@@ -27,24 +27,31 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
     if (/[^a-zA-Z0-9]/.test(pwd)) strength++;
 
     if (strength <= 2) {
-      return { level: 1, label: 'Weak', color: 'bg-red-500' };
+      return { level: 1, label: 'Weak' };
     } else if (strength <= 4) {
-      return { level: 2, label: 'Medium', color: 'bg-yellow-500' };
+      return { level: 2, label: 'Medium' };
     } else {
-      return { level: 3, label: 'Strong', color: 'bg-green-500' };
+      return { level: 3, label: 'Strong' };
     }
   };
 
   const strength = getStrength(password);
 
+  // Each bar has its own fixed color
+  const barColors = [
+    'bg-red-500',    // Bar 1: Red
+    'bg-yellow-500', // Bar 2: Yellow
+    'bg-green-500',  // Bar 3: Green
+  ];
+
   return (
     <div className="mt-2">
       <div className="flex gap-1 mb-1">
-        {[1, 2, 3].map((level) => (
+        {[1, 2, 3].map((barIndex) => (
           <div
-            key={level}
+            key={barIndex}
             className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-              level <= strength.level ? strength.color : 'bg-gray-700'
+              barIndex <= strength.level ? barColors[barIndex - 1] : 'bg-gray-700'
             }`}
           />
         ))}
