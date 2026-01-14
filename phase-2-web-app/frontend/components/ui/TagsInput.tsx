@@ -58,11 +58,11 @@ export function TagsInput({
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-gray-300">
         Tags {value.length > 0 && <span className="text-gray-500">({value.length}/{maxTags})</span>}
       </label>
 
-      <div className="min-h-[42px] flex flex-wrap gap-2 p-2 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent">
+      <div className="min-h-[42px] flex flex-wrap gap-2 p-2 border border-gray-600 rounded-lg focus-within:ring-2 focus-within:ring-emerald-500 focus-within:border-transparent bg-gray-800">
         {/* Tag chips */}
         {value.map((tag) => (
           <TagChip key={tag} tag={tag} onRemove={() => removeTag(tag)} disabled={disabled} />
@@ -76,12 +76,12 @@ export function TagsInput({
           onKeyDown={handleKeyDown}
           placeholder={value.length === 0 ? placeholder : ''}
           disabled={disabled || value.length >= maxTags}
-          className="flex-1 min-w-[120px] px-2 py-1 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 min-w-[120px] px-2 py-1 outline-none disabled:opacity-50 disabled:cursor-not-allowed bg-gray-800 text-gray-200 placeholder-gray-500"
         />
       </div>
 
       {/* Helper text */}
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-gray-400">
         Press Enter to add tags. Click × to remove.
       </p>
     </div>
