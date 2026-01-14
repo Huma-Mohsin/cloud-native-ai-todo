@@ -43,8 +43,8 @@ export default function SignupPage() {
 
           {/* Features */}
           <div className="mt-12 text-center lg:text-left">
-            <p className="text-base text-gray-400 font-medium">
-              Smart task management <span className="text-gray-600 mx-2">|</span> Real-time analytics <span className="text-gray-600 mx-2">|</span> Lightning fast performance
+            <p className="text-lg text-gray-300 font-semibold">
+              Task management <span className="text-gray-600 mx-3">|</span> Live analytics <span className="text-gray-600 mx-3">|</span> Lightning fast
             </p>
           </div>
         </div>
