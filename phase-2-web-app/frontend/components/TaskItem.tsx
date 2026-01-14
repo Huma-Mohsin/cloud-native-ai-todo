@@ -207,7 +207,7 @@ export function TaskItem({
   return (
     <div
       className={`relative bg-gray-900 border rounded-xl shadow-lg transition-all hover:shadow-xl ${
-        task.completed ? 'opacity-70 border-gray-600' : isOverdue ? 'border-red-400' : 'border-gray-700'
+        task.completed ? 'border-gray-600' : isOverdue ? 'border-red-400' : 'border-gray-700'
       }`}
     >
       {/* Status Indicator Line - Left Edge */}
@@ -259,7 +259,7 @@ export function TaskItem({
             {/* Title */}
             <h3
               className={`text-base sm:text-lg font-semibold text-white mb-3 break-words leading-relaxed ${
-                task.completed ? 'line-through text-gray-500' : ''
+                task.completed ? 'line-through' : ''
               }`}
             >
               {task.title}
