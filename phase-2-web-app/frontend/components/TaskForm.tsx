@@ -98,28 +98,18 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-      {/* Title and Submit Button */}
-      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-        <div className="flex-1">
-          <Input
-            id="task-title"
-            type="text"
-            placeholder="What do you need to do?"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            disabled={isLoading}
-            required
-            maxLength={200}
-          />
-        </div>
-        <Button
-          type="submit"
-          isLoading={isLoading}
-          disabled={!title.trim()}
-          className="sm:w-auto w-full bg-emerald-600 text-white font-bold px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-base hover:bg-emerald-700"
-        >
-          ➕ Add Task
-        </Button>
+      {/* Title */}
+      <div>
+        <Input
+          id="task-title"
+          type="text"
+          placeholder="What do you need to do?"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          disabled={isLoading}
+          required
+          maxLength={200}
+        />
       </div>
 
       {/* Description */}
@@ -133,6 +123,18 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           disabled={isLoading}
           maxLength={1000}
         />
+      </div>
+
+      {/* Submit Button */}
+      <div>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          disabled={!title.trim()}
+          className="w-full sm:w-auto bg-emerald-600 text-white font-bold px-4 py-2 sm:px-6 sm:py-3 shadow-lg hover:shadow-xl transition-all duration-200 text-sm sm:text-base hover:bg-emerald-700"
+        >
+          ➕ Add Task
+        </Button>
       </div>
 
       {/* Toggle Advanced Options */}
