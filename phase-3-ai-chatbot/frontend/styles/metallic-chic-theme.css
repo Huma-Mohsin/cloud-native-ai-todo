@@ -1,0 +1,109 @@
+/* Metallic Chic Theme - Light Blue Metallic CSS Variables */
+
+:root {
+  /* Metallic Chic Colors - Light Blue */
+  --color-sky-light: #E8F4F8;
+  --color-sky: #C1E1EC;
+  --color-sky-medium: #A8D8EA;
+
+  --color-blue-light: #6BB6D6;
+  --color-blue: #4A90A4;
+  --color-blue-dark: #2E5266;
+
+  --color-navy-light: #1B3A52;
+  --color-navy: #17324D;
+  --color-navy-dark: #0D1F2D;
+
+  /* Functional Colors */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #6BB6D6;
+
+  /* Gradients */
+  --gradient-metallic: linear-gradient(135deg, var(--color-sky-light) 0%, var(--color-sky) 50%, var(--color-sky-medium) 100%);
+  --gradient-blue: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-blue) 50%, var(--color-blue-dark) 100%);
+  --gradient-navy: linear-gradient(135deg, var(--color-blue-dark) 0%, var(--color-navy-light) 50%, var(--color-navy) 100%);
+
+  /* Shadows */
+  --shadow-metallic: 0 4px 6px -1px rgba(107, 182, 214, 0.3), 0 2px 4px -1px rgba(107, 182, 214, 0.2);
+  --shadow-blue: 0 4px 6px -1px rgba(74, 144, 164, 0.4), 0 2px 4px -1px rgba(74, 144, 164, 0.3);
+
+  /* Spacing */
+  --split-screen-gap: 1rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+/* Utility Classes */
+
+/* Metallic surface effect */
+.metallic-surface {
+  background: var(--gradient-metallic);
+  box-shadow: var(--shadow-metallic);
+}
+
+/* Blue accent effect */
+.blue-accent {
+  color: var(--color-blue-light);
+  text-shadow: 0 0 10px rgba(107, 182, 214, 0.3);
+}
+
+/* Navy background */
+.navy-bg {
+  background: var(--gradient-navy);
+}
+
+/* Blue glow effect for animations */
+.blue-glow {
+  box-shadow: 0 0 20px rgba(107, 182, 214, 0.5);
+}
+
+/* Metallic border */
+.metallic-border {
+  border: 1px solid var(--color-sky);
+}
+
+/* Blue border */
+.blue-border {
+  border: 1px solid var(--color-blue-light);
+}
+
+/* Smooth transitions */
+.smooth-transition {
+  transition: all var(--transition-normal);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scrollbar for metallic theme */
+.metallic-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.metallic-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-sky-light);
+  border-radius: 4px;
+}
+
+.metallic-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-blue);
+  border-radius: 4px;
+}
+
+.metallic-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue-light);
+}
