@@ -36,8 +36,9 @@ export function ChatInterface({ session }: ChatInterfaceProps) {
   }, [messages]);
 
   const handleTaskCreated = (taskId: number, title: string) => {
-    // Add success message to chat showing the task ID
-    const successMessage = `✅ Task "${title}" created successfully (ID: ${taskId})!\n\nYou can now:\n- Update it: "Update task ${taskId} priority to high"\n- Complete it: "Complete task ${taskId}"\n- Delete it: "Delete task ${taskId}"`;
+    const successMessage = language === 'ur'
+      ? `✅ ٹاسک "${title}" کامیابی سے بنایا گیا (ID: ${taskId})!\n\nآپ یہ بھی کر سکتے ہیں:\n- اسے اپ ڈیٹ کریں: "ٹاسک ${taskId} کی ترجیح زیادہ کریں"\n- مکمل کریں: "ٹاسک ${taskId} مکمل کریں"\n- حذف کریں: "ٹاسک ${taskId} حذف کریں"`
+      : `✅ Task "${title}" created successfully (ID: ${taskId})!\n\nYou can now:\n- Update it: "Update task ${taskId} priority to high"\n- Complete it: "Complete task ${taskId}"\n- Delete it: "Delete task ${taskId}"`;
     addAssistantMessage(successMessage);
   };
 
@@ -71,7 +72,7 @@ export function ChatInterface({ session }: ChatInterfaceProps) {
           <div>
             <h1 className="text-3xl font-bold tracking-tight blue-accent">✨ TaskFlow AI</h1>
             <p className="text-sm text-metallic-sky-light mt-1">
-              Your intelligent task assistant
+              {t('subtitle')}
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -85,7 +86,7 @@ export function ChatInterface({ session }: ChatInterfaceProps) {
               onClick={handleLogout}
               className="bg-metallic-blue-light/20 hover:bg-metallic-blue-light/30 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 border border-metallic-blue-light/50"
             >
-              Logout
+              {t('logout')}
             </button>
           </div>
         </div>

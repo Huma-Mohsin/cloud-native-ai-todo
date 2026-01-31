@@ -108,19 +108,28 @@ interface CategoryBadgeProps {
 }
 
 export function CategoryBadge({ category, className }: CategoryBadgeProps) {
+  const { language } = useLanguage();
   if (!category) return null;
 
   const categoryColors: Record<string, string> = {
-    Work: 'bg-info/20 text-info border-info/50',
-    Personal: 'bg-metallic-blue/20 text-metallic-blue border-metallic-blue/50',
-    Shopping: 'bg-success/20 text-success border-success/50',
-    Health: 'bg-error/20 text-error border-error/50',
-    Learning: 'bg-warning/20 text-warning border-warning/50',
+    work: 'bg-info/20 text-info border-info/50',
+    personal: 'bg-metallic-blue/20 text-metallic-blue border-metallic-blue/50',
+    shopping: 'bg-success/20 text-success border-success/50',
+    health: 'bg-error/20 text-error border-error/50',
+    learning: 'bg-warning/20 text-warning border-warning/50',
   };
 
-  const color =
-    categoryColors[category] ||
-    'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50';
+  const categoryLabels: Record<string, Record<string, string>> = {
+    work: { en: 'Work', ur: 'کام' },
+    personal: { en: 'Personal', ur: 'ذاتی' },
+    shopping: { en: 'Shopping', ur: 'خریداری' },
+    health: { en: 'Health', ur: 'صحت' },
+    learning: { en: 'Learning', ur: 'سیکھنا' },
+  };
+
+  const key = category.toLowerCase();
+  const color = categoryColors[key] || 'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50';
+  const label = categoryLabels[key]?.[language] || category;
 
   return (
     <span
@@ -130,7 +139,7 @@ export function CategoryBadge({ category, className }: CategoryBadgeProps) {
         className
       )}
     >
-      {category}
+      {label}
     </span>
   );
 }

@@ -145,6 +145,10 @@ export interface Translations {
   insights: string;
   taskStatus: string;
   total: string;
+
+  // Chat Header
+  subtitle: string;
+  logout: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -287,6 +291,10 @@ export const translations: Record<Language, Translations> = {
     insights: 'Insights',
     taskStatus: 'Task Status',
     total: 'Total',
+
+    // Chat Header
+    subtitle: 'Your intelligent task assistant',
+    logout: 'Logout',
   },
 
   ur: {
@@ -428,6 +436,10 @@ export const translations: Record<Language, Translations> = {
     insights: 'بصیرت',
     taskStatus: 'ٹاسک کی حیثیت',
     total: 'کل',
+
+    // Chat Header
+    subtitle: 'آپ کا ذہیں ٹاسک اسسٹنٹ',
+    logout: 'لاگ آؤٹ',
   },
 };
 
