@@ -5,6 +5,7 @@ import { PriorityButtonGroup } from './PriorityButtonGroup';
 import { DatePickerQuick } from './DatePickerQuick';
 import { QuickActionDropdown } from './QuickActionDropdown';
 import { TagInput } from './TagInput';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export interface QuickAction {
   id: string;
@@ -35,6 +36,7 @@ interface QuickActionButtonsProps {
 }
 
 export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickActionButtonsProps) {
+  const { t } = useLanguage();
   const [updates, setUpdates] = useState<Record<string, any>>({});
   const [isSaving, setIsSaving] = useState(false);
   const [description, setDescription] = useState('');
@@ -75,7 +77,7 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
     } catch (error) {
       console.error('❌ Failed to save:', error);
       // Show error to user
-      alert(`Failed to save task: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      alert(`${t('failedToSave')}: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsSaving(false);
     }
@@ -135,7 +137,7 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 shadow-lg animate-fadeIn mt-4">
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-gray-800 mb-2">✨ Customize your task:</h3>
+        <h3 className="text-lg font-bold text-gray-800 mb-2">✨ {t('customizeTask')}</h3>
       </div>
 
       <div className="space-y-4">
@@ -157,7 +159,7 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
               : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-md'
           }`}
         >
-          {isSaving ? '⏳ Saving...' : '✅ Save Changes'}
+          {isSaving ? `⏳ ${t('saving')}` : `✅ ${t('saveChanges')}`}
         </button>
 
         <button
@@ -165,7 +167,7 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
           disabled={isSaving}
           className="px-6 py-3 rounded-lg font-bold text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-50 transition-all duration-200 transform hover:scale-105"
         >
-          ❌ Skip
+          ❌ {t('skip')}
         </button>
       </div>
     </div>

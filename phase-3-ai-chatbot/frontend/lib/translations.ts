@@ -127,6 +127,16 @@ export interface Translations {
   showCompletedTasks: string;
   more: string;
 
+  // Quick Actions Form
+  customizeTask: string;
+  saveChanges: string;
+  saving: string;
+  skip: string;
+  customDate: string;
+  selectCategory: string;
+  tagInputPlaceholder: string;
+  failedToSave: string;
+
   // Analytics Sidebar
   analytics: string;
   realTimeInsights: string;
@@ -259,6 +269,16 @@ export const translations: Record<Language, Translations> = {
     showCompletedTasks: 'Show completed tasks',
     more: 'more',
 
+    // Quick Actions Form
+    customizeTask: 'Customize your task:',
+    saveChanges: 'Save Changes',
+    saving: 'Saving...',
+    skip: 'Skip',
+    customDate: 'Custom Date',
+    selectCategory: 'Select...',
+    tagInputPlaceholder: 'Type and press Enter to add tags...',
+    failedToSave: 'Failed to save task',
+
     // Analytics Sidebar
     analytics: 'Analytics',
     realTimeInsights: 'Real-time insights',
@@ -389,6 +409,16 @@ export const translations: Record<Language, Translations> = {
     allCategories: 'تمام کیٹگریز',
     showCompletedTasks: 'مکمل ٹاسک دکھائیں',
     more: 'اور',
+
+    // Quick Actions Form
+    customizeTask: 'اپنا ٹاسک حسب ضرورت بنائیں:',
+    saveChanges: 'تبدیلیاں محفوظ کریں',
+    saving: 'محفوظ ہو رہا ہے...',
+    skip: 'چھوڑیں',
+    customDate: 'خصوصی تاریخ',
+    selectCategory: 'منتخب کریں...',
+    tagInputPlaceholder: 'ٹیگز لکھیں اور Enter دبائیں...',
+    failedToSave: 'ٹاسک محفوظ کرنے میں ناکامی',
 
     // Analytics Sidebar
     analytics: 'تجزیات',

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, KeyboardEvent } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TagInputProps {
   suggestions?: string[];
@@ -8,6 +9,7 @@ interface TagInputProps {
 }
 
 export function TagInput({ suggestions = [], onTagsChange }: TagInputProps) {
+  const { t } = useLanguage();
   const [tags, setTags] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -78,7 +80,7 @@ export function TagInput({ suggestions = [], onTagsChange }: TagInputProps) {
           onKeyDown={handleKeyDown}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          placeholder="Type and press Enter to add tags..."
+          placeholder={t('tagInputPlaceholder')}
           className="w-full px-4 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
         />
 

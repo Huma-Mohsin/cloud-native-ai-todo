@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface QuickActionDropdownProps {
   options: string[];
@@ -8,7 +9,9 @@ interface QuickActionDropdownProps {
   placeholder?: string;
 }
 
-export function QuickActionDropdown({ options, onSelect, placeholder = 'Select...' }: QuickActionDropdownProps) {
+export function QuickActionDropdown({ options, onSelect, placeholder }: QuickActionDropdownProps) {
+  const { t } = useLanguage();
+  const displayPlaceholder = placeholder || t('selectCategory');
   const [selected, setSelected] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,7 +52,7 @@ export function QuickActionDropdown({ options, onSelect, placeholder = 'Select..
               {getCategoryIcon(selected)} {selected.charAt(0).toUpperCase() + selected.slice(1)}
             </>
           ) : (
-            <>{placeholder}</>
+            <>{displayPlaceholder}</>
           )}
         </span>
         <span className="ml-2">{isOpen ? '▲' : '▼'}</span>

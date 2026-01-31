@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { addDays, addWeeks, format } from 'date-fns';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface DatePickerQuickProps {
   quickOptions: string[];
@@ -9,6 +10,7 @@ interface DatePickerQuickProps {
 }
 
 export function DatePickerQuick({ quickOptions, onSelect }: DatePickerQuickProps) {
+  const { t } = useLanguage();
   const [selected, setSelected] = useState<string | null>(null);
   const [showCustomPicker, setShowCustomPicker] = useState(false);
 
@@ -49,11 +51,11 @@ export function DatePickerQuick({ quickOptions, onSelect }: DatePickerQuickProps
   const getOptionLabel = (option: string): string => {
     switch (option) {
       case 'tomorrow':
-        return '📅 Tomorrow';
+        return `📅 ${t('tomorrow')}`;
       case 'this_week':
-        return '📅 This Week';
+        return `📅 ${t('thisWeek')}`;
       case 'custom':
-        return '📅 Custom Date';
+        return `📅 ${t('customDate')}`;
       default:
         return option;
     }
