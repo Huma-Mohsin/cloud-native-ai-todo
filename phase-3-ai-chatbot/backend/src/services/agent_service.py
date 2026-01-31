@@ -356,6 +356,13 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                 {"value": "medium", "label": "درمیانی"},
                 {"value": "low", "label": "کم"}
             ]
+            category_options = [
+                {"value": "work", "label": "کام"},
+                {"value": "personal", "label": "ذاتی"},
+                {"value": "shopping", "label": "خریداری"},
+                {"value": "health", "label": "صحت"}
+            ]
+            tag_suggestions = ["فوری", "اہم", "گروسری"]
         else:
             response = f"Ready to create task: '{title}'"
             priority_label = "Priority"
@@ -369,6 +376,13 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                 {"value": "medium", "label": "Medium"},
                 {"value": "low", "label": "Low"}
             ]
+            category_options = [
+                {"value": "work", "label": "Work"},
+                {"value": "personal", "label": "Personal"},
+                {"value": "shopping", "label": "Shopping"},
+                {"value": "health", "label": "Health"}
+            ]
+            tag_suggestions = ["urgent", "important", "groceries"]
 
         return {
             "response": response,
@@ -396,7 +410,7 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                         "id": "category",
                         "label": category_label,
                         "type": "dropdown",
-                        "options": ["work", "personal", "shopping", "health"]
+                        "options": category_options
                     },
                     {
                         "id": "description",
@@ -408,7 +422,7 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                         "id": "tags",
                         "label": tags_label,
                         "type": "tag_input",
-                        "suggestions": ["urgent", "important", "groceries"]
+                        "suggestions": tag_suggestions
                     }
                 ]
             }
