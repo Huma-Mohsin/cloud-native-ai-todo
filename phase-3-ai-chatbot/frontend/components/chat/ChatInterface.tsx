@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import type { Session } from '@/lib/auth';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageToggleCompact } from './LanguageToggle';
+import { useVoiceRecording } from '@/hooks/useVoiceRecording';
+import { VoiceButton } from './VoiceButton';
 
 interface ChatInterfaceProps {
   session: Session;
@@ -26,6 +28,11 @@ export function ChatInterface({ session }: ChatInterfaceProps) {
   const token = session.session.token;
 
   const { messages, isLoading, error, sendMessage, addAssistantMessage } = useChat({ userId, token });
+
+  const { isRecording, isSupported, startRecording, stopRecording } = useVoiceRecording({
+    language,
+    onTranscript: (text: string) => setInput(text),
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -169,9 +176,15 @@ export function ChatInterface({ session }: ChatInterfaceProps) {
             className="flex-1 border-2 border-metallic-sky rounded-2xl px-6 py-3 focus:outline-none focus:ring-2 focus:ring-metallic-blue-light focus:border-transparent transition-all duration-200 text-metallic-navy placeholder-metallic-blue bg-metallic-sky-light/20"
             disabled={isLoading}
           />
+          <VoiceButton
+            isRecording={isRecording}
+            isSupported={isSupported}
+            onStart={startRecording}
+            onStop={stopRecording}
+          />
           <button
             type="submit"
-            disabled={isLoading || !input.trim()}
+            disabled={isLoading || isRecording || !input.trim()}
             className="bg-blue-gradient text-white px-8 py-3 rounded-2xl hover:shadow-blue disabled:bg-metallic-sky disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-metallic hover:scale-105 disabled:hover:scale-100"
           >
             {isLoading ? `⏳ ${t('recording')}` : `🚀 ${t('sendButton')}`}
