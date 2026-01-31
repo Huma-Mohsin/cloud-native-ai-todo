@@ -70,7 +70,7 @@ class AgentService:
             else:
                 return await self._run_openai_agent(user_id, message, conversation_history, language, session)
         else:
-            return await self._run_rule_based_agent(user_id, message, session)
+            return await self._run_rule_based_agent(user_id, message, language, session)
 
     async def _run_gemini_agent(
         self,
@@ -186,16 +186,27 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         self,
         user_id: str,
         message: str,
+        language: str,
         session: AsyncSession,
     ) -> dict[str, Any]:
-        """Rule-based fallback agent for parsing natural language commands."""
+        """Rule-based fallback agent for parsing natural language commands with language support."""
         message_lower = message.lower().strip()
         tool_calls = []
 
+        # Urdu keywords for pattern matching
+        urdu_keywords = {
+            'add': ['شامل', 'بنائیں', 'بنا', 'ٹاسک', 'کام'],
+            'list': ['دکھائیں', 'تمام', 'لسٹ', 'کیا'],
+            'complete': ['مکمل', 'ختم', 'پورا'],
+            'delete': ['حذف', 'ڈیلیٹ', 'ہٹا'],
+            'update': ['اپ ڈیٹ', 'تبدیل', 'بدل'],
+        }
+
         try:
-            # Pattern 1: Add task
-            if any(keyword in message_lower for keyword in ["add", "create", "new task", "remember to", "need to"]):
-                result = await self._handle_add_task(user_id, message, session)
+            # Pattern 1: Add task (English + Urdu)
+            if (any(keyword in message_lower for keyword in ["add", "create", "new task", "remember to", "need to"]) or
+                any(keyword in message for keyword in urdu_keywords['add'])):
+                result = await self._handle_add_task(user_id, message, session, language)
                 tool_calls.append({"tool": "add_task", "result": "success"})
                 print(f"DEBUG: _handle_add_task returned: {result}")  # DEBUG LOG
                 response_dict = {
@@ -210,42 +221,46 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                     print(f"DEBUG: No quick_actions in result!")  # DEBUG LOG
                 return response_dict
 
-            # Pattern 2: List tasks
-            elif any(keyword in message_lower for keyword in ["show", "list", "what", "my tasks", "pending", "completed"]):
-                result = await self._handle_list_tasks(user_id, message_lower, session)
+            # Pattern 2: List tasks (English + Urdu)
+            elif (any(keyword in message_lower for keyword in ["show", "list", "what", "my tasks", "pending", "completed"]) or
+                  any(keyword in message for keyword in urdu_keywords['list'])):
+                result = await self._handle_list_tasks(user_id, message_lower, session, language)
                 tool_calls.append({"tool": "list_tasks", "result": "success"})
                 return {"response": result["response"], "tool_calls": tool_calls}
 
-            # Pattern 3: Complete task
-            elif any(keyword in message_lower for keyword in ["complete", "done", "finish", "mark as complete"]):
-                result = await self._handle_complete_task(user_id, message, session)
+            # Pattern 3: Complete task (English + Urdu)
+            elif (any(keyword in message_lower for keyword in ["complete", "done", "finish", "mark as complete"]) or
+                  any(keyword in message for keyword in urdu_keywords['complete'])):
+                result = await self._handle_complete_task(user_id, message, session, language)
                 tool_calls.append({"tool": "complete_task", "result": "success"})
                 return {"response": result["response"], "tool_calls": tool_calls}
 
-            # Pattern 4: Delete task
-            elif any(keyword in message_lower for keyword in ["delete", "remove", "cancel"]):
-                result = await self._handle_delete_task(user_id, message, session)
+            # Pattern 4: Delete task (English + Urdu)
+            elif (any(keyword in message_lower for keyword in ["delete", "remove", "cancel"]) or
+                  any(keyword in message for keyword in urdu_keywords['delete'])):
+                result = await self._handle_delete_task(user_id, message, session, language)
                 tool_calls.append({"tool": "delete_task", "result": "success"})
                 return {"response": result["response"], "tool_calls": tool_calls}
 
-            # Pattern 5: Update task
-            elif any(keyword in message_lower for keyword in ["update", "change", "modify", "edit"]):
-                result = await self._handle_update_task(user_id, message, session)
+            # Pattern 5: Update task (English + Urdu)
+            elif (any(keyword in message_lower for keyword in ["update", "change", "modify", "edit"]) or
+                  any(keyword in message for keyword in urdu_keywords['update'])):
+                result = await self._handle_update_task(user_id, message, session, language)
                 tool_calls.append({"tool": "update_task", "result": "success"})
                 return {"response": result["response"], "tool_calls": tool_calls}
 
-            # Pattern 6: Set reminder
-            elif any(keyword in message_lower for keyword in ["remind", "reminder", "alarm", "alert", "notify"]):
-                if "snooze" in message_lower:
+            # Pattern 6: Set reminder (English + Urdu)
+            elif any(keyword in message_lower for keyword in ["remind", "reminder", "alarm", "alert", "notify", "یاد دلائیں", "یاد دہانی"]):
+                if "snooze" in message_lower or "بعد میں" in message:
                     result = await self._handle_snooze_reminder(user_id, message, session)
                     tool_calls.append({"tool": "snooze_reminder", "result": "success"})
-                elif "cancel" in message_lower or "remove" in message_lower or "delete" in message_lower:
+                elif "cancel" in message_lower or "remove" in message_lower or "delete" in message_lower or "منسوخ" in message:
                     result = await self._handle_cancel_reminder(user_id, message, session)
                     tool_calls.append({"tool": "cancel_reminder", "result": "success"})
-                elif "show" in message_lower or "list" in message_lower:
+                elif "show" in message_lower or "list" in message_lower or "دکھائیں" in message:
                     result = await self._handle_list_reminders(user_id, message, session)
                     tool_calls.append({"tool": "list_reminders", "result": "success"})
-                elif "dismiss" in message_lower:
+                elif "dismiss" in message_lower or "بند" in message:
                     result = await self._handle_dismiss_reminder(user_id, message, session)
                     tool_calls.append({"tool": "dismiss_reminder", "result": "success"})
                 else:
@@ -254,23 +269,33 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                 return {"response": result["response"], "tool_calls": tool_calls}
 
             else:
+                if language == "ur":
+                    return {
+                        "response": "میں آپ کے ٹاسک منظم کرنے میں مدد کر سکتا ہوں! آزمائیں:\n\n📋 ٹاسک مینجمنٹ:\n- 'گروسری خریدنے کا ٹاسک شامل کریں'\n- 'مجھے اپنے تمام ٹاسک دکھائیں'\n- 'ٹاسک 1 کو مکمل کریں'\n- 'ٹاسک 2 حذف کریں'\n- 'ٹاسک 3 اپ ڈیٹ کریں'\n\n⏰ یاد دہانیاں:\n- 'ٹاسک 5 کے بارے میں کل 2 بجے یاد دلائیں'\n- 'ٹاسک 3 کے لیے 30 منٹ میں یاد دہانی سیٹ کریں'\n- 'میری یاد دہانیاں دکھائیں'",
+                        "tool_calls": [],
+                    }
                 return {
                     "response": "I can help you manage tasks! Try:\n\n📋 Task Management:\n- 'Add a task to buy groceries'\n- 'Show me all my tasks'\n- 'Mark task 1 as complete'\n- 'Delete task 2'\n- 'Update task 3 to Call mom'\n\n⏰ Reminders:\n- 'Remind me about task 5 tomorrow at 2pm'\n- 'Set reminder for task 3 in 30 minutes'\n- 'Show my reminders'\n- 'Snooze task 5 for 10 minutes'\n- 'Cancel reminder for task 2'",
                     "tool_calls": [],
                 }
 
         except Exception as e:
+            if language == "ur":
+                return {
+                    "response": f"معافی چاہتا ہوں، کوئی غلطی آئی: {str(e)}",
+                    "tool_calls": tool_calls,
+                }
             return {
                 "response": f"Sorry, I encountered an error: {str(e)}",
                 "tool_calls": tool_calls,
             }
 
-    async def _handle_add_task(self, user_id: str, message: str, session: AsyncSession) -> dict[str, Any]:
+    async def _handle_add_task(self, user_id: str, message: str, session: AsyncSession, language: str = "en") -> dict[str, Any]:
         """Parse and extract task title, but DON'T create task yet.
 
         Task will be created when user clicks 'Save' with all the details.
         """
-        # Extract task title and description
+        # Extract task title and description - English patterns
         patterns = [
             r"add (?:a )?task (?:to )?(.+)",
             r"create (?:a )?task (?:to )?(.+)",
@@ -278,39 +303,77 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
             r"(?:i need to|remember to) (.+)",
         ]
 
+        # Urdu patterns for task extraction
+        urdu_patterns = [
+            r"(.+?)(?:کا ٹاسک شامل کریں|کا کام شامل کریں|کا ٹاسک بنائیں)",
+            r"(.+?)(?:شامل کریں|بنائیں|بنا دیں)",
+        ]
+
         title = None
         description = None
 
-        for pattern in patterns:
-            match = re.search(pattern, message.lower())
-            if match:
-                content = match.group(1).strip()
-                # Remove surrounding quotes if present
-                content = content.strip('"').strip("'")
-                # Check for description separator
-                if " - " in content:
-                    parts = content.split(" - ", 1)
-                    title = parts[0].strip()
-                    description = parts[1].strip()
-                else:
-                    title = content
-                break
+        # Try Urdu patterns first if language is Urdu
+        if language == "ur":
+            for pattern in urdu_patterns:
+                match = re.search(pattern, message)
+                if match:
+                    title = match.group(1).strip()
+                    title = title.strip('"').strip("'")
+                    break
+
+        # Fall back to English patterns
+        if not title:
+            for pattern in patterns:
+                match = re.search(pattern, message.lower())
+                if match:
+                    content = match.group(1).strip()
+                    content = content.strip('"').strip("'")
+                    if " - " in content:
+                        parts = content.split(" - ", 1)
+                        title = parts[0].strip()
+                        description = parts[1].strip()
+                    else:
+                        title = content
+                    break
 
         if not title:
             title = message.strip()
-            # Remove surrounding quotes if present
             title = title.strip('"').strip("'")
-
-        # DON'T create task yet - just return quick_actions with task title
-        response = f"Ready to create task: '{title}'"
 
         print(f"DEBUG: Task title extracted: {title}, Description: {description}")  # DEBUG
 
-        # Return response with quick_actions for interactive UI
+        # Language-specific response and labels
+        if language == "ur":
+            response = f"ٹاسک بنانے کے لیے تیار: '{title}'"
+            priority_label = "ترجیح"
+            due_date_label = "آخری تاریخ"
+            category_label = "کیٹگری"
+            description_label = "تفصیل"
+            tags_label = "ٹیگز"
+            desc_placeholder = description or "تفصیل شامل کریں..."
+            priority_options = [
+                {"value": "high", "label": "زیادہ"},
+                {"value": "medium", "label": "درمیانی"},
+                {"value": "low", "label": "کم"}
+            ]
+        else:
+            response = f"Ready to create task: '{title}'"
+            priority_label = "Priority"
+            due_date_label = "Due Date"
+            category_label = "Category"
+            description_label = "Description"
+            tags_label = "Tags"
+            desc_placeholder = description or "Add description..."
+            priority_options = [
+                {"value": "high", "label": "High"},
+                {"value": "medium", "label": "Medium"},
+                {"value": "low", "label": "Low"}
+            ]
+
         return {
             "response": response,
             "quick_actions": {
-                "type": "task_creation",  # Changed from task_customization
+                "type": "task_creation",
                 "pending_task": {
                     "title": title,
                     "description": description,
@@ -319,35 +382,31 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
                 "actions": [
                     {
                         "id": "priority",
-                        "label": "Priority",
+                        "label": priority_label,
                         "type": "button_group",
-                        "options": [
-                            {"value": "high", "label": "High"},
-                            {"value": "medium", "label": "Medium"},
-                            {"value": "low", "label": "Low"}
-                        ]
+                        "options": priority_options
                     },
                     {
                         "id": "due_date",
-                        "label": "Due Date",
+                        "label": due_date_label,
                         "type": "date_picker",
                         "quick_options": ["tomorrow", "this_week", "custom"]
                     },
                     {
                         "id": "category",
-                        "label": "Category",
+                        "label": category_label,
                         "type": "dropdown",
                         "options": ["work", "personal", "shopping", "health"]
                     },
                     {
                         "id": "description",
-                        "label": "Description",
+                        "label": description_label,
                         "type": "text_input",
-                        "placeholder": description or "Add description..."
+                        "placeholder": desc_placeholder
                     },
                     {
                         "id": "tags",
-                        "label": "Tags",
+                        "label": tags_label,
                         "type": "tag_input",
                         "suggestions": ["urgent", "important", "groceries"]
                     }
@@ -355,11 +414,13 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
             }
         }
 
-    async def _handle_list_tasks(self, user_id: str, message: str, session: AsyncSession) -> dict[str, Any]:
+    async def _handle_list_tasks(self, user_id: str, message: str, session: AsyncSession, language: str = "en") -> dict[str, Any]:
         """Parse and execute list_tasks command."""
-        # Determine filter
-        completed_only = "completed" in message or "done" in message or "finished" in message
-        pending_only = "pending" in message or "incomplete" in message or "todo" in message
+        # Determine filter (English + Urdu)
+        completed_only = ("completed" in message or "done" in message or "finished" in message or
+                          "مکمل" in message or "ختم شدہ" in message)
+        pending_only = ("pending" in message or "incomplete" in message or "todo" in message or
+                        "زیر التواء" in message or "نامکمل" in message)
 
         result = await self.mcp_server.call_tool(
             "list_tasks",
@@ -374,9 +435,14 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         if result.get("success"):
             tasks = result.get("tasks", [])
             if not tasks:
+                if language == "ur":
+                    return {"response": "ابھی تک آپ کے کوئی ٹاسک نہیں ہیں۔ کیا آپ ایک شامل کرنا چاہیں گے؟"}
                 return {"response": "You don't have any tasks yet. Try adding one!"}
 
-            response = f"Your tasks ({len(tasks)}):\n\n"
+            if language == "ur":
+                response = f"آپ کے ٹاسک ({len(tasks)}):\n\n"
+            else:
+                response = f"Your tasks ({len(tasks)}):\n\n"
             for task in tasks:
                 status = "[X]" if task["completed"] else "[ ]"
                 response += f"{status} [{task['id']}] {task['title']}"
@@ -386,13 +452,17 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
 
             return {"response": response.strip()}
         else:
+            if language == "ur":
+                return {"response": f"ٹاسک لسٹ دکھانے میں ناکامی: {result.get('error', 'ناملوم غلطی')}"}
             return {"response": f"Failed to list tasks: {result.get('error', 'Unknown error')}"}
 
-    async def _handle_complete_task(self, user_id: str, message: str, session: AsyncSession) -> dict[str, Any]:
+    async def _handle_complete_task(self, user_id: str, message: str, session: AsyncSession, language: str = "en") -> dict[str, Any]:
         """Parse and execute complete_task command."""
         # Extract task ID
         match = re.search(r"(?:task\s+)?(\d+)", message)
         if not match:
+            if language == "ur":
+                return {"response": "کیا آپ ٹاسک نمبر بتا سکتے ہیں؟ مثال: 'ٹاسک 1 مکمل کریں'"}
             return {"response": "Please specify a task ID (e.g., 'Mark task 1 as complete')"}
 
         task_id = int(match.group(1))
@@ -404,15 +474,21 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         )
 
         if result.get("success"):
+            if language == "ur":
+                return {"response": f"✅ ٹاسک {task_id} مکمل ہو گیا!"}
             return {"response": f"Task {task_id} marked as complete!"}
         else:
+            if language == "ur":
+                return {"response": f"ٹاسک مکمل کرنے میں ناکامی: {result.get('error', 'ٹاسک نہیں ملا')}"}
             return {"response": f"Failed to complete task: {result.get('error', 'Task not found')}"}
 
-    async def _handle_delete_task(self, user_id: str, message: str, session: AsyncSession) -> dict[str, Any]:
+    async def _handle_delete_task(self, user_id: str, message: str, session: AsyncSession, language: str = "en") -> dict[str, Any]:
         """Parse and execute delete_task command."""
         # Extract task ID
         match = re.search(r"(?:task\s+)?(\d+)", message)
         if not match:
+            if language == "ur":
+                return {"response": "کیا آپ ٹاسک نمبر بتا سکتے ہیں؟ مثال: 'ٹاسک 1 حذف کریں'"}
             return {"response": "Please specify a task ID (e.g., 'Delete task 1')"}
 
         task_id = int(match.group(1))
@@ -424,11 +500,15 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         )
 
         if result.get("success"):
+            if language == "ur":
+                return {"response": f"🗑️ ٹاسک {task_id} حذف ہو گیا"}
             return {"response": f"Task {task_id} has been deleted"}
         else:
+            if language == "ur":
+                return {"response": f"ٹاسک حذف کرنے میں ناکامی: {result.get('error', 'ٹاسک نہیں ملا')}"}
             return {"response": f"Failed to delete task: {result.get('error', 'Task not found')}"}
 
-    async def _handle_update_task(self, user_id: str, message: str, session: AsyncSession) -> dict[str, Any]:
+    async def _handle_update_task(self, user_id: str, message: str, session: AsyncSession, language: str = "en") -> dict[str, Any]:
         """Parse and execute update_task command with support for priority, due_date, category, tags."""
         from datetime import datetime, timedelta
         import re
@@ -439,16 +519,19 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         task_id_match = re.search(r"(?:task\s+)?(\d+)", message)
         task_id = int(task_id_match.group(1)) if task_id_match else None
 
-        # If no explicit task ID and user just said "set priority...", get the last created task
-        # For now, we'll require task ID
+        # If no explicit task ID, check for follow-up keywords (English + Urdu)
         if not task_id:
-            # Check if this is a follow-up to task creation (contains set/add keywords but no task ID)
-            if any(keyword in message_lower for keyword in ["set", "add", "priority", "due", "category", "tag"]):
+            if (any(keyword in message_lower for keyword in ["set", "add", "priority", "due", "category", "tag"]) or
+                    any(keyword in message for keyword in ["ترجیح", "آخری تاریخ", "کیٹگری"])):
+                if language == "ur":
+                    return {"response": "کون سا ٹاسک اپ ڈیٹ کریں گے؟ ٹاسک نمبر شامل کریں (مثال: 'ٹاسک 42 اپ ڈیٹ کریں')"}
                 return {"response": "Which task would you like to update? Please include the task ID (e.g., 'Update task 42 with...')"}
 
             # Traditional update format
             match = re.search(r"(?:task\s+)?(\d+)\s+(?:to|with)\s+['\"]?(.+?)['\"]?$", message, re.IGNORECASE)
             if not match:
+                if language == "ur":
+                    return {"response": "ٹاسک نمبر بتائیں (مثال: 'ٹاسک 1 اپ ڈیٹ کریں')"}
                 return {"response": "Please specify task ID (e.g., 'Update task 1 to Call mom')"}
             task_id = int(match.group(1))
 
@@ -460,24 +543,24 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         category = None
         tags = None
 
-        # Parse priority
-        if "priority" in message_lower:
-            if "high" in message_lower:
+        # Parse priority (English + Urdu)
+        if "priority" in message_lower or "ترجیح" in message:
+            if "high" in message_lower or "زیادہ" in message:
                 priority = "high"
-            elif "medium" in message_lower:
+            elif "medium" in message_lower or "درمیانی" in message:
                 priority = "medium"
-            elif "low" in message_lower:
+            elif "low" in message_lower or "کم" in message:
                 priority = "low"
 
-        # Parse due date
-        if any(keyword in message_lower for keyword in ["due", "deadline", "by"]):
-            if "tomorrow" in message_lower:
+        # Parse due date (English + Urdu)
+        if (any(keyword in message_lower for keyword in ["due", "deadline", "by"]) or
+                any(keyword in message for keyword in ["آخری تاریخ", "ڈیڈ لائن"])):
+            if "tomorrow" in message_lower or "کل" in message:
                 due_date = (datetime.now() + timedelta(days=1)).isoformat()
-            elif "today" in message_lower:
+            elif "today" in message_lower or "آج" in message:
                 due_date = datetime.now().isoformat()
-            elif "next week" in message_lower:
+            elif "next week" in message_lower or "اگلے ہفتے" in message:
                 due_date = (datetime.now() + timedelta(days=7)).isoformat()
-            # You can add more date parsing here
 
         # Parse category
         category_match = re.search(r"category\s+(?:to\s+)?['\"]?([a-zA-Z0-9\s]+)['\"]?", message_lower)
@@ -527,24 +610,42 @@ Be natural, helpful, and proactive in helping users organize their tasks!"""
         )
 
         if result.get("success"):
-            updates = []
-            if priority:
-                updates.append(f"priority to {priority}")
-            if due_date:
-                updates.append(f"due date")
-            if category:
-                updates.append(f"category to '{category}'")
-            if tags:
-                updates.append(f"tags")
-            if title:
-                updates.append(f"title")
-            if description:
-                updates.append(f"description")
-
-            update_text = ", ".join(updates) if updates else "task"
-            response = f"Updated {update_text} for task {task_id}! Anything else you'd like to change?"
-            return {"response": response}
+            if language == "ur":
+                priority_ur = {"high": "زیادہ", "medium": "درمیانی", "low": "کم"}
+                updates = []
+                if priority:
+                    updates.append(f"ترجیح {priority_ur.get(priority, priority)}")
+                if due_date:
+                    updates.append("آخری تاریخ")
+                if category:
+                    updates.append(f"کیٹگری '{category}'")
+                if tags:
+                    updates.append("ٹیگز")
+                if title:
+                    updates.append("عنوان")
+                if description:
+                    updates.append("تفصیل")
+                update_text = "، ".join(updates) if updates else "ٹاسک"
+                return {"response": f"✅ ٹاسک {task_id} میں {update_text} اپ ڈیٹ ہو گیا! کچھ اور بدلنا چاہیں گے؟"}
+            else:
+                updates = []
+                if priority:
+                    updates.append(f"priority to {priority}")
+                if due_date:
+                    updates.append(f"due date")
+                if category:
+                    updates.append(f"category to '{category}'")
+                if tags:
+                    updates.append(f"tags")
+                if title:
+                    updates.append(f"title")
+                if description:
+                    updates.append(f"description")
+                update_text = ", ".join(updates) if updates else "task"
+                return {"response": f"Updated {update_text} for task {task_id}! Anything else you'd like to change?"}
         else:
+            if language == "ur":
+                return {"response": f"ٹاسک اپ ڈیٹ کرنے میں ناکامی: {result.get('error', 'ٹاسک نہیں ملا')}"}
             return {"response": f"Failed to update task: {result.get('error', 'Task not found')}"}
 
     async def _handle_set_reminder(self, user_id: str, message: str, session: AsyncSession) -> dict[str, Any]:
