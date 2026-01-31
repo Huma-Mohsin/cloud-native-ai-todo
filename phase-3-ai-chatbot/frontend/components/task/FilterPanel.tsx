@@ -6,6 +6,8 @@
 
 'use client';
 
+import { useLanguage } from '@/contexts/LanguageContext';
+
 interface FilterPanelProps {
   category: string | null;
   showCompleted: boolean;
@@ -23,18 +25,19 @@ export function FilterPanel({
   onReset,
   availableCategories = [],
 }: FilterPanelProps) {
+  const { t } = useLanguage();
   const hasActiveFilters = category || showCompleted;
 
   return (
     <div className="bg-white border border-metallic-sky/30 rounded-xl p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-metallic-blue">Advanced Filters</h3>
+        <h3 className="text-sm font-semibold text-metallic-blue">{t('advancedFilters')}</h3>
         {hasActiveFilters && (
           <button
             onClick={onReset}
             className="text-xs text-metallic-navy/60 hover:text-error transition-colors"
           >
-            Reset
+            {t('reset')}
           </button>
         )}
       </div>
@@ -42,14 +45,14 @@ export function FilterPanel({
       {/* Category Filter */}
       <div>
         <label className="block text-sm font-medium text-metallic-navy mb-2">
-          Category
+          {t('category')}
         </label>
         <select
           value={category || ''}
           onChange={(e) => onCategoryChange(e.target.value || null)}
           className="w-full px-3 py-2 border border-metallic-sky/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-metallic-blue focus:border-transparent bg-white text-metallic-navy text-sm"
         >
-          <option value="">All categories</option>
+          <option value="">{t('allCategories')}</option>
           {availableCategories.map((cat) => (
             <option key={cat} value={cat}>
               {cat}
@@ -68,7 +71,7 @@ export function FilterPanel({
           className="h-4 w-4 rounded border-metallic-sky/30 text-metallic-blue focus:ring-metallic-blue focus:ring-offset-metallic-navy-dark"
         />
         <label htmlFor="show-completed" className="text-sm text-metallic-navy cursor-pointer">
-          Show completed tasks
+          {t('showCompletedTasks')}
         </label>
       </div>
     </div>

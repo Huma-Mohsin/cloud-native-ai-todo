@@ -9,6 +9,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Priority } from '@/lib/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // ============================================================================
 // Priority Badge
@@ -20,16 +21,18 @@ interface PriorityBadgeProps {
 }
 
 export function PriorityBadge({ priority, className }: PriorityBadgeProps) {
+  const { t } = useLanguage();
+
   const colors = {
     high: 'bg-error/20 text-error border-error/50',
     medium: 'bg-warning/20 text-warning border-warning/50',
     low: 'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50',
   };
 
-  const labels = {
-    high: 'High',
-    medium: 'Medium',
-    low: 'Low',
+  const labelKeys = {
+    high: 'high' as const,
+    medium: 'medium' as const,
+    low: 'low' as const,
   };
 
   return (
@@ -40,7 +43,7 @@ export function PriorityBadge({ priority, className }: PriorityBadgeProps) {
         className
       )}
     >
-      {labels[priority]}
+      {t(labelKeys[priority])}
     </span>
   );
 }
@@ -56,6 +59,7 @@ interface DueDateBadgeProps {
 }
 
 export function DueDateBadge({ dueDate, completed, className }: DueDateBadgeProps) {
+  const { language, t } = useLanguage();
   if (!dueDate) return null;
 
   const now = new Date();
@@ -66,18 +70,19 @@ export function DueDateBadge({ dueDate, completed, className }: DueDateBadgeProp
     due.getMonth() === now.getMonth() &&
     due.getFullYear() === now.getFullYear();
 
+  const locale = language === 'ur' ? 'ur-PK' : 'en-US';
   let color = 'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50';
-  let label = due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  let label = due.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
 
   if (completed) {
     color = 'bg-success/20 text-success border-success/50';
     label = '✓ ' + label;
   } else if (isOverdue) {
     color = 'bg-error/20 text-error border-error/50';
-    label = '⚠ Overdue';
+    label = `⚠ ${t('overdue')}`;
   } else if (isDueToday) {
     color = 'bg-warning/20 text-warning border-warning/50';
-    label = '📅 Today';
+    label = `📅 ${t('today')}`;
   }
 
   return (
@@ -174,6 +179,7 @@ interface TagListProps {
 }
 
 export function TagList({ tags, maxDisplay = 5, className }: TagListProps) {
+  const { t } = useLanguage();
   if (!tags || tags.length === 0) return null;
 
   const displayTags = tags.slice(0, maxDisplay);
@@ -186,7 +192,7 @@ export function TagList({ tags, maxDisplay = 5, className }: TagListProps) {
       ))}
       {remainingCount > 0 && (
         <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium text-metallic-navy/70">
-          +{remainingCount} more
+          +{remainingCount} {t('more')}
         </span>
       )}
     </div>

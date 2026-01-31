@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Task } from '@/lib/types';
 import { PriorityBadge, DueDateBadge, CategoryBadge, TagList } from './ui/Badges';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TaskItemProps {
   task: Task;
@@ -59,6 +60,7 @@ export function TaskItem({
   availableCategories,
   animationType = 'none',
 }: TaskItemProps) {
+  const { language, t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -220,9 +222,9 @@ export function TaskItem({
             )}
 
             <p className="mt-3 text-xs sm:text-sm text-metallic-navy/50">
-              Created {new Date(task.created_at).toLocaleDateString()}
+              {t('created')} {new Date(task.created_at).toLocaleDateString(language === 'ur' ? 'ur-PK' : 'en-US')}
               {task.updated_at !== task.created_at && (
-                <span> • Updated {new Date(task.updated_at).toLocaleDateString()}</span>
+                <span> • {t('updated')} {new Date(task.updated_at).toLocaleDateString(language === 'ur' ? 'ur-PK' : 'en-US')}</span>
               )}
             </p>
           </div>

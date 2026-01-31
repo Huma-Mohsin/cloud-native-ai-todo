@@ -12,6 +12,7 @@
 'use client';
 
 import { TaskStats } from '@/lib/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   PieChart,
   Pie,
@@ -34,23 +35,24 @@ interface AnalyticsSidebarProps {
 }
 
 export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarProps) {
+  const { language, t } = useLanguage();
   if (!stats) return null;
 
   // Priority distribution data with metallic colors
   const priorityData = [
-    { name: 'High', value: stats.high_priority, color: '#EF4444' }, // error red
-    { name: 'Medium', value: stats.medium_priority, color: '#F59E0B' }, // warning amber
-    { name: 'Low', value: stats.low_priority, color: '#A8A8A8' }, // metallic-sky-dark
+    { name: t('high'), value: stats.high_priority, color: '#EF4444' },
+    { name: t('medium'), value: stats.medium_priority, color: '#F59E0B' },
+    { name: t('low'), value: stats.low_priority, color: '#A8A8A8' },
   ];
 
   // Completion status data with metallic colors
   const statusData = [
-    { name: 'Completed', value: stats.completed, color: '#10B981' }, // success green
-    { name: 'Pending', value: stats.pending, color: '#F59E0B' }, // warning amber
-    { name: 'Overdue', value: stats.overdue, color: '#EF4444' }, // error red
+    { name: t('completed'), value: stats.completed, color: '#10B981' },
+    { name: t('pending'), value: stats.pending, color: '#F59E0B' },
+    { name: t('overdue'), value: stats.overdue, color: '#EF4444' },
   ];
 
-  // Mock weekly activity data (you can replace with real API data)
+  // Mock weekly activity data
   const weeklyData = [
     { day: 'Mon', completed: 5, created: 7 },
     { day: 'Tue', completed: 8, created: 6 },
@@ -64,56 +66,56 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
   // Stats cards data - Metallic Chic theme with colored borders
   const quickStats = [
     {
-      label: 'Total',
+      label: t('total'),
       value: stats.total,
       icon: '📋',
       borderColor: 'border-metallic-blue',
       iconColor: 'text-metallic-blue',
     },
     {
-      label: 'Pending',
+      label: t('pending'),
       value: stats.pending,
       icon: '⏳',
       borderColor: 'border-warning',
       iconColor: 'text-warning',
     },
     {
-      label: 'Completed',
+      label: t('completed'),
       value: stats.completed,
       icon: '✅',
       borderColor: 'border-success',
       iconColor: 'text-success',
     },
     {
-      label: 'Success Rate',
+      label: t('successRate'),
       value: `${stats.completion_rate}%`,
       icon: '📈',
       borderColor: 'border-info',
       iconColor: 'text-info',
     },
     {
-      label: 'High',
+      label: t('high'),
       value: stats.high_priority,
       icon: '🔴',
       borderColor: 'border-error',
       iconColor: 'text-error',
     },
     {
-      label: 'Medium',
+      label: t('medium'),
       value: stats.medium_priority,
       icon: '🟡',
       borderColor: 'border-warning',
       iconColor: 'text-warning',
     },
     {
-      label: 'Low',
+      label: t('low'),
       value: stats.low_priority,
       icon: '⚪',
       borderColor: 'border-metallic-sky',
       iconColor: 'text-metallic-navy',
     },
     {
-      label: 'Overdue',
+      label: t('overdue'),
       value: stats.overdue,
       icon: '⚠️',
       borderColor: 'border-error',
@@ -158,10 +160,10 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
               <div className="w-8 h-8 rounded-lg bg-metallic-blue flex items-center justify-center shadow-blue">
                 <span className="text-lg">📊</span>
               </div>
-              <h2 className="text-lg font-semibold text-metallic-navy">Analytics</h2>
+              <h2 className="text-lg font-semibold text-metallic-navy">{t('analytics')}</h2>
             </div>
           </div>
-          <p className="text-sm text-metallic-navy/70 font-medium text-center lg:text-left">Real-time insights</p>
+          <p className="text-sm text-metallic-navy/70 font-medium text-center lg:text-left">{t('realTimeInsights')}</p>
         </div>
 
         {/* Content - Metallic Background */}
@@ -193,7 +195,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           <div className="bg-white rounded-xl p-5 shadow-metallic border border-metallic-sky/30">
             <h3 className="text-sm font-semibold text-metallic-navy mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
-              <span>Task Status</span>
+              <span>{t('taskStatus')}</span>
             </h3>
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
@@ -234,7 +236,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           <div className="bg-white rounded-xl p-5 shadow-metallic border border-metallic-sky/30">
             <h3 className="text-sm font-semibold text-metallic-navy mb-4 flex items-center gap-2">
               <span className="text-lg">📊</span>
-              <span>Priority Breakdown</span>
+              <span>{t('priorityBreakdown')}</span>
             </h3>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={priorityData}>
@@ -270,7 +272,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           <div className="bg-white rounded-xl p-5 shadow-metallic border border-metallic-sky/30">
             <h3 className="text-sm font-semibold text-metallic-navy mb-4 flex items-center gap-2">
               <span className="text-lg">📈</span>
-              <span>Weekly Activity</span>
+              <span>{t('weeklyActivity')}</span>
             </h3>
             <ResponsiveContainer width="100%" height={220}>
               <LineChart data={weeklyData}>
@@ -302,7 +304,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                   stroke="#10B981"
                   strokeWidth={3}
                   dot={{ fill: '#10B981', r: 5 }}
-                  name="Completed"
+                  name={t('completed')}
                 />
                 <Line
                   type="monotone"
@@ -310,7 +312,7 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
                   stroke="#D4AF37"
                   strokeWidth={3}
                   dot={{ fill: '#D4AF37', r: 5 }}
-                  name="Created"
+                  name={t('created')}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -320,31 +322,37 @@ export function AnalyticsSidebar({ stats, isOpen, onClose }: AnalyticsSidebarPro
           <div className="bg-white rounded-xl p-5 shadow-blue border-2 border-metallic-blue">
             <h3 className="text-sm font-semibold text-metallic-blue mb-3 flex items-center gap-2">
               <span className="text-lg">💡</span>
-              <span>Insights</span>
+              <span>{t('insights')}</span>
             </h3>
             <ul className="space-y-2 text-sm">
               {stats.completion_rate >= 70 && (
                 <li className="flex items-start gap-2 text-success">
                   <span className="text-base">✅</span>
-                  <span>Great job! Completion rate is excellent.</span>
+                  <span>{t('excellent')}</span>
                 </li>
               )}
               {stats.overdue > 0 && (
                 <li className="flex items-start gap-2 text-warning">
                   <span className="text-base">⚠️</span>
-                  <span>{stats.overdue} overdue task{stats.overdue > 1 ? 's' : ''} need attention.</span>
+                  <span>{language === 'ur'
+                    ? `${stats.overdue} وقت گزر گئے ٹاسک توجہ دیں`
+                    : `${stats.overdue} overdue task${stats.overdue > 1 ? 's' : ''} need attention.`}</span>
                 </li>
               )}
               {stats.high_priority > 0 && (
                 <li className="flex items-start gap-2 text-error">
                   <span className="text-base">🔴</span>
-                  <span>Focus on {stats.high_priority} high-priority task{stats.high_priority > 1 ? 's' : ''}.</span>
+                  <span>{language === 'ur'
+                    ? `${stats.high_priority} ${t('high')} ٹاسک پر توجہ دیں`
+                    : `Focus on ${stats.high_priority} high-priority task${stats.high_priority > 1 ? 's' : ''}.`}</span>
                 </li>
               )}
               {stats.pending === 0 && (
                 <li className="flex items-start gap-2 text-metallic-blue">
                   <span className="text-base">🎉</span>
-                  <span>All caught up! Time to add new goals.</span>
+                  <span>{language === 'ur'
+                    ? 'سب مکمل! نئے اہداف شامل کرنے کا وقت۔'
+                    : 'All caught up! Time to add new goals.'}</span>
                 </li>
               )}
             </ul>
