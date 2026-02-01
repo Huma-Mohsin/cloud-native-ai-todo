@@ -14,6 +14,7 @@ export interface Translations {
   newConversation: string;
   voiceInput: string;
   recording: string;
+  sending: string;
   stopRecording: string;
 
   // Task Actions
@@ -160,6 +161,7 @@ export const translations: Record<Language, Translations> = {
     newConversation: 'New Conversation',
     voiceInput: 'Voice Input',
     recording: 'Recording...',
+    sending: 'Sending...',
     stopRecording: 'Stop Recording',
 
     // Task Actions
@@ -305,6 +307,7 @@ export const translations: Record<Language, Translations> = {
     newConversation: 'نئی گفتگو',
     voiceInput: 'آواز سے ان پٹ',
     recording: 'ریکارڈنگ جاری ہے...',
+    sending: 'بھیجا جا رہا ہے...',
     stopRecording: 'ریکارڈنگ بند کریں',
 
     // Task Actions
