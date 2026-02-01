@@ -26,10 +26,10 @@ export function AnalyticsPanel({ userId, token }: AnalyticsPanelProps) {
     completed: 0,
     pending: 0,
     overdue: 0,
-    today: 0,
-    this_week: 0,
+    completion_rate: 0,
     high_priority: 0,
-    archived: 0,
+    medium_priority: 0,
+    low_priority: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
 
