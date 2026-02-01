@@ -6,7 +6,7 @@ This module validates Better Auth session tokens from cookies.
 import os
 from datetime import datetime
 from typing import Optional
-from fastapi import HTTPException, Depends, Cookie
+from fastapi import HTTPException, Depends, Cookie, Request
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 import logging
@@ -80,13 +80,20 @@ async def verify_session_token(
 
 
 async def get_current_user(
+    request: Request,
     better_auth_session_token: Optional[str] = Cookie(None, alias="better-auth.session_token"),
     session_token: Optional[str] = Cookie(None),
     session: AsyncSession = Depends(get_session)
 ) -> dict:
-    """Get current authenticated user from Better Auth cookie.
+    """Get current authenticated user from Better Auth cookie or Bearer token.
+
+    Tries in order:
+    1. better-auth.session_token cookie
+    2. session_token cookie
+    3. Authorization: Bearer header (same session token, sent by frontend)
 
     Args:
+        request: Incoming HTTP request
         better_auth_session_token: Session token from cookie (with prefix)
         session_token: Session token from cookie (without prefix)
         session: Database session
@@ -100,12 +107,20 @@ async def get_current_user(
     # Try both cookie names (with and without prefix)
     token = better_auth_session_token or session_token
 
-    logger.debug(f"get_current_user called, cookie: {token[:20] if token else 'None'}...")
+    # Fallback: read session token from Authorization Bearer header.
+    # The frontend sends the same session token via Bearer header; this handles
+    # cases where cookies are not forwarded (e.g., cross-origin proxy).
+    if not token:
+        auth_header = request.headers.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            token = auth_header[7:]
+
+    logger.debug(f"get_current_user called, token: {token[:20] if token else 'None'}...")
 
     if not token:
         raise HTTPException(
             status_code=401,
-            detail="No session token found in cookies"
+            detail="No session token found in cookies or Authorization header"
         )
 
     return await verify_session_token(token, session)

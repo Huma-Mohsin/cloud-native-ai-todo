@@ -33,14 +33,19 @@ app = FastAPI(
 
 # Configure CORS FIRST (middleware executes in reverse order)
 # IMPORTANT: Must use specific origins (not *) when allow_credentials=True
+import os as _os
+_CORS_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3002",
+    "http://localhost:3003",
+]
+if _os.getenv("NEXT_PUBLIC_APP_URL"):
+    _CORS_ORIGINS.append(_os.getenv("NEXT_PUBLIC_APP_URL"))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:3002",
-        "http://localhost:3003"
-    ],
+    allow_origins=_CORS_ORIGINS,
     allow_credentials=True,  # Required for cookies
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],

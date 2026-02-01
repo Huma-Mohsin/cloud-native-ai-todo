@@ -9,7 +9,19 @@ export async function middleware(request: NextRequest) {
 
     // Forward cookies from the incoming request to the backend
     const cookies = request.cookies.getAll();
-    const cookieHeader = cookies.map((c) => `${c.name}=${c.value}`).join('; ');
+    let cookieHeader = cookies.map((c) => `${c.name}=${c.value}`).join('; ');
+
+    // If Authorization Bearer token is present, inject it as a session_token cookie.
+    // The frontend sends the Better Auth session token via Bearer header, but the
+    // backend's get_current_user reads it from cookies only. Injecting it here bridges
+    // the gap when cookies aren't forwarded through rewrites.
+    const authHeader = request.headers.get('Authorization');
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.substring(7);
+      cookieHeader = cookieHeader
+        ? `${cookieHeader}; session_token=${token}`
+        : `session_token=${token}`;
+    }
 
     const headers: Record<string, string> = {};
     if (cookieHeader) {
@@ -21,7 +33,6 @@ export async function middleware(request: NextRequest) {
       headers['Content-Type'] = contentType;
     }
 
-    const authHeader = request.headers.get('Authorization');
     if (authHeader) {
       headers['Authorization'] = authHeader;
     }
