@@ -64,6 +64,9 @@ export interface TaskStats {
   medium_priority: number;
   low_priority: number;
   overdue: number;
+  today?: number;
+  this_week?: number;
+  archived?: number;
 }
 
 /**
