@@ -44,7 +44,7 @@ export function AnalyticsPanel({ userId, token }: AnalyticsPanelProps) {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/stats`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/stats`, {
         credentials: 'include',
       });
 
