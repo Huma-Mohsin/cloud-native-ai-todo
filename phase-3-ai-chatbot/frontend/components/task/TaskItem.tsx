@@ -12,7 +12,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Task } from '@/lib/types';
+import { Task, UpdateTaskRequest } from '@/lib/types';
 import { PriorityBadge, DueDateBadge, CategoryBadge, TagList } from './ui/Badges';
 import { useLanguage } from '@/contexts/LanguageContext';
 
