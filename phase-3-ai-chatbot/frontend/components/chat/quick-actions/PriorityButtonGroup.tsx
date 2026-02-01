@@ -5,7 +5,7 @@ import { useState } from 'react';
 interface PriorityOption {
   value: string;
   label: string;
-  icon: string;
+  icon?: string;
 }
 
 interface PriorityButtonGroupProps {
