@@ -37,8 +37,7 @@ export function AnalyticsPanel({ userId, token }: AnalyticsPanelProps) {
   useTaskSync({
     userId,
     token,
-    onTaskUpdate: () => {
-      // Refetch stats when tasks are updated
+    onTasksChange: () => {
       fetchStats();
     },
   });
