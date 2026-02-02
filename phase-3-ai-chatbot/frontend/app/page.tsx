@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn, signUp } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { AnimatedTasks } from '@/components/AnimatedTasks';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -53,18 +54,25 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-metallic-gradient">
-      <div className="bg-white p-8 rounded-2xl shadow-blue w-full max-w-md border-2 border-metallic-sky">
-        <div className="text-center mb-8">
-          <div className="inline-block p-4 bg-blue-gradient rounded-2xl mb-4 shadow-metallic">
-            <h1 className="text-4xl font-bold text-white">
-              ✨ TaskFlow AI
-            </h1>
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      {/* Left Side - Animated Tasks Illustration */}
+      <div className="lg:w-1/2 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 flex items-center justify-center p-8 lg:p-12">
+        <AnimatedTasks />
+      </div>
+
+      {/* Right Side - Login/Signup Form */}
+      <div className="lg:w-1/2 flex items-center justify-center bg-metallic-gradient p-8 lg:p-12">
+        <div className="bg-white p-8 rounded-2xl shadow-blue w-full max-w-md border-2 border-metallic-sky">
+          <div className="text-center mb-8">
+            <div className="inline-block p-4 bg-blue-gradient rounded-2xl mb-4 shadow-metallic">
+              <h1 className="text-4xl font-bold text-white">
+                ✨ TaskFlow AI
+              </h1>
+            </div>
+            <p className="text-metallic-navy text-lg">
+              {isLogin ? 'Welcome back!' : 'Create your account'}
+            </p>
           </div>
-          <p className="text-metallic-navy text-lg">
-            {isLogin ? 'Welcome back!' : 'Create your account'}
-          </p>
-        </div>
 
         {error && (
           <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-4">
@@ -180,6 +188,7 @@ export default function AuthPage() {
               ? "Don't have an account? Sign up"
               : 'Already have an account? Sign in'}
           </button>
+        </div>
         </div>
       </div>
     </div>
