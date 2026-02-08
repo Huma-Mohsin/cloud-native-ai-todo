@@ -1,13 +1,3 @@
-/**
- * SplitScreenLayout Component - Metallic Chic Theme
- *
- * Main 2-column layout that combines:
- * - Dashboard Panel (LEFT side - 60%)
- * - Chatbot Panel (RIGHT side - 40%)
- * - Mobile tab switcher for small screens
- * - Responsive design with breakpoints
- */
-
 'use client';
 
 import { useState } from 'react';
@@ -24,15 +14,12 @@ export function SplitScreenLayout({ dashboardContent, chatbotContent }: SplitScr
   const [activeTab, setActiveTab] = useState<'dashboard' | 'chatbot'>('dashboard');
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-screen flex flex-col overflow-hidden bg-gradient-to-br from-beige-100 to-beige-50">
       {/* Mobile Tab Switcher */}
       <MobileTabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* 2-Column Container */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Desktop: Both panels visible side by side */}
-        {/* Mobile: Only active tab visible */}
-
         {/* LEFT PANEL - Dashboard (60%) */}
         <div
           className={`
@@ -50,7 +37,7 @@ export function SplitScreenLayout({ dashboardContent, chatbotContent }: SplitScr
             w-full lg:w-2/5 h-full
             ${activeTab === 'chatbot' ? 'block' : 'hidden'}
             lg:block
-            border-l border-metallic-silver/20
+            border-l border-border
           `}
         >
           <ChatPanel>{chatbotContent}</ChatPanel>

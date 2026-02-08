@@ -1,9 +1,3 @@
-/**
- * SearchBar Component - Metallic Chic Theme
- *
- * Real-time search input with debouncing for task filtering.
- */
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -47,7 +41,7 @@ export function SearchBar({
       {/* Search Icon */}
       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
         <svg
-          className="h-5 w-5 text-metallic-navy/60"
+          className="h-5 w-5 text-primary-500"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -60,14 +54,14 @@ export function SearchBar({
         </svg>
       </div>
 
-      {/* Input - Metallic Chic theme */}
+      {/* Input */}
       <input
         type="text"
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
-        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-metallic-sky/30 rounded-xl bg-white text-metallic-navy placeholder-metallic-sky/50 focus:outline-none focus:ring-2 focus:ring-metallic-blue focus:border-metallic-blue disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-metallic hover:border-metallic-blue/50"
+        className="w-full pl-11 pr-12 py-3 text-sm font-medium border border-border rounded-xl bg-white text-content placeholder-content-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:border-primary-300"
       />
 
       {/* Clear Button */}
@@ -75,7 +69,7 @@ export function SearchBar({
         <button
           type="button"
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-metallic-navy/60 hover:text-metallic-blue focus:outline-none transition-colors"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-content-muted hover:text-primary-500 focus:outline-none transition-colors"
           aria-label="Clear search"
         >
           <svg

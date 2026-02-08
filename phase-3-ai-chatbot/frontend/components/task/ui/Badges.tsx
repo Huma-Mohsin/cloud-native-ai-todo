@@ -1,9 +1,3 @@
-/**
- * Badge components for tasks - Priority, DueDate, Category
- *
- * Metallic Chic themed badges with appropriate colors
- */
-
 'use client';
 
 import React from 'react';
@@ -24,9 +18,9 @@ export function PriorityBadge({ priority, className }: PriorityBadgeProps) {
   const { t } = useLanguage();
 
   const colors = {
-    high: 'bg-error/20 text-error border-error/50',
-    medium: 'bg-warning/20 text-warning border-warning/50',
-    low: 'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50',
+    high: 'bg-gradient-to-r from-error-100 to-error-50 text-error-600 border-error-200 shadow-sm',
+    medium: 'bg-gradient-to-r from-warning-100 to-warning-50 text-warning-600 border-warning-200 shadow-sm',
+    low: 'bg-gradient-to-r from-primary-100 to-primary-50 text-primary-600 border-primary-200 shadow-sm',
   };
 
   const labelKeys = {
@@ -71,17 +65,17 @@ export function DueDateBadge({ dueDate, completed, className }: DueDateBadgeProp
     due.getFullYear() === now.getFullYear();
 
   const locale = language === 'ur' ? 'ur-PK' : 'en-US';
-  let color = 'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50';
+  let color = 'bg-gradient-to-r from-surface-tertiary to-surface-secondary text-content-muted border-border';
   let label = due.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
 
   if (completed) {
-    color = 'bg-success/20 text-success border-success/50';
+    color = 'bg-gradient-to-r from-success-100 to-success-50 text-success-600 border-success-200 shadow-sm';
     label = '✓ ' + label;
   } else if (isOverdue) {
-    color = 'bg-error/20 text-error border-error/50';
+    color = 'bg-gradient-to-r from-error-100 to-error-50 text-error-600 border-error-200 shadow-sm';
     label = `⚠ ${t('overdue')}`;
   } else if (isDueToday) {
-    color = 'bg-warning/20 text-warning border-warning/50';
+    color = 'bg-gradient-to-r from-warning-100 to-warning-50 text-warning-600 border-warning-200 shadow-sm';
     label = `📅 ${t('today')}`;
   }
 
@@ -112,11 +106,11 @@ export function CategoryBadge({ category, className }: CategoryBadgeProps) {
   if (!category) return null;
 
   const categoryColors: Record<string, string> = {
-    work: 'bg-info/20 text-info border-info/50',
-    personal: 'bg-metallic-blue/20 text-metallic-blue border-metallic-blue/50',
-    shopping: 'bg-success/20 text-success border-success/50',
-    health: 'bg-error/20 text-error border-error/50',
-    learning: 'bg-warning/20 text-warning border-warning/50',
+    work: 'bg-gradient-to-r from-indigo-100 to-indigo-50 text-indigo-600 border-indigo-200 shadow-sm',
+    personal: 'bg-gradient-to-r from-accent-100 to-accent-50 text-accent-600 border-accent-200 shadow-sm',
+    shopping: 'bg-gradient-to-r from-emerald-100 to-emerald-50 text-emerald-600 border-emerald-200 shadow-sm',
+    health: 'bg-gradient-to-r from-rose-100 to-rose-50 text-rose-600 border-rose-200 shadow-sm',
+    learning: 'bg-gradient-to-r from-amber-100 to-amber-50 text-amber-600 border-amber-200 shadow-sm',
   };
 
   const categoryLabels: Record<string, Record<string, string>> = {
@@ -128,7 +122,7 @@ export function CategoryBadge({ category, className }: CategoryBadgeProps) {
   };
 
   const key = category.toLowerCase();
-  const color = categoryColors[key] || 'bg-metallic-sky/20 text-metallic-navy border-metallic-sky/50';
+  const color = categoryColors[key] || 'bg-gradient-to-r from-beige-100 to-beige-50 text-content-secondary border-beige-200 shadow-sm';
   const label = categoryLabels[key]?.[language] || category;
 
   return (
@@ -158,17 +152,17 @@ export function TagChip({ tag, onRemove, className }: TagChipProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-white border border-metallic-sky/30 text-metallic-navy',
+        'inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-gradient-to-r from-primary-50 to-accent-50 border border-primary-100 text-primary-600 shadow-sm',
         className
       )}
     >
-      <span className="text-metallic-blue">#</span>
+      <span className="text-accent-500">#</span>
       {tag}
       {onRemove && (
         <button
           type="button"
           onClick={onRemove}
-          className="ml-1 hover:text-error transition-colors"
+          className="ml-1 hover:text-error-500 transition-colors"
         >
           ×
         </button>
@@ -200,7 +194,7 @@ export function TagList({ tags, maxDisplay = 5, className }: TagListProps) {
         <TagChip key={index} tag={tag} />
       ))}
       {remainingCount > 0 && (
-        <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium text-metallic-navy/70">
+        <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium text-content-muted">
           +{remainingCount} {t('more')}
         </span>
       )}

@@ -53,8 +53,8 @@ export function TaskList({
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-metallic-blue border-r-transparent"></div>
-        <p className="mt-2 text-sm text-metallic-navy">Loading tasks...</p>
+        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary-500 border-r-transparent"></div>
+        <p className="mt-2 text-sm text-content-muted">Loading tasks...</p>
       </div>
     );
   }
@@ -62,36 +62,36 @@ export function TaskList({
   return (
     <div className="space-y-4">
       {/* Filter tabs */}
-      <div className="flex gap-2 border-b border-metallic-sky/30">
+      <div className="flex gap-1 border-b border-border bg-white rounded-t-xl p-1">
         <button
           onClick={() => setFilter('all')}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+          className={`px-4 py-2.5 text-sm font-semibold rounded-lg transition-all ${
             filter === 'all'
-              ? 'border-metallic-blue text-metallic-blue'
-              : 'border-transparent text-metallic-navy/70 hover:text-metallic-navy'
+              ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-md shadow-primary-500/20'
+              : 'text-content-muted hover:text-content hover:bg-surface-tertiary'
           }`}
         >
-          All ({tasks.length})
+          📋 All ({tasks.length})
         </button>
         <button
           onClick={() => setFilter('pending')}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+          className={`px-4 py-2.5 text-sm font-semibold rounded-lg transition-all ${
             filter === 'pending'
-              ? 'border-metallic-blue text-metallic-blue'
-              : 'border-transparent text-metallic-navy/70 hover:text-metallic-navy'
+              ? 'bg-gradient-to-r from-warning-500 to-warning-600 text-white shadow-md shadow-warning-500/20'
+              : 'text-content-muted hover:text-content hover:bg-surface-tertiary'
           }`}
         >
-          Pending ({pendingCount})
+          ⏳ Pending ({pendingCount})
         </button>
         <button
           onClick={() => setFilter('completed')}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+          className={`px-4 py-2.5 text-sm font-semibold rounded-lg transition-all ${
             filter === 'completed'
-              ? 'border-metallic-blue text-metallic-blue'
-              : 'border-transparent text-metallic-navy/70 hover:text-metallic-navy'
+              ? 'bg-gradient-to-r from-success-500 to-success-600 text-white shadow-md shadow-success-500/20'
+              : 'text-content-muted hover:text-content hover:bg-surface-tertiary'
           }`}
         >
-          Completed ({completedCount})
+          ✅ Completed ({completedCount})
         </button>
       </div>
 
@@ -100,9 +100,9 @@ export function TaskList({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center py-12 bg-white rounded-lg border border-metallic-sky/30"
+          className="text-center py-12 bg-white rounded-xl border border-border shadow-sm"
         >
-          <p className="text-metallic-navy">
+          <p className="text-content-secondary text-base">
             {filter === 'all' && '📋 No tasks yet. Create your first task!'}
             {filter === 'pending' && '✅ No pending tasks. Great job!'}
             {filter === 'completed' && '🎯 No completed tasks yet.'}

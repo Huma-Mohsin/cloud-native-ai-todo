@@ -24,7 +24,7 @@ export function ChatMessage({ message, userToken, onTaskCreated }: ChatMessagePr
     try {
       const chatService = getChatService();
       const result = await chatService.createTaskWithDetails(taskData, userToken);
-      console.log('✅ Task created with result:', result);
+      console.log('Task created with result:', result);
 
       // Notify parent component about task creation
       if (onTaskCreated && result.id) {
@@ -47,7 +47,7 @@ export function ChatMessage({ message, userToken, onTaskCreated }: ChatMessagePr
     try {
       const chatService = getChatService();
       const result = await chatService.quickUpdateTask(taskId, updates, userToken);
-      console.log('✅ Task updated with result:', result);
+      console.log('Task updated with result:', result);
 
       // Notify parent component about task update
       if (onTaskCreated && result.id) {
@@ -67,19 +67,19 @@ export function ChatMessage({ message, userToken, onTaskCreated }: ChatMessagePr
   };
 
   return (
-    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4 animate-fadeIn`}>
-      <div className="max-w-[85%] w-full">
+    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4 animate-fade-in`}>
+      <div className={`${isUser ? 'max-w-[85%]' : 'max-w-[85%] w-full'}`}>
         <div
-          className={`rounded-2xl px-6 py-3 shadow-metallic transition-all duration-200 hover:shadow-blue ${
+          className={`rounded-2xl px-4 py-2.5 shadow-sm inline-block ${
             isUser
-              ? 'bg-blue-gradient text-white'
-              : 'bg-white text-metallic-navy border-2 border-metallic-sky'
+              ? 'bg-gray-100 text-content border border-gray-200'
+              : 'bg-white border border-border text-content'
           }`}
         >
-          <div className={`text-xs font-bold mb-2 ${isUser ? 'text-metallic-sky-light' : 'text-metallic-blue'}`}>
+          <div className={`text-xs font-semibold mb-1 ${isUser ? 'text-gray-500' : 'text-primary-500'}`}>
             {isUser ? '👤 You' : '🤖 AI Assistant'}
           </div>
-          <div className="whitespace-pre-wrap leading-relaxed">{message.content}</div>
+          <div className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</div>
         </div>
 
         {/* Render Quick Actions if present and not skipped */}

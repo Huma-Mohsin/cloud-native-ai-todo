@@ -70,8 +70,8 @@ export function DatePickerQuick({ quickOptions, onSelect }: DatePickerQuickProps
             onClick={() => handleQuickSelect(option)}
             className={`px-4 py-2 rounded-lg font-medium border-2 transition-all duration-200 transform hover:scale-105 ${
               selected === option
-                ? 'bg-blue-500 text-white border-blue-600'
-                : 'bg-blue-50 text-blue-700 border-blue-300 hover:bg-blue-100'
+                ? 'bg-brand-600 text-white border-brand-700'
+                : 'bg-brand-50 text-brand-700 border-brand-200 hover:bg-brand-100'
             }`}
           >
             {getOptionLabel(option)}
@@ -85,7 +85,7 @@ export function DatePickerQuick({ quickOptions, onSelect }: DatePickerQuickProps
             type="date"
             onChange={handleCustomDateSelect}
             min={format(new Date(), 'yyyy-MM-dd')}
-            className="px-4 py-2 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+            className="px-4 py-2 border-2 border-brand-200 rounded-lg focus:border-brand-500 focus:outline-none transition-colors bg-white text-brand-950"
           />
         </div>
       )}

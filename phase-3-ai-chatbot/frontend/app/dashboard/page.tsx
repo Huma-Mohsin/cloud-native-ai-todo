@@ -20,10 +20,10 @@ export default function DashboardPage() {
 
   if (isPending) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-metallic-charcoal">
+      <div className="min-h-screen flex items-center justify-center bg-dark-gradient">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-metallic-gold mx-auto"></div>
-          <p className="mt-4 text-metallic-silver">Loading dashboard...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-brand-400 mx-auto"></div>
+          <p className="mt-4 text-brand-200">Loading dashboard...</p>
         </div>
       </div>
     );

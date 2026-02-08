@@ -1,13 +1,3 @@
-/**
- * Button component - Reusable button with Metallic Chic theme
- *
- * Features:
- * - Multiple variants (default, outline, ghost, destructive, gold)
- * - Loading state with spinner
- * - Disabled state
- * - Metallic Chic color scheme
- */
-
 'use client';
 
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
@@ -34,11 +24,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const variants = {
-      default: 'bg-metallic-sky text-metallic-navy-dark hover:bg-metallic-sky-dark shadow-metallic hover:shadow-blue transition-all duration-200',
-      outline: 'border-2 border-metallic-sky bg-transparent text-metallic-navy hover:border-metallic-blue hover:bg-metallic-blue/10 hover:text-metallic-blue transition-all duration-200',
-      ghost: 'hover:bg-metallic-sky/20 text-metallic-navy hover:text-metallic-blue transition-all duration-200',
-      destructive: 'bg-error text-white hover:bg-red-700 transition-all duration-200',
-      gold: 'bg-gold-gradient text-metallic-navy-dark hover:shadow-blue shadow-lg hover:scale-105 transition-all duration-200 font-semibold',
+      default: 'bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-md shadow-primary-500/20 hover:shadow-lg transition-all duration-200',
+      outline: 'border border-border bg-white text-content hover:border-primary-400 hover:bg-primary-50 hover:text-primary-600 transition-all duration-200 shadow-sm',
+      ghost: 'hover:bg-primary-50 text-content-secondary hover:text-primary-600 transition-all duration-200',
+      destructive: 'bg-gradient-to-r from-error-500 to-error-600 text-white hover:from-error-600 hover:to-error-700 shadow-md shadow-error-500/20 transition-all duration-200',
+      gold: 'bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:shadow-lg shadow-md hover:scale-105 transition-all duration-200 font-semibold',
     };
 
     const sizes = {
@@ -51,7 +41,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center font-medium focus:outline-none focus:ring-2 focus:ring-metallic-blue focus:ring-offset-2 focus:ring-offset-metallic-navy disabled:opacity-50 disabled:cursor-not-allowed',
+          'inline-flex items-center justify-center font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
           variants[variant],
           sizes[size],
           isLoading && 'opacity-50 cursor-not-allowed',

@@ -1,11 +1,3 @@
-/**
- * MobileTabSwitcher Component - Metallic Chic Theme
- *
- * Tab navigation for mobile devices to switch between:
- * - Dashboard view
- * - Chatbot view
- */
-
 'use client';
 
 interface MobileTabSwitcherProps {
@@ -15,14 +7,14 @@ interface MobileTabSwitcherProps {
 
 export function MobileTabSwitcher({ activeTab, onTabChange }: MobileTabSwitcherProps) {
   return (
-    <div className="lg:hidden sticky top-0 z-30 bg-navy-gradient border-b border-metallic-sky/30 shadow-blue">
+    <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-border shadow-sm">
       <div className="flex">
         <button
           onClick={() => onTabChange('dashboard')}
           className={`flex-1 py-4 px-6 text-sm font-semibold transition-all duration-200 ${
             activeTab === 'dashboard'
-              ? 'bg-metallic-blue-light text-white border-b-4 border-metallic-blue'
-              : 'bg-metallic-navy text-metallic-sky hover:bg-metallic-navy-light'
+              ? 'bg-primary-50 text-primary-600 border-b-4 border-primary-500'
+              : 'bg-surface-secondary text-content-muted hover:bg-surface-tertiary'
           }`}
         >
           <span className="flex items-center justify-center gap-2">
@@ -34,8 +26,8 @@ export function MobileTabSwitcher({ activeTab, onTabChange }: MobileTabSwitcherP
           onClick={() => onTabChange('chatbot')}
           className={`flex-1 py-4 px-6 text-sm font-semibold transition-all duration-200 ${
             activeTab === 'chatbot'
-              ? 'bg-metallic-blue-light text-white border-b-4 border-metallic-blue'
-              : 'bg-metallic-navy text-metallic-sky hover:bg-metallic-navy-light'
+              ? 'bg-primary-50 text-primary-600 border-b-4 border-primary-500'
+              : 'bg-surface-secondary text-content-muted hover:bg-surface-tertiary'
           }`}
         >
           <span className="flex items-center justify-center gap-2">

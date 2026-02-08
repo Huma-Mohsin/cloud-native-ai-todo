@@ -7,66 +7,161 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Metallic Chic Theme - Light Blue Metallic
-        metallic: {
-          sky: {
-            light: '#E8F4F8',    // Very Light Blue (almost white)
-            DEFAULT: '#C1E1EC',  // Soft Sky Blue
-            medium: '#A8D8EA',   // Light Metallic Blue
-          },
-          blue: {
-            light: '#6BB6D6',    // Bright Cyan Blue
-            DEFAULT: '#4A90A4',  // Medium Blue
-            dark: '#2E5266',     // Navy Blue
-          },
-          navy: {
-            light: '#1B3A52',    // Deep Blue
-            DEFAULT: '#17324D',  // Very Dark Blue
-            dark: '#0D1F2D',     // Almost Black Blue
-          },
+        // Uizard Ecommerce Light Theme with Beige
+        primary: {
+          50: '#E8F4FD',
+          100: '#D1E9FB',
+          200: '#A3D3F7',
+          300: '#75BDF3',
+          400: '#47A7EF',
+          500: '#1E90FF',
+          600: '#1976D2',
+          700: '#1565C0',
+          800: '#0D47A1',
+          900: '#0A3A85',
+        },
+        accent: {
+          50: '#F3E8FF',
+          100: '#E9D5FF',
+          200: '#D8B4FE',
+          300: '#C084FC',
+          400: '#A881FE',
+          500: '#6419FF',
+          600: '#4A0FD4',
+          700: '#3B0CA8',
+          800: '#2C097C',
+          900: '#1D0650',
+        },
+        // Beige/Warm Neutrals
+        beige: {
+          50: '#FDFCFB',
+          100: '#FAF8F5',
+          200: '#F5F0EB',
+          300: '#EDE5DC',
+          400: '#DED2C4',
+          500: '#C9B8A8',
+          600: '#B09A86',
+          700: '#8B7A6B',
+          800: '#665A4D',
+          900: '#433C33',
+        },
+        // Light theme backgrounds
+        surface: {
+          DEFAULT: '#FFFFFF',
+          secondary: '#F8FAFC',
+          tertiary: '#F1F5F9',
+          warm: '#FAF8F5',
+          beige: '#F5F0EB',
+        },
+        // Text colors
+        content: {
+          DEFAULT: '#111111',
+          secondary: '#2E2E2E',
+          muted: '#64748B',
+          light: '#94A3B8',
+        },
+        // Border colors
+        border: {
+          DEFAULT: '#E2E8F0',
+          light: '#F1F5F9',
+          dark: '#CBD5E1',
+          warm: '#EDE5DC',
         },
         // Functional colors
-        success: '#10B981',
-        warning: '#F59E0B',
-        error: '#EF4444',
-        info: '#6BB6D6',
+        success: {
+          50: '#ECFDF5',
+          100: '#D1FAE5',
+          200: '#A7F3D0',
+          300: '#6EE7B7',
+          400: '#34D399',
+          500: '#10B981',
+          600: '#059669',
+          700: '#047857',
+        },
+        warning: {
+          50: '#FFFBEB',
+          100: '#FEF3C7',
+          200: '#FDE68A',
+          300: '#FCD34D',
+          400: '#FBBF24',
+          500: '#F59E0B',
+          600: '#D97706',
+          700: '#B45309',
+        },
+        error: {
+          50: '#FEF2F2',
+          100: '#FEE2E2',
+          200: '#FECACA',
+          300: '#FCA5A5',
+          400: '#F87171',
+          500: '#EF4444',
+          600: '#DC2626',
+          700: '#B91C1C',
+        },
+        info: {
+          50: '#EFF6FF',
+          100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#60A5FA',
+          500: '#3B82F6',
+          600: '#2563EB',
+          700: '#1D4ED8',
+        },
       },
       backgroundImage: {
-        'metallic-gradient': 'linear-gradient(135deg, #E8F4F8 0%, #C1E1EC 50%, #A8D8EA 100%)',
-        'blue-gradient': 'linear-gradient(135deg, #6BB6D6 0%, #4A90A4 50%, #2E5266 100%)',
-        'navy-gradient': 'linear-gradient(135deg, #2E5266 0%, #1B3A52 50%, #17324D 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #1E90FF 0%, #1565C0 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #6419FF 0%, #A881FE 100%)',
+        'gradient-purple': 'linear-gradient(135deg, #6419FF 0%, #A881FE 50%, #C4B5FD 100%)',
+        'gradient-hero': 'linear-gradient(135deg, #FAF8F5 0%, #E8F4FD 50%, #F3E8FF 100%)',
+        'gradient-warm': 'linear-gradient(135deg, #FAF8F5 0%, #F5F0EB 50%, #EDE5DC 100%)',
+        'gradient-surface': 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
       },
       boxShadow: {
-        'metallic': '0 4px 6px -1px rgba(107, 182, 214, 0.3), 0 2px 4px -1px rgba(107, 182, 214, 0.2)',
-        'blue': '0 4px 6px -1px rgba(74, 144, 164, 0.4), 0 2px 4px -1px rgba(74, 144, 164, 0.3)',
+        'xs': '0 1px 2px rgba(0, 0, 0, 0.04)',
+        'sm': '0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04)',
+        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04)',
+        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04)',
+        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03)',
+        'primary': '0 4px 14px rgba(30, 144, 255, 0.25)',
+        'primary-lg': '0 6px 20px rgba(30, 144, 255, 0.35)',
+        'accent': '0 4px 14px rgba(100, 25, 255, 0.25)',
+        'accent-lg': '0 6px 20px rgba(100, 25, 255, 0.35)',
+        'warm': '0 4px 14px rgba(201, 184, 168, 0.25)',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '24px',
+      },
+      fontFamily: {
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       animation: {
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'slide-up': 'slideUp 0.3s ease-out',
         'slide-in-right': 'slideInRight 0.3s ease-out',
-        'slide-in-left': 'slideInLeft 0.3s ease-out',
-        'fade-in': 'fadeIn 0.2s ease-in',
         'scale-in': 'scaleIn 0.2s ease-out',
-        'bounce-subtle': 'bounceSubtle 0.5s ease-in-out',
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
       },
       keyframes: {
-        slideInRight: {
-          '0%': { transform: 'translateX(100%)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
-        },
-        slideInLeft: {
-          '0%': { transform: 'translateX(-100%)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
-        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        scaleIn: {
-          '0%': { transform: 'scale(0.9)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        bounceSubtle: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
     },

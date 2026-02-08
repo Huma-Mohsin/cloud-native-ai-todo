@@ -1,9 +1,3 @@
-/**
- * Sort Dropdown Component - Metallic Chic Theme
- *
- * Dropdown to select task sorting option.
- */
-
 'use client';
 
 import { SortOption } from '@/lib/types';
@@ -27,7 +21,7 @@ export function SortDropdown({ value, onChange, disabled = false }: SortDropdown
 
   return (
     <div className="flex items-center gap-2">
-      <label className="text-sm font-medium text-metallic-navy whitespace-nowrap">
+      <label className="text-sm font-semibold text-content whitespace-nowrap">
         {t('sortBy')}:
       </label>
       <div className="relative">
@@ -35,7 +29,7 @@ export function SortDropdown({ value, onChange, disabled = false }: SortDropdown
           value={value}
           onChange={(e) => onChange(e.target.value as SortOption)}
           disabled={disabled}
-          className="appearance-none pl-3 pr-10 py-2 border border-metallic-sky/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-metallic-blue focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed bg-white cursor-pointer text-sm hover:border-metallic-blue transition-all duration-200 text-metallic-navy"
+          className="appearance-none pl-3 pr-10 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed bg-white cursor-pointer text-sm hover:border-primary-300 transition-all duration-200 text-content shadow-sm"
         >
           {sortOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -47,7 +41,7 @@ export function SortDropdown({ value, onChange, disabled = false }: SortDropdown
         {/* Dropdown Icon */}
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <svg
-            className="h-4 w-4 text-metallic-navy/60"
+            className="h-4 w-4 text-primary-500"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"

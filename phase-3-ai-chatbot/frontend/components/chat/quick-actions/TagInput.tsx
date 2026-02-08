@@ -54,12 +54,12 @@ export function TagInput({ suggestions = [], onTagsChange }: TagInputProps) {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium"
+              className="inline-flex items-center px-3 py-1 bg-brand-100 text-brand-700 rounded-full text-sm font-medium"
             >
               🏷️ {tag}
               <button
                 onClick={() => removeTag(tag)}
-                className="ml-2 text-purple-500 hover:text-purple-700 focus:outline-none"
+                className="ml-2 text-brand-500 hover:text-brand-700 focus:outline-none"
               >
                 ×
               </button>
@@ -81,17 +81,17 @@ export function TagInput({ suggestions = [], onTagsChange }: TagInputProps) {
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           placeholder={t('tagInputPlaceholder')}
-          className="w-full px-4 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-2 border-2 border-brand-200 rounded-lg focus:border-brand-500 focus:outline-none transition-colors bg-white text-brand-950"
         />
 
         {/* Suggestions dropdown */}
         {showSuggestions && filteredSuggestions.length > 0 && (
-          <div className="absolute z-10 w-full mt-1 bg-white border-2 border-purple-200 rounded-lg shadow-lg max-h-40 overflow-y-auto animate-fadeIn">
+          <div className="absolute z-10 w-full mt-1 bg-white border-2 border-brand-200 rounded-lg shadow-brand max-h-40 overflow-y-auto animate-fadeIn">
             {filteredSuggestions.map((suggestion) => (
               <button
                 key={suggestion}
                 onClick={() => addTag(suggestion)}
-                className="w-full px-4 py-2 text-left hover:bg-purple-50 transition-colors text-sm"
+                className="w-full px-4 py-2 text-left hover:bg-brand-50 transition-colors text-sm text-brand-800"
               >
                 🏷️ {suggestion}
               </button>

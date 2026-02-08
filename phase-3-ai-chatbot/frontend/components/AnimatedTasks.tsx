@@ -1,137 +1,143 @@
-/**
- * Animated Tasks Illustration Component
- *
- * Colorful, animated task cards that float and bounce on the login page
- */
-
 'use client';
 
+import { useEffect, useState } from 'react';
+
+const TASK_DATA = [
+  { emoji: '📝', label: 'Create', color: 'from-primary-500 to-primary-600', delay: 0 },
+  { emoji: '✅', label: 'Complete', color: 'from-success-500 to-success-600', delay: 0.5 },
+  { emoji: '📋', label: 'Organize', color: 'from-accent-400 to-accent-500', delay: 1 },
+  { emoji: '🔔', label: 'Remind', color: 'from-warning-500 to-warning-600', delay: 1.5 },
+  { emoji: '🎯', label: 'Focus', color: 'from-error-500 to-error-600', delay: 2 },
+  { emoji: '📊', label: 'Track', color: 'from-info-500 to-info-600', delay: 2.5 },
+];
+
+const FLOATING_ICONS = ['✨', '💡', '🚀', '⭐', '💫', '🎨'];
+
 export function AnimatedTasks() {
+  const [mounted, setMounted] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % TASK_DATA.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-      {/* Gradient Background Blobs */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-30 animate-blob"></div>
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-      <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    <div className="relative w-full h-full min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
+      {/* Light Background with Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+        {/* Animated gradient orbs - smaller */}
+        <div className="absolute top-1/4 left-1/4 w-[250px] h-[250px] bg-primary-200/30 rounded-full blur-3xl animate-blob"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-[200px] h-[200px] bg-accent-200/30 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-beige-200/40 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
 
-      {/* Main Container */}
-      <div className="relative z-10 w-full max-w-lg space-y-6">
+      {/* Floating particles - fewer and smaller */}
+      {mounted && FLOATING_ICONS.map((icon, i) => (
+        <div
+          key={i}
+          className="absolute text-xl opacity-30 animate-float"
+          style={{
+            left: `${15 + (i * 14)}%`,
+            top: `${10 + (i % 3) * 20}%`,
+            animationDelay: `${i * 0.5}s`,
+            animationDuration: `${5 + i}s`,
+          }}
+        >
+          {icon}
+        </div>
+      ))}
 
-        {/* Title Section */}
-        <div className="text-center mb-12 animate-fadeInUp">
-          <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 mb-4">
-            📋 TaskFlow AI
-          </h2>
-          <p className="text-2xl font-semibold text-gray-700">
-            Organize your tasks with AI ✨
-          </p>
+      {/* Main Animation Container - positioned higher */}
+      <div className="relative flex items-center justify-center mb-8" style={{ marginTop: '-40px' }}>
+        {/* Decorative rings - smaller */}
+        <div className="absolute flex items-center justify-center pointer-events-none">
+          <div className="absolute w-[280px] h-[280px] border-2 border-dashed border-primary-200/40 rounded-full animate-spin" style={{ animationDuration: '30s' }}></div>
+          <div className="absolute w-[220px] h-[220px] border border-accent-200/50 rounded-full animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }}></div>
+          <div className="absolute w-[160px] h-[160px] border-2 border-beige-300/40 rounded-full animate-pulse"></div>
         </div>
 
-        {/* Floating Task Cards */}
-        <div className="space-y-4">
+        {/* Central AI Hub - smaller */}
+        <div className={`relative z-20 transition-all duration-1000 ${mounted ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}>
+          {/* Glow effect */}
+          <div className="absolute -inset-8 bg-gradient-to-r from-primary-400/20 via-accent-400/20 to-primary-400/20 rounded-full blur-2xl animate-pulse"></div>
 
-          {/* Task Card 1 - Purple */}
-          <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 animate-floatUp animation-delay-200">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg animate-bounce-slow">
-                <span className="text-3xl">✅</span>
-              </div>
-              <div className="flex-1">
-                <div className="h-3 bg-white/80 rounded-full w-3/4 mb-2"></div>
-                <div className="h-2 bg-white/60 rounded-full w-1/2"></div>
-              </div>
-              <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                <span className="text-xl">📋</span>
-              </div>
+          {/* Main circle */}
+          <div className="relative w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-primary-100">
+            {/* Inner gradient ring */}
+            <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary-50 to-accent-50"></div>
+
+            {/* Brain icon */}
+            <div className="relative text-center z-10">
+              <div className="text-4xl mb-0.5 animate-bounce-slow">🧠</div>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500 text-[10px] font-bold tracking-wider uppercase">AI</span>
+            </div>
+
+            {/* Orbiting dot */}
+            <div className="absolute w-full h-full animate-spin" style={{ animationDuration: '4s' }}>
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-primary"></div>
             </div>
           </div>
+        </div>
 
-          {/* Task Card 2 - Pink to Orange */}
-          <div className="bg-gradient-to-r from-pink-500 to-orange-500 p-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 animate-floatUp animation-delay-400 ml-8">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg animate-bounce-slow animation-delay-1000">
-                <span className="text-3xl">📝</span>
-              </div>
-              <div className="flex-1">
-                <div className="h-3 bg-white/80 rounded-full w-2/3 mb-2"></div>
-                <div className="h-2 bg-white/60 rounded-full w-1/3"></div>
-              </div>
-              <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                <span className="text-xl">✏️</span>
-              </div>
+        {/* Orbiting Task Cards - smaller radius and size */}
+        {mounted && (
+          <div className="absolute flex items-center justify-center pointer-events-none">
+            <div className="relative w-[320px] h-[320px]">
+              {TASK_DATA.map((task, index) => {
+                const angle = (index * 60 - 90) * (Math.PI / 180);
+                const radius = 130;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                const isActive = index === activeIndex;
+
+                return (
+                  <div
+                    key={task.label}
+                    className={`absolute transition-all duration-500 pointer-events-auto ${isActive ? 'scale-110 z-30' : 'scale-100 z-10'}`}
+                    style={{
+                      left: `calc(50% + ${x}px - 32px)`,
+                      top: `calc(50% + ${y}px - 32px)`,
+                    }}
+                  >
+                    <div
+                      className={`w-16 h-16 bg-white rounded-xl shadow-md flex flex-col items-center justify-center border-2 cursor-pointer hover:scale-110 transition-all duration-300 ${isActive ? 'border-primary-400 shadow-primary' : 'border-beige-200 hover:border-primary-300'}`}
+                    >
+                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${task.color} flex items-center justify-center mb-0.5 shadow-sm`}>
+                        <span className="text-base">{task.emoji}</span>
+                      </div>
+                      <span className="text-content-secondary text-[8px] font-semibold uppercase tracking-wide">{task.label}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+        )}
+      </div>
 
-          {/* Task Card 3 - Blue to Cyan */}
-          <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 animate-floatUp animation-delay-600">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg animate-bounce-slow animation-delay-2000">
-                <span className="text-3xl">📅</span>
-              </div>
-              <div className="flex-1">
-                <div className="h-3 bg-white/80 rounded-full w-4/5 mb-2"></div>
-                <div className="h-2 bg-white/60 rounded-full w-2/5"></div>
-              </div>
-              <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                <span className="text-xl">⏰</span>
-              </div>
-            </div>
-          </div>
+      {/* Bottom Branding - more space from animation */}
+      <div className={`relative z-30 text-center px-4 transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 mb-2">
+          TaskFlow AI
+        </h2>
+        <p className="text-content-muted text-sm mb-3">Your intelligent task assistant</p>
 
-          {/* Task Card 4 - Green to Teal */}
-          <div className="bg-gradient-to-r from-green-500 to-teal-500 p-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 animate-floatUp animation-delay-800 ml-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg animate-bounce-slow animation-delay-3000">
-                <span className="text-3xl">🎯</span>
-              </div>
-              <div className="flex-1">
-                <div className="h-3 bg-white/80 rounded-full w-3/5 mb-2"></div>
-                <div className="h-2 bg-white/60 rounded-full w-2/5"></div>
-              </div>
-              <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                <span className="text-xl">📌</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Task Card 5 - Indigo to Purple */}
-          <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 animate-floatUp animation-delay-1000 ml-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg animate-bounce-slow animation-delay-4000">
-                <span className="text-3xl">🔔</span>
-              </div>
-              <div className="flex-1">
-                <div className="h-3 bg-white/80 rounded-full w-3/4 mb-2"></div>
-                <div className="h-2 bg-white/60 rounded-full w-1/2"></div>
-              </div>
-              <div className="w-8 h-8 bg-white/30 rounded-lg flex items-center justify-center">
-                <span className="text-xl">📊</span>
-              </div>
-            </div>
-          </div>
-
+        {/* Feature tags - smaller */}
+        <div className="flex justify-center gap-2 flex-wrap">
+          <span className="px-3 py-1 bg-white text-primary-500 text-xs font-semibold rounded-full border border-primary-200 shadow-sm">
+            ⚡ Smart
+          </span>
+          <span className="px-3 py-1 bg-white text-accent-500 text-xs font-semibold rounded-full border border-accent-200 shadow-sm">
+            🚀 Fast
+          </span>
+          <span className="px-3 py-1 bg-white text-success-500 text-xs font-semibold rounded-full border border-success-50 shadow-sm">
+            ✨ Intuitive
+          </span>
         </div>
-
-        {/* Floating Particles - Todo Icons */}
-        <div className="absolute top-20 left-10 animate-float animation-delay-500">
-          <span className="text-2xl">✍️</span>
-        </div>
-        <div className="absolute top-40 right-20 animate-float animation-delay-1500">
-          <span className="text-3xl">📌</span>
-        </div>
-        <div className="absolute bottom-32 left-16 animate-float animation-delay-2500">
-          <span className="text-xl">⭐</span>
-        </div>
-        <div className="absolute bottom-20 right-12 animate-float animation-delay-3500">
-          <span className="text-2xl">🏆</span>
-        </div>
-        <div className="absolute top-1/3 right-8 animate-float">
-          <span className="text-xl">✔️</span>
-        </div>
-        <div className="absolute bottom-1/3 left-12 animate-float animation-delay-4500">
-          <span className="text-3xl">📈</span>
-        </div>
-
       </div>
     </div>
   );

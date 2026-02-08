@@ -150,6 +150,19 @@ export interface Translations {
   // Chat Header
   subtitle: string;
   logout: string;
+
+  // Progress Section
+  overallProgress: string;
+  dailyInsight: string;
+  tasksCompleted: string;
+
+  // Motivational Messages
+  perfectAllCompleted: string;
+  amazingProgress: string;
+  greatWork: string;
+  tasksOverdueCatchUp: string;
+  tasksDueTodayYouCanDoIt: string;
+  tasksWaitingLetsStart: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -297,6 +310,19 @@ export const translations: Record<Language, Translations> = {
     // Chat Header
     subtitle: 'Your intelligent task assistant',
     logout: 'Logout',
+
+    // Progress Section
+    overallProgress: 'Overall Progress',
+    dailyInsight: 'Daily Insight',
+    tasksCompleted: 'tasks completed',
+
+    // Motivational Messages
+    perfectAllCompleted: 'Perfect! All tasks completed!',
+    amazingProgress: 'Amazing progress! You\'re almost there!',
+    greatWork: 'Great work! Keep the momentum going!',
+    tasksOverdueCatchUp: 'tasks overdue. Let\'s catch up!',
+    tasksDueTodayYouCanDoIt: 'tasks due today. You can do it!',
+    tasksWaitingLetsStart: 'tasks waiting. Let\'s get started!',
   },
 
   ur: {
@@ -443,6 +469,19 @@ export const translations: Record<Language, Translations> = {
     // Chat Header
     subtitle: 'آپ کا ذہیں ٹاسک اسسٹنٹ',
     logout: 'لاگ آؤٹ',
+
+    // Progress Section
+    overallProgress: 'مجموعی پیشرفت',
+    dailyInsight: 'روزانہ بصیرت',
+    tasksCompleted: 'ٹاسک مکمل ہوئے',
+
+    // Motivational Messages
+    perfectAllCompleted: 'بہترین! تمام ٹاسک مکمل! 🎉',
+    amazingProgress: 'زبردست پیشرفت! تقریباً ہو گیا!',
+    greatWork: 'شاندار کام! جاری رکھیں!',
+    tasksOverdueCatchUp: 'ٹاسک کا وقت گزر گیا۔ آئیں پورا کریں!',
+    tasksDueTodayYouCanDoIt: 'ٹاسک آج مکمل کرنے ہیں۔ آپ کر سکتے ہیں!',
+    tasksWaitingLetsStart: 'ٹاسک منتظر ہیں۔ آئیں شروع کریں!',
   },
 };
 

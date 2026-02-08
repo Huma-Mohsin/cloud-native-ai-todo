@@ -12,10 +12,10 @@ export default function ChatPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-metallic-gradient">
+    <div className="min-h-screen flex items-center justify-center bg-surface-gradient">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-metallic-blue-light mx-auto"></div>
-        <p className="mt-4 text-metallic-navy">Redirecting to dashboard...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-400 mx-auto"></div>
+        <p className="mt-4 text-brand-950">Redirecting to dashboard...</p>
       </div>
     </div>
   );

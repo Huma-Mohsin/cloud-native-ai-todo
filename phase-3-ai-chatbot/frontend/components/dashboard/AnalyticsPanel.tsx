@@ -1,5 +1,5 @@
 /**
- * AnalyticsPanel Component - Metallic Chic Theme
+ * AnalyticsPanel Component - Light Ecommerce Theme
  *
  * Left sidebar panel dedicated to analytics and statistics:
  * - Fetches task stats
@@ -68,23 +68,23 @@ export function AnalyticsPanel({ userId, token }: AnalyticsPanelProps) {
 
   if (isLoading) {
     return (
-      <div className="h-full flex items-center justify-center bg-metallic-charcoal p-4">
+      <div className="h-full flex items-center justify-center bg-white p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-metallic-blue mx-auto"></div>
-          <p className="mt-2 text-sm text-metallic-silver">Loading analytics...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500 mx-auto"></div>
+          <p className="mt-2 text-sm text-content-muted">Loading analytics...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-full overflow-y-auto bg-metallic-charcoal p-4">
+    <div className="h-full overflow-y-auto bg-white p-4 custom-scrollbar">
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-metallic-silver mb-1 flex items-center gap-2">
+        <h2 className="text-xl font-bold text-content mb-1 flex items-center gap-2">
           <span>📊</span>
-          <span>Analytics</span>
+          <span className="text-gradient">Analytics</span>
         </h2>
-        <p className="text-xs text-metallic-silver/70">Real-time insights</p>
+        <p className="text-xs text-content-muted">Real-time insights</p>
       </div>
       <AnalyticsSidebar stats={stats} isOpen={true} onClose={() => {}} />
     </div>

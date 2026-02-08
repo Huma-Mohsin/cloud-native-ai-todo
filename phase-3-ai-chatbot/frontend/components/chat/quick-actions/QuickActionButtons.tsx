@@ -55,9 +55,9 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
           description: description || data.pending_task.description || '',
           ...updates, // priority, due_date, category, tags
         };
-        console.log('📤 Creating new task:', taskData);  // DEBUG
+        console.log('📤 Creating new task:', taskData);
         await onCreate(taskData);
-        console.log('✅ Task created successfully!');  // DEBUG
+        console.log('✅ Task created successfully!');
       } else if (data.type === 'task_customization' && data.task_id) {
         // Updating existing task
         if (Object.keys(updates).length === 0 && !description) {
@@ -68,15 +68,14 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
         if (description) {
           finalUpdates.description = description;
         }
-        console.log('📤 Updating task:', finalUpdates);  // DEBUG
+        console.log('📤 Updating task:', finalUpdates);
         await onUpdate(data.task_id, finalUpdates);
-        console.log('✅ Task updated successfully!');  // DEBUG
+        console.log('✅ Task updated successfully!');
       } else {
         onSkip();
       }
     } catch (error) {
       console.error('❌ Failed to save:', error);
-      // Show error to user
       alert(`${t('failedToSave')}: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsSaving(false);
@@ -117,7 +116,7 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder={action.placeholder || 'Add description...'}
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+            className="w-full px-4 py-2 border-2 border-brand-200 rounded-lg focus:border-brand-500 focus:outline-none transition-colors bg-white text-brand-950"
           />
         );
 
@@ -135,28 +134,28 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 shadow-lg animate-fadeIn mt-4">
+    <div className="bg-dark-700 rounded-lg p-4 border border-dark-700 mt-4">
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-gray-800 mb-2">✨ {t('customizeTask')}</h3>
+        <h3 className="text-lg font-bold text-light-100 mb-2">{t('customizeTask')}</h3>
       </div>
 
       <div className="space-y-4">
         {data.actions.map((action) => (
           <div key={action.id} className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">{action.label}:</label>
+            <label className="block text-sm font-semibold text-light-200">{action.label}:</label>
             {renderAction(action)}
           </div>
         ))}
       </div>
 
-      <div className="flex gap-3 mt-6 pt-4 border-t-2 border-blue-200">
+      <div className="flex gap-3 mt-6 pt-4 border-t border-dark-700">
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className={`flex-1 px-6 py-3 rounded-lg font-bold text-white transition-all duration-200 transform hover:scale-105 ${
+          className={`flex-1 px-6 py-2 rounded-lg font-bold text-white transition-colors ${
             isSaving
-              ? 'bg-green-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-md'
+              ? 'bg-primary-500/70 cursor-not-allowed'
+              : 'bg-primary-500 hover:bg-primary-600'
           }`}
         >
           {isSaving ? (
@@ -173,7 +172,7 @@ export function QuickActionButtons({ data, onUpdate, onCreate, onSkip }: QuickAc
         <button
           onClick={onSkip}
           disabled={isSaving}
-          className="px-6 py-3 rounded-lg font-bold text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-50 transition-all duration-200 transform hover:scale-105"
+          className="px-6 py-2 rounded-lg font-bold text-light-100 bg-dark-800 border border-dark-700 hover:bg-dark-900 transition-colors"
         >
           ❌ {t('skip')}
         </button>

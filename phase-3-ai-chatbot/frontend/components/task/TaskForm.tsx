@@ -143,7 +143,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-base font-medium text-metallic-blue hover:text-metallic-blue-light focus:outline-none flex items-center gap-2 transition-colors"
+          className="text-base font-medium text-brand-600 hover:text-brand-400 focus:outline-none flex items-center gap-2 transition-colors"
         >
           <span className="text-lg">{showAdvanced ? '🔽' : '▶️'}</span>
           <span>
@@ -156,7 +156,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
           <button
             type="button"
             onClick={handleReset}
-            className="text-sm font-medium text-metallic-navy/60 hover:text-error focus:outline-none transition-colors"
+            className="text-sm font-medium text-brand-950/60 hover:text-error focus:outline-none transition-colors"
           >
             🔄 Reset all fields
           </button>
@@ -165,7 +165,7 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Advanced Options */}
       {showAdvanced && (
-        <div className="space-y-4 p-5 bg-white rounded-xl border-2 border-metallic-sky/30 shadow-metallic">
+        <div className="space-y-4 p-5 bg-white rounded-xl border-2 border-brand-200 shadow-brand">
           {/* Priority Selector */}
           <PrioritySelector value={priority} onChange={setPriority} disabled={isLoading} />
 
@@ -203,8 +203,8 @@ export function TaskForm({ onSubmit, isLoading = false, availableCategories }: T
 
       {/* Quick Summary */}
       {hasAdvancedFields && (
-        <div className="text-sm text-metallic-navy bg-metallic-blue/10 p-4 rounded-xl border-2 border-metallic-blue/30 shadow-blue">
-          <strong className="text-base text-metallic-blue">📝 Task Summary:</strong>
+        <div className="text-sm text-brand-950 bg-brand-100 p-4 rounded-xl border-2 border-brand-200 shadow-brand">
+          <strong className="text-base text-brand-600">📝 Task Summary:</strong>
           {' '}
           <span className="font-semibold">{priority}</span> priority
           {dueDate && <span>, due {new Date(dueDate).toLocaleDateString()}</span>}

@@ -200,28 +200,28 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
   };
 
   return (
-    <div className="flex h-full bg-gradient-to-b from-metallic-sky-light/20 to-white">
+    <div className="flex h-full bg-transparent">
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
           {/* Highlight Banner - Show when viewing specific task */}
           {highlightTaskId && highlightedTask && (
-            <div className="bg-metallic-blue-light/10 border-2 border-metallic-blue rounded-2xl p-4 shadow-md">
+            <div className="bg-primary-50 border-2 border-primary-500 rounded-2xl p-4 shadow-md">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">📌</span>
                   <div>
-                    <p className="text-sm font-semibold text-metallic-blue">
+                    <p className="text-sm font-semibold text-primary-600">
                       {t('viewingTaskFromReminder')}
                     </p>
-                    <p className="text-xs text-metallic-navy/70">
+                    <p className="text-xs text-content-muted">
                       Task #{highlightedTask.id}: {highlightedTask.title}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={handleClearHighlight}
-                  className="px-4 py-2 bg-metallic-blue text-white rounded-lg text-sm font-semibold hover:bg-metallic-blue-light transition-all duration-200 hover:scale-105"
+                  className="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg text-sm font-semibold hover:shadow-primary-lg transition-all duration-200 hover:scale-105"
                 >
                   {t('viewAllTasks')}
                 </button>
@@ -232,10 +232,10 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
           {/* Header with Export Buttons */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-metallic-navy mb-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gradient mb-1">
                 TaskFlow Dashboard
               </h1>
-              <p className="text-sm text-metallic-navy/70">
+              <p className="text-sm text-content-muted">
                 Manage your tasks with real-time updates via AI chatbot
               </p>
             </div>
@@ -256,28 +256,28 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
           {/* Empty State - No Tasks */}
           {tasks.length === 0 && !isLoading && (
             <div className="text-center py-16 px-4">
-              <div className="inline-block p-8 bg-gradient-to-br from-metallic-blue/5 to-metallic-sky-light/30 rounded-3xl shadow-lg border-2 border-metallic-sky">
+              <div className="inline-block p-8 bg-white rounded-3xl shadow-lg border border-border">
                 <div className="text-7xl mb-6">✨</div>
-                <h2 className="text-2xl font-bold text-metallic-navy mb-3">
+                <h2 className="text-2xl font-bold text-gradient mb-3">
                   Welcome to TaskFlow!
                 </h2>
-                <p className="text-metallic-navy/70 mb-6 max-w-md mx-auto">
+                <p className="text-content-muted mb-6 max-w-md mx-auto">
                   Start organizing your life with AI-powered task management.
                   Use the chatbot on the right to create your first task!
                 </p>
-                <div className="bg-metallic-blue/10 rounded-xl p-4 max-w-sm mx-auto border border-metallic-blue/20">
-                  <p className="text-sm font-semibold text-metallic-blue mb-3">💬 Try saying:</p>
-                  <div className="space-y-2 text-left text-sm text-metallic-navy/80">
+                <div className="bg-surface-tertiary rounded-xl p-4 max-w-sm mx-auto border border-border">
+                  <p className="text-sm font-semibold text-primary-500 mb-3">💬 Try saying:</p>
+                  <div className="space-y-2 text-left text-sm text-content-secondary">
                     <p className="flex items-center gap-2">
-                      <span className="text-metallic-blue">→</span>
+                      <span className="text-primary-500">→</span>
                       "Add a task to buy groceries"
                     </p>
                     <p className="flex items-center gap-2">
-                      <span className="text-metallic-blue">→</span>
+                      <span className="text-primary-500">→</span>
                       "Create a task for tomorrow's meeting"
                     </p>
                     <p className="flex items-center gap-2">
-                      <span className="text-metallic-blue">→</span>
+                      <span className="text-primary-500">→</span>
                       "Remind me about task 1 in 30 minutes"
                     </p>
                   </div>
@@ -289,57 +289,57 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
           {/* Quick Stats Cards - Professional Overview */}
           {tasks.length > 0 && (() => {
             const totalTasks = tasks.length;
-            const completedTasks = tasks.filter(t => t.completed).length;
-            const pendingTasks = tasks.filter(t => !t.completed).length;
-            const dueTodayTasks = tasks.filter(t => {
-              if (!t.due_date || t.completed) return false;
+            const completedTasks = tasks.filter(tsk => tsk.completed).length;
+            const pendingTasks = tasks.filter(tsk => !tsk.completed).length;
+            const dueTodayTasks = tasks.filter(tsk => {
+              if (!tsk.due_date || tsk.completed) return false;
               const today = new Date();
-              const dueDate = new Date(t.due_date);
+              const dueDate = new Date(tsk.due_date);
               return dueDate.toDateString() === today.toDateString();
             }).length;
-            const overdueTasks = tasks.filter(t => {
-              if (!t.due_date || t.completed) return false;
-              return new Date(t.due_date) < new Date();
+            const overdueTasks = tasks.filter(tsk => {
+              if (!tsk.due_date || tsk.completed) return false;
+              return new Date(tsk.due_date) < new Date();
             }).length;
-            const highPriorityTasks = tasks.filter(t => t.priority === 'high' && !t.completed).length;
+            const highPriorityTasks = tasks.filter(tsk => tsk.priority === 'high' && !tsk.completed).length;
             const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
             return (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
                 {/* Total Tasks */}
-                <div className="bg-gradient-to-br from-metallic-blue to-metallic-blue-light rounded-xl p-4 shadow-md border border-metallic-blue-light/30">
+                <div className="bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl p-4 shadow-lg shadow-primary-500/20 border border-primary-400/30 hover:scale-105 transition-transform">
                   <div className="text-white text-2xl sm:text-3xl font-bold">{totalTasks}</div>
-                  <div className="text-white/80 text-xs sm:text-sm mt-1">📋 {t('totalTasks')}</div>
+                  <div className="text-white/90 text-xs sm:text-sm mt-1 font-medium">📋 {t('totalTasks')}</div>
                 </div>
 
                 {/* Completed */}
-                <div className="bg-gradient-to-br from-success to-green-500 rounded-xl p-4 shadow-md border border-green-400/30">
+                <div className="bg-gradient-to-br from-success-500 to-success-600 rounded-xl p-4 shadow-lg shadow-success-500/20 border border-success-400/30 hover:scale-105 transition-transform">
                   <div className="text-white text-2xl sm:text-3xl font-bold">{completedTasks}</div>
-                  <div className="text-white/80 text-xs sm:text-sm mt-1">✅ {t('completed')}</div>
+                  <div className="text-white/90 text-xs sm:text-sm mt-1 font-medium">✅ {t('completed')}</div>
                 </div>
 
                 {/* Pending */}
-                <div className="bg-gradient-to-br from-warning to-yellow-500 rounded-xl p-4 shadow-md border border-yellow-400/30">
+                <div className="bg-gradient-to-br from-warning-500 to-warning-600 rounded-xl p-4 shadow-lg shadow-warning-500/20 border border-warning-400/30 hover:scale-105 transition-transform">
                   <div className="text-white text-2xl sm:text-3xl font-bold">{pendingTasks}</div>
-                  <div className="text-white/80 text-xs sm:text-sm mt-1">⏳ {t('pending')}</div>
+                  <div className="text-white/90 text-xs sm:text-sm mt-1 font-medium">⏳ {t('pending')}</div>
                 </div>
 
                 {/* Due Today */}
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 shadow-md border border-blue-400/30">
+                <div className="bg-gradient-to-br from-info-500 to-info-600 rounded-xl p-4 shadow-lg shadow-info-500/20 border border-info-400/30 hover:scale-105 transition-transform">
                   <div className="text-white text-2xl sm:text-3xl font-bold">{dueTodayTasks}</div>
-                  <div className="text-white/80 text-xs sm:text-sm mt-1">📅 {t('dueToday')}</div>
+                  <div className="text-white/90 text-xs sm:text-sm mt-1 font-medium">📅 {t('dueToday')}</div>
                 </div>
 
                 {/* Overdue */}
-                <div className="bg-gradient-to-br from-error to-red-600 rounded-xl p-4 shadow-md border border-red-400/30">
+                <div className="bg-gradient-to-br from-error-500 to-error-600 rounded-xl p-4 shadow-lg shadow-error-500/20 border border-error-400/30 hover:scale-105 transition-transform">
                   <div className="text-white text-2xl sm:text-3xl font-bold">{overdueTasks}</div>
-                  <div className="text-white/80 text-xs sm:text-sm mt-1">⚠️ {t('overdue')}</div>
+                  <div className="text-white/90 text-xs sm:text-sm mt-1 font-medium">⚠️ {t('overdue')}</div>
                 </div>
 
                 {/* High Priority */}
-                <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 shadow-md border border-purple-400/30">
+                <div className="bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl p-4 shadow-lg shadow-accent-500/20 border border-accent-400/30 hover:scale-105 transition-transform">
                   <div className="text-white text-2xl sm:text-3xl font-bold">{highPriorityTasks}</div>
-                  <div className="text-white/80 text-xs sm:text-sm mt-1">🔥 {t('highPriority')}</div>
+                  <div className="text-white/90 text-xs sm:text-sm mt-1 font-medium">🔥 {t('highPriority')}</div>
                 </div>
               </div>
             );
@@ -347,75 +347,75 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
 
           {/* Completion Progress Bar & Motivational Insights */}
           {tasks.length > 0 && (() => {
-            const completedTasks = tasks.filter(t => t.completed).length;
+            const completedTasks = tasks.filter(task => task.completed).length;
             const totalTasks = tasks.length;
-            const pendingTasks = tasks.filter(t => !t.completed).length;
+            const pendingTasks = tasks.filter(task => !task.completed).length;
             const completionRate = Math.round((completedTasks / totalTasks) * 100);
-            const dueTodayCount = tasks.filter(t => {
-              if (!t.due_date || t.completed) return false;
-              return new Date(t.due_date).toDateString() === new Date().toDateString();
+            const dueTodayCount = tasks.filter(task => {
+              if (!task.due_date || task.completed) return false;
+              return new Date(task.due_date).toDateString() === new Date().toDateString();
             }).length;
-            const overdueCount = tasks.filter(t => {
-              if (!t.due_date || t.completed) return false;
-              return new Date(t.due_date) < new Date();
+            const overdueCount = tasks.filter(task => {
+              if (!task.due_date || task.completed) return false;
+              return new Date(task.due_date) < new Date();
             }).length;
 
             // Generate motivational message
             let motivationalMessage = "";
-            let messageColor = "text-metallic-blue";
+            let messageColor = "text-primary-500";
             let messageIcon = "💡";
 
             if (completionRate === 100) {
-              motivationalMessage = "Perfect! All tasks completed! 🎉";
-              messageColor = "text-success";
+              motivationalMessage = t('perfectAllCompleted');
+              messageColor = "text-success-500";
               messageIcon = "🏆";
             } else if (completionRate >= 80) {
-              motivationalMessage = "Amazing progress! You're almost there!";
-              messageColor = "text-success";
+              motivationalMessage = t('amazingProgress');
+              messageColor = "text-success-500";
               messageIcon = "🌟";
             } else if (completionRate >= 50) {
-              motivationalMessage = "Great work! Keep the momentum going!";
-              messageColor = "text-metallic-blue";
+              motivationalMessage = t('greatWork');
+              messageColor = "text-primary-500";
               messageIcon = "💪";
             } else if (overdueCount > 0) {
-              motivationalMessage = `${overdueCount} task${overdueCount > 1 ? 's' : ''} overdue. Let's catch up!`;
-              messageColor = "text-error";
+              motivationalMessage = `${overdueCount} ${t('tasksOverdueCatchUp')}`;
+              messageColor = "text-error-500";
               messageIcon = "⚠️";
             } else if (dueTodayCount > 0) {
-              motivationalMessage = `${dueTodayCount} task${dueTodayCount > 1 ? 's' : ''} due today. You can do it!`;
-              messageColor = "text-warning";
+              motivationalMessage = `${dueTodayCount} ${t('tasksDueTodayYouCanDoIt')}`;
+              messageColor = "text-warning-500";
               messageIcon = "📅";
             } else if (pendingTasks > 0) {
-              motivationalMessage = `${pendingTasks} task${pendingTasks > 1 ? 's' : ''} waiting. Let's get started!`;
-              messageColor = "text-metallic-blue";
+              motivationalMessage = `${pendingTasks} ${t('tasksWaitingLetsStart')}`;
+              messageColor = "text-primary-500";
               messageIcon = "🚀";
             }
 
             return (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {/* Progress Bar */}
-                <div className="bg-white rounded-xl p-5 shadow-md border-2 border-metallic-sky">
+                <div className="bg-white rounded-xl p-5 shadow-md border border-border">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-semibold text-metallic-navy">Overall Progress</h3>
-                    <span className="text-lg font-bold text-metallic-blue">{completionRate}%</span>
+                    <h3 className="text-sm font-semibold text-content">{t('overallProgress')}</h3>
+                    <span className="text-lg font-bold text-primary-500">{completionRate}%</span>
                   </div>
-                  <div className="w-full bg-metallic-sky-light rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-surface-tertiary rounded-full h-3 overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-metallic-blue to-success transition-all duration-500 rounded-full"
+                      className="h-full bg-gradient-to-r from-primary-500 to-success-500 transition-all duration-500 rounded-full"
                       style={{ width: `${completionRate}%` }}
                     />
                   </div>
-                  <p className="text-xs text-metallic-navy/60 mt-2">
-                    {completedTasks} of {totalTasks} tasks completed
+                  <p className="text-xs text-content-muted mt-2">
+                    {completedTasks} {t('of')} {totalTasks} {t('tasksCompleted')}
                   </p>
                 </div>
 
                 {/* Motivational Insight */}
-                <div className="bg-gradient-to-br from-metallic-blue/5 to-metallic-sky-light/30 rounded-xl p-5 shadow-md border-2 border-metallic-blue/20">
+                <div className="bg-white rounded-xl p-5 shadow-md border border-border">
                   <div className="flex items-start gap-3">
                     <span className="text-3xl">{messageIcon}</span>
                     <div className="flex-1">
-                      <h3 className="text-sm font-semibold text-metallic-navy mb-1">Daily Insight</h3>
+                      <h3 className="text-sm font-semibold text-content mb-1">{t('dailyInsight')}</h3>
                       <p className={`text-sm font-medium ${messageColor}`}>
                         {motivationalMessage}
                       </p>
@@ -429,26 +429,26 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
           {/* Today's Focus Section */}
           {tasks.length > 0 && (() => {
             const today = new Date();
-            const dueTodayTasks = tasks.filter(t => {
-              if (!t.due_date || t.completed) return false;
-              const dueDate = new Date(t.due_date);
+            const dueTodayTasks = tasks.filter(tsk => {
+              if (!tsk.due_date || tsk.completed) return false;
+              const dueDate = new Date(tsk.due_date);
               return dueDate.toDateString() === today.toDateString();
             });
 
-            const overdueTasks = tasks.filter(t => {
-              if (!t.due_date || t.completed) return false;
-              return new Date(t.due_date) < today;
+            const overdueTasks = tasks.filter(tsk => {
+              if (!tsk.due_date || tsk.completed) return false;
+              return new Date(tsk.due_date) < today;
             });
 
-            const highPriorityTasks = tasks.filter(t => t.priority === 'high' && !t.completed).slice(0, 3);
+            const highPriorityTasks = tasks.filter(tsk => tsk.priority === 'high' && !tsk.completed).slice(0, 3);
 
             const hasFocusTasks = dueTodayTasks.length > 0 || overdueTasks.length > 0 || highPriorityTasks.length > 0;
 
             if (!hasFocusTasks) return null;
 
             return (
-              <div className="bg-gradient-to-br from-metallic-sky-light/30 to-white rounded-xl p-5 shadow-md border-2 border-metallic-blue">
-                <h3 className="text-lg font-bold text-metallic-navy mb-4 flex items-center gap-2">
+              <div className="bg-white rounded-xl p-5 shadow-md border border-border">
+                <h3 className="text-lg font-bold text-gradient mb-4 flex items-center gap-2">
                   <span>🎯</span>
                   <span>{t('todaysFocus')}</span>
                 </h3>
@@ -456,17 +456,17 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
                 <div className="space-y-3">
                   {/* Overdue Tasks */}
                   {overdueTasks.length > 0 && (
-                    <div className="bg-error/10 border-l-4 border-error rounded-lg p-3">
-                      <h4 className="text-sm font-semibold text-error mb-2">⚠️ {t('overdue')} ({overdueTasks.length})</h4>
+                    <div className="bg-error-50 border-l-4 border-error-500 rounded-lg p-3">
+                      <h4 className="text-sm font-semibold text-error-500 mb-2">⚠️ {t('overdue')} ({overdueTasks.length})</h4>
                       <div className="space-y-1">
                         {overdueTasks.slice(0, 3).map(task => (
-                          <div key={task.id} className="text-sm text-metallic-navy flex items-center gap-2">
-                            <span className="font-mono text-xs text-error">#{task.id}</span>
+                          <div key={task.id} className="text-sm text-content-secondary flex items-center gap-2">
+                            <span className="font-mono text-xs text-error-500">#{task.id}</span>
                             <span className="truncate">{task.title}</span>
                           </div>
                         ))}
                         {overdueTasks.length > 3 && (
-                          <p className="text-xs text-error/70 mt-1">+{overdueTasks.length - 3} more</p>
+                          <p className="text-xs text-error-500/70 mt-1">+{overdueTasks.length - 3} more</p>
                         )}
                       </div>
                     </div>
@@ -474,17 +474,17 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
 
                   {/* Due Today */}
                   {dueTodayTasks.length > 0 && (
-                    <div className="bg-warning/10 border-l-4 border-warning rounded-lg p-3">
-                      <h4 className="text-sm font-semibold text-warning mb-2">📅 {t('dueToday')} ({dueTodayTasks.length})</h4>
+                    <div className="bg-warning-50 border-l-4 border-warning-500 rounded-lg p-3">
+                      <h4 className="text-sm font-semibold text-warning-600 mb-2">📅 {t('dueToday')} ({dueTodayTasks.length})</h4>
                       <div className="space-y-1">
                         {dueTodayTasks.slice(0, 3).map(task => (
-                          <div key={task.id} className="text-sm text-metallic-navy flex items-center gap-2">
-                            <span className="font-mono text-xs text-warning">#{task.id}</span>
+                          <div key={task.id} className="text-sm text-content-secondary flex items-center gap-2">
+                            <span className="font-mono text-xs text-warning-600">#{task.id}</span>
                             <span className="truncate">{task.title}</span>
                           </div>
                         ))}
                         {dueTodayTasks.length > 3 && (
-                          <p className="text-xs text-warning/70 mt-1">+{dueTodayTasks.length - 3} more</p>
+                          <p className="text-xs text-warning-600/70 mt-1">+{dueTodayTasks.length - 3} more</p>
                         )}
                       </div>
                     </div>
@@ -492,12 +492,12 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
 
                   {/* High Priority */}
                   {highPriorityTasks.length > 0 && (
-                    <div className="bg-purple-100 border-l-4 border-purple-500 rounded-lg p-3">
-                      <h4 className="text-sm font-semibold text-purple-700 mb-2">🔥 {t('highPriority')}</h4>
+                    <div className="bg-accent-50 border-l-4 border-accent-500 rounded-lg p-3">
+                      <h4 className="text-sm font-semibold text-accent-500 mb-2">🔥 {t('highPriority')}</h4>
                       <div className="space-y-1">
                         {highPriorityTasks.map(task => (
-                          <div key={task.id} className="text-sm text-metallic-navy flex items-center gap-2">
-                            <span className="font-mono text-xs text-purple-600">#{task.id}</span>
+                          <div key={task.id} className="text-sm text-content-secondary flex items-center gap-2">
+                            <span className="font-mono text-xs text-accent-500">#{task.id}</span>
                             <span className="truncate">{task.title}</span>
                           </div>
                         ))}
@@ -511,8 +511,8 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
 
           {/* Section Divider */}
           {tasks.length > 0 && (
-            <div className="border-t-2 border-metallic-sky/30 pt-6">
-              <h2 className="text-xl font-bold text-metallic-navy mb-4 flex items-center gap-2">
+            <div className="border-t border-border pt-6">
+              <h2 className="text-xl font-bold text-content mb-4 flex items-center gap-2">
                 <span>📋</span>
                 <span>All Tasks</span>
               </h2>
@@ -557,8 +557,8 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
 
           {/* Error Display */}
           {(error || operationError) && (
-            <div className="bg-error/20 border-2 border-error rounded-xl p-4">
-              <p className="text-sm font-medium text-error flex items-center gap-2" role="alert">
+            <div className="bg-error-50 border border-error-500/50 rounded-xl p-4">
+              <p className="text-sm font-medium text-error-500 flex items-center gap-2" role="alert">
                 <span className="text-lg">⚠️</span>
                 {error || operationError}
               </p>
@@ -595,8 +595,8 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
 
             return (
               <div className="mt-8 space-y-6">
-                <div className="border-t-2 border-metallic-sky/30 pt-8">
-                  <h2 className="text-xl font-bold text-metallic-navy mb-6 flex items-center gap-2">
+                <div className="border-t border-border pt-8">
+                  <h2 className="text-xl font-bold text-content mb-6 flex items-center gap-2">
                     <span>📊</span>
                     <span>{t('detailedAnalytics')}</span>
                   </h2>
@@ -604,8 +604,8 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
                   {/* Charts Row */}
                   <div className="grid md:grid-cols-2 gap-6 mb-6">
                     {/* Task Status Distribution - Donut Chart */}
-                    <div className="bg-white rounded-xl p-5 shadow-lg border border-metallic-silver/30">
-                      <h3 className="text-sm font-semibold text-metallic-navy mb-4 flex items-center gap-2">
+                    <div className="bg-white rounded-xl p-5 shadow-md border border-border">
+                      <h3 className="text-sm font-semibold text-content mb-4 flex items-center gap-2">
                         <span className="text-lg">🍩</span>
                         <span>{t('taskStatusDistribution')}</span>
                       </h3>
@@ -632,8 +632,8 @@ export function TaskDashboard({ userId, token, highlightTaskId }: TaskDashboardP
                     </div>
 
                     {/* Priority Breakdown - Bar Chart */}
-                    <div className="bg-white rounded-xl p-5 shadow-lg border border-metallic-silver/30">
-                      <h3 className="text-sm font-semibold text-metallic-navy mb-4 flex items-center gap-2">
+                    <div className="bg-white rounded-xl p-5 shadow-md border border-border">
+                      <h3 className="text-sm font-semibold text-content mb-4 flex items-center gap-2">
                         <span className="text-lg">📊</span>
                         <span>{t('priorityBreakdown')}</span>
                       </h3>
