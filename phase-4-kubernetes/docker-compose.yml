@@ -1,0 +1,80 @@
+# =============================================================================
+# Phase IV: Docker Compose Configuration
+# For local testing before Kubernetes deployment
+# =============================================================================
+
+version: '3.9'
+
+services:
+  # ---------------------------------------------------------------------------
+  # Frontend Service (Next.js)
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ../phase-3-ai-chatbot/frontend
+      dockerfile: ../../phase-4-kubernetes/docker/Dockerfile.frontend
+      args:
+        - NEXT_PUBLIC_API_URL=http://localhost:8000
+    image: todo-frontend:latest
+    container_name: todo-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - todo-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ---------------------------------------------------------------------------
+  # Backend Service (FastAPI + MCP)
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: ../phase-3-ai-chatbot/backend
+      dockerfile: ../../phase-4-kubernetes/docker/Dockerfile.backend
+    image: todo-backend:latest
+    container_name: todo-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - GOOGLE_GENAI_API_KEY=${GOOGLE_GENAI_API_KEY:-}
+      - ENVIRONMENT=production
+    env_file:
+      - ../phase-3-ai-chatbot/backend/.env
+    networks:
+      - todo-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+# -----------------------------------------------------------------------------
+# Networks
+# -----------------------------------------------------------------------------
+networks:
+  todo-network:
+    driver: bridge
+    name: todo-network
+
+# -----------------------------------------------------------------------------
+# Volumes (if needed for persistence)
+# -----------------------------------------------------------------------------
+volumes:
+  todo-data:
+    driver: local

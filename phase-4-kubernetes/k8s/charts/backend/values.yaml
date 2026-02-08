@@ -1,0 +1,111 @@
+# =============================================================================
+# Backend Helm Chart Values
+# =============================================================================
+
+# Replica count for high availability
+replicaCount: 2
+
+# Container image configuration
+image:
+  repository: todo-backend
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+# Image pull secrets (for private registries)
+imagePullSecrets: []
+
+# Override name settings
+nameOverride: ""
+fullnameOverride: ""
+
+# Service account configuration
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+# Pod annotations
+podAnnotations: {}
+
+# Pod security context
+podSecurityContext:
+  fsGroup: 1001
+
+# Container security context
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  capabilities:
+    drop:
+      - ALL
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 8000
+  targetPort: 8000
+
+# Resource limits and requests
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+# Horizontal Pod Autoscaler
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity rules
+affinity: {}
+
+# Liveness probe
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 20
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# Readiness probe
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# Environment variables from ConfigMap
+config:
+  ENVIRONMENT: "production"
+
+# Secrets configuration
+# These should be created separately or via external-secrets
+secrets:
+  # Set these values via --set or values file override
+  databaseUrl: ""
+  openaiApiKey: ""
+  betterAuthSecret: ""
+  googleGenaiApiKey: ""
+
+# External secret name (if using existing secret)
+existingSecret: ""
