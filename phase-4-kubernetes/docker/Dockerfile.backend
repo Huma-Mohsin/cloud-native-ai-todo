@@ -55,7 +55,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # Copy application source code
 COPY --chown=appuser:appgroup src/ ./src/
-COPY --chown=appuser:appgroup migrations/ ./migrations/ 2>/dev/null || true
+# migrations folder optional - skip if not exists
 
 # Switch to non-root user
 USER appuser
