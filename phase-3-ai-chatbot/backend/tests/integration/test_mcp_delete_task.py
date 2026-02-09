@@ -9,7 +9,7 @@ import pytest
 from src.mcp.tools.delete_task import delete_task_handler
 from src.mcp.schemas import DeleteTaskInput
 from src.services.task_service import TaskService
-from src.schemas.task import CreateTaskRequest
+from src.schemas.task import CreateTaskRequest, UpdateTaskRequest
 
 
 @pytest.mark.asyncio
@@ -21,7 +21,7 @@ async def test_delete_task_success(async_session):
     - Success response is returned
     - Task title and ID are included
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create task
     task = await TaskService.create_task(
@@ -49,7 +49,7 @@ async def test_delete_task_removed_from_database(async_session):
     - Task no longer exists in database
     - Cannot be retrieved after deletion
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -64,8 +64,8 @@ async def test_delete_task_removed_from_database(async_session):
     await delete_task_handler(input_data, async_session)
 
     # Verify deletion
-    deleted_task = await TaskService.get_task(
-        task_id=task_id, user_id=user_id, session=async_session
+    deleted_task = await TaskService.get_task_by_id(
+        task_id=task_id, session=async_session
     )
 
     assert deleted_task is None
@@ -79,7 +79,7 @@ async def test_delete_task_not_found(async_session):
     - Returns failure response
     - Error message indicates task not found
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     input_data = DeleteTaskInput(user_id=user_id, task_id=99999)
     result = await delete_task_handler(input_data, async_session)
@@ -96,8 +96,8 @@ async def test_delete_task_unauthorized(async_session):
     - Returns failure response
     - Task remains in database for owner
     """
-    user1 = 1
-    user2 = 2
+    user1 = "test_user_1"
+    user2 = "test_user_2"
 
     # Create task for user1
     task = await TaskService.create_task(
@@ -114,9 +114,9 @@ async def test_delete_task_unauthorized(async_session):
 
     assert result.success is False
 
-    # Verify task still exists for user1
-    existing_task = await TaskService.get_task(
-        task_id=task.id, user_id=user1, session=async_session
+    # Verify task still exists
+    existing_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
     assert existing_task is not None
 
@@ -129,7 +129,7 @@ async def test_delete_completed_task(async_session):
     - Completed tasks can be deleted
     - Deletion succeeds regardless of completion status
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -143,7 +143,7 @@ async def test_delete_completed_task(async_session):
     await TaskService.update_task(
         task_id=task.id,
         user_id=user_id,
-        updates={"completed": True},
+        task_data=UpdateTaskRequest(completed=True),
         session=async_session,
     )
 
@@ -162,7 +162,7 @@ async def test_delete_multiple_tasks(async_session):
     - Multiple tasks can be deleted independently
     - Each deletion is persisted
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create tasks
     task1 = await TaskService.create_task(
@@ -192,11 +192,11 @@ async def test_delete_multiple_tasks(async_session):
     assert result2.success is True
 
     # Verify both deleted
-    deleted1 = await TaskService.get_task(
-        task_id=task1.id, user_id=user_id, session=async_session
+    deleted1 = await TaskService.get_task_by_id(
+        task_id=task1.id, session=async_session
     )
-    deleted2 = await TaskService.get_task(
-        task_id=task2.id, user_id=user_id, session=async_session
+    deleted2 = await TaskService.get_task_by_id(
+        task_id=task2.id, session=async_session
     )
 
     assert deleted1 is None
@@ -211,7 +211,7 @@ async def test_delete_task_twice(async_session):
     - Second deletion returns failure
     - Error message indicates task not found
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -241,7 +241,7 @@ async def test_delete_task_output_format(async_session):
     - Output matches DeleteTaskOutput schema
     - All required fields are present
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -275,7 +275,7 @@ async def test_delete_task_doesnt_affect_other_tasks(async_session):
     - Other tasks remain unchanged
     - Only specified task is deleted
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create multiple tasks
     task1 = await TaskService.create_task(
@@ -298,8 +298,8 @@ async def test_delete_task_doesnt_affect_other_tasks(async_session):
     await delete_task_handler(input_data, async_session)
 
     # Verify task1 still exists
-    remaining_task = await TaskService.get_task(
-        task_id=task1.id, user_id=user_id, session=async_session
+    remaining_task = await TaskService.get_task_by_id(
+        task_id=task1.id, session=async_session
     )
 
     assert remaining_task is not None

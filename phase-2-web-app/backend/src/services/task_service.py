@@ -102,7 +102,7 @@ class TaskService:
         elif sort_by == "position":
             statement = statement.order_by(Task.position.asc())
         else:  # default: created_at
-            statement = statement.order_by(Task.completed.asc(), Task.created_at.desc())
+            statement = statement.order_by(Task.created_at.desc())
 
         result = await session.execute(statement)
         tasks = result.scalars().all()

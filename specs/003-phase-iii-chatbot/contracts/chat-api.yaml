@@ -1,0 +1,575 @@
+openapi: 3.0.3
+info:
+  title: Todo Chatbot API
+  description: |
+    AI-powered chatbot API for natural language task management.
+
+    This API enables users to manage their todo tasks through conversational interactions.
+    The chatbot uses OpenAI Agents SDK with MCP (Model Context Protocol) tools to understand
+    natural language and perform task operations.
+
+    **Key Features:**
+    - Natural language task creation, listing, completion, deletion, and updates
+    - Stateless architecture with database-persisted conversations
+    - JWT authentication for secure access
+    - Tool call transparency in responses
+
+    **Architecture:**
+    - Frontend: OpenAI ChatKit
+    - Backend: FastAPI + OpenAI Agents SDK + MCP Server
+    - Database: PostgreSQL (conversations, messages, tasks)
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+  - url: https://api.todo-app.example.com
+    description: Production server
+
+tags:
+  - name: chat
+    description: Chat conversation endpoints
+
+paths:
+  /api/{user_id}/chat:
+    post:
+      tags:
+        - chat
+      summary: Send a chat message
+      description: |
+        Send a message to the AI chatbot and receive a response.
+
+        **Stateless Request Cycle:**
+        1. Receive request (conversation_id?, message)
+        2. Fetch conversation history from database
+        3. Store user message in database
+        4. Run AI agent with history + new message
+        5. Store assistant response in database
+        6. Return response (conversation_id, response, tool_calls)
+
+        **Natural Language Examples:**
+        - "Add a task to buy groceries"
+        - "Show me all my tasks"
+        - "Mark task 3 as complete"
+        - "Delete the meeting task"
+        - "Change task 1 to 'Call mom tonight'"
+
+        **Authentication:**
+        Requires valid JWT token in Authorization header. The user_id in the token
+        must match the {user_id} path parameter.
+      operationId: sendChatMessage
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: User ID (must match user_id in JWT token)
+          schema:
+            type: string
+            example: "user_123"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            examples:
+              newConversation:
+                summary: Start new conversation
+                value:
+                  message: "Add a task to buy groceries"
+              continueConversation:
+                summary: Continue existing conversation
+                value:
+                  conversation_id: 123
+                  message: "Show me all my tasks"
+      responses:
+        '200':
+          description: Successful chat interaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              examples:
+                taskCreated:
+                  summary: Task created successfully
+                  value:
+                    conversation_id: 123
+                    response: "✓ Added task: Buy groceries (ID: 42)"
+                    tool_calls:
+                      - tool: "add_task"
+                        arguments:
+                          user_id: "user_123"
+                          title: "Buy groceries"
+                        result:
+                          task_id: 42
+                          status: "created"
+                          title: "Buy groceries"
+                taskListed:
+                  summary: Tasks listed successfully
+                  value:
+                    conversation_id: 123
+                    response: |
+                      Here are your pending tasks:
+                      1. Buy groceries (ID: 42)
+                      2. Call mom (ID: 43)
+                      3. Pay bills (ID: 44)
+                    tool_calls:
+                      - tool: "list_tasks"
+                        arguments:
+                          user_id: "user_123"
+                          status: "pending"
+                        result:
+                          - id: 42
+                            title: "Buy groceries"
+                            completed: false
+                          - id: 43
+                            title: "Call mom"
+                            completed: false
+                          - id: 44
+                            title: "Pay bills"
+                            completed: false
+        '400':
+          description: Bad request (invalid input)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                emptyMessage:
+                  summary: Empty message
+                  value:
+                    error: "Bad Request"
+                    message: "Message cannot be empty"
+                    code: "INVALID_INPUT"
+                messageTooLong:
+                  summary: Message too long
+                  value:
+                    error: "Bad Request"
+                    message: "Message exceeds maximum length of 2000 characters"
+                    code: "MESSAGE_TOO_LONG"
+        '401':
+          description: Unauthorized (missing or invalid JWT token)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                missingToken:
+                  summary: Missing authorization header
+                  value:
+                    error: "Unauthorized"
+                    message: "Missing authorization header"
+                    code: "MISSING_TOKEN"
+                invalidToken:
+                  summary: Invalid JWT token
+                  value:
+                    error: "Unauthorized"
+                    message: "Invalid or expired token"
+                    code: "INVALID_TOKEN"
+        '403':
+          description: Forbidden (user_id mismatch)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userIdMismatch:
+                  summary: User ID in token doesn't match path parameter
+                  value:
+                    error: "Forbidden"
+                    message: "User ID in token does not match requested user_id"
+                    code: "USER_ID_MISMATCH"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                serverError:
+                  summary: Generic server error
+                  value:
+                    error: "Internal Server Error"
+                    message: "An unexpected error occurred"
+                    code: "INTERNAL_ERROR"
+                openaiError:
+                  summary: OpenAI API error
+                  value:
+                    error: "Internal Server Error"
+                    message: "OpenAI API request failed"
+                    code: "OPENAI_ERROR"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT token obtained from Better Auth authentication.
+
+        **Token Structure:**
+        ```json
+        {
+          "user_id": "user_123",
+          "email": "user@example.com",
+          "exp": 1234567890
+        }
+        ```
+
+        **Usage:**
+        ```
+        Authorization: Bearer <your-jwt-token>
+        ```
+
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+      properties:
+        conversation_id:
+          type: integer
+          description: |
+            Optional conversation ID to continue an existing conversation.
+            If not provided, a new conversation will be created.
+          example: 123
+          nullable: true
+        message:
+          type: string
+          description: User's message in natural language
+          minLength: 1
+          maxLength: 2000
+          example: "Add a task to buy groceries"
+
+    ChatResponse:
+      type: object
+      required:
+        - conversation_id
+        - response
+        - tool_calls
+      properties:
+        conversation_id:
+          type: integer
+          description: Conversation ID (new or existing)
+          example: 123
+        response:
+          type: string
+          description: AI assistant's response message
+          example: "✓ Added task: Buy groceries (ID: 42)"
+        tool_calls:
+          type: array
+          description: List of MCP tool calls executed by the agent
+          items:
+            $ref: '#/components/schemas/ToolCall'
+
+    ToolCall:
+      type: object
+      required:
+        - tool
+        - arguments
+        - result
+      properties:
+        tool:
+          type: string
+          description: Name of the MCP tool that was called
+          enum:
+            - add_task
+            - list_tasks
+            - complete_task
+            - delete_task
+            - update_task
+          example: "add_task"
+        arguments:
+          type: object
+          description: Arguments passed to the tool
+          additionalProperties: true
+          example:
+            user_id: "user_123"
+            title: "Buy groceries"
+        result:
+          type: object
+          description: Result returned by the tool
+          additionalProperties: true
+          example:
+            task_id: 42
+            status: "created"
+            title: "Buy groceries"
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+        - code
+      properties:
+        error:
+          type: string
+          description: Error type (HTTP status text)
+          example: "Bad Request"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Message cannot be empty"
+        code:
+          type: string
+          description: Machine-readable error code
+          example: "INVALID_INPUT"
+        details:
+          type: object
+          description: Additional error details (optional)
+          additionalProperties: true
+          nullable: true
+
+    # MCP Tool Schemas (for reference)
+    AddTaskInput:
+      type: object
+      required:
+        - user_id
+        - title
+      properties:
+        user_id:
+          type: string
+          description: User ID from JWT token
+          example: "user_123"
+        title:
+          type: string
+          description: Task title
+          minLength: 1
+          maxLength: 200
+          example: "Buy groceries"
+        description:
+          type: string
+          description: Task description (optional)
+          maxLength: 1000
+          example: "Milk, eggs, bread"
+          nullable: true
+
+    AddTaskOutput:
+      type: object
+      required:
+        - task_id
+        - status
+        - title
+      properties:
+        task_id:
+          type: integer
+          description: Created task ID
+          example: 42
+        status:
+          type: string
+          description: Operation status
+          example: "created"
+        title:
+          type: string
+          description: Task title
+          example: "Buy groceries"
+
+    ListTasksInput:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: User ID from JWT token
+          example: "user_123"
+        status:
+          type: string
+          description: Filter by task status
+          enum:
+            - all
+            - pending
+            - completed
+          default: "all"
+          example: "pending"
+
+    ListTasksOutput:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - title
+          - completed
+          - created_at
+        properties:
+          id:
+            type: integer
+            example: 42
+          title:
+            type: string
+            example: "Buy groceries"
+          description:
+            type: string
+            nullable: true
+            example: "Milk, eggs, bread"
+          completed:
+            type: boolean
+            example: false
+          created_at:
+            type: string
+            format: date-time
+            example: "2026-01-15T10:00:00Z"
+
+    CompleteTaskInput:
+      type: object
+      required:
+        - user_id
+        - task_id
+      properties:
+        user_id:
+          type: string
+          description: User ID from JWT token
+          example: "user_123"
+        task_id:
+          type: integer
+          description: Task ID to complete
+          example: 42
+
+    CompleteTaskOutput:
+      type: object
+      required:
+        - task_id
+        - status
+        - title
+      properties:
+        task_id:
+          type: integer
+          example: 42
+        status:
+          type: string
+          example: "completed"
+        title:
+          type: string
+          example: "Buy groceries"
+
+    DeleteTaskInput:
+      type: object
+      required:
+        - user_id
+        - task_id
+      properties:
+        user_id:
+          type: string
+          description: User ID from JWT token
+          example: "user_123"
+        task_id:
+          type: integer
+          description: Task ID to delete
+          example: 42
+
+    DeleteTaskOutput:
+      type: object
+      required:
+        - task_id
+        - status
+        - title
+      properties:
+        task_id:
+          type: integer
+          example: 42
+        status:
+          type: string
+          example: "deleted"
+        title:
+          type: string
+          example: "Buy groceries"
+
+    UpdateTaskInput:
+      type: object
+      required:
+        - user_id
+        - task_id
+      properties:
+        user_id:
+          type: string
+          description: User ID from JWT token
+          example: "user_123"
+        task_id:
+          type: integer
+          description: Task ID to update
+          example: 42
+        title:
+          type: string
+          description: New task title (optional)
+          minLength: 1
+          maxLength: 200
+          example: "Buy groceries and fruits"
+          nullable: true
+        description:
+          type: string
+          description: New task description (optional)
+          maxLength: 1000
+          example: "Milk, eggs, bread, apples, bananas"
+          nullable: true
+
+    UpdateTaskOutput:
+      type: object
+      required:
+        - task_id
+        - status
+        - title
+      properties:
+        task_id:
+          type: integer
+          example: 42
+        status:
+          type: string
+          example: "updated"
+        title:
+          type: string
+          example: "Buy groceries and fruits"
+
+  examples:
+    # Additional examples for documentation
+    MultiStepToolCall:
+      summary: Multi-step tool call (search then action)
+      value:
+        conversation_id: 123
+        response: "✓ Marked task as complete: Buy groceries (ID: 42)"
+        tool_calls:
+          - tool: "list_tasks"
+            arguments:
+              user_id: "user_123"
+              status: "all"
+            result:
+              - id: 42
+                title: "Buy groceries"
+                completed: false
+          - tool: "complete_task"
+            arguments:
+              user_id: "user_123"
+              task_id: 42
+            result:
+              task_id: 42
+              status: "completed"
+              title: "Buy groceries"
+
+# Rate Limiting
+# The API implements rate limiting to prevent abuse:
+# - 10 requests per minute per user
+# - Rate limit headers included in responses:
+#   - X-RateLimit-Limit: 10
+#   - X-RateLimit-Remaining: 9
+#   - X-RateLimit-Reset: 1234567890 (Unix timestamp)
+
+# Error Codes Reference
+# - INVALID_INPUT: Request validation failed
+# - MESSAGE_TOO_LONG: Message exceeds 2000 characters
+# - MISSING_TOKEN: Authorization header not provided
+# - INVALID_TOKEN: JWT token is invalid or expired
+# - USER_ID_MISMATCH: Token user_id doesn't match path parameter
+# - TASK_NOT_FOUND: Referenced task doesn't exist
+# - UNAUTHORIZED: User doesn't have permission
+# - OPENAI_ERROR: OpenAI API request failed
+# - DATABASE_ERROR: Database operation failed
+# - INTERNAL_ERROR: Unexpected server error

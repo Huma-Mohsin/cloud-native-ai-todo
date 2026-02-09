@@ -9,7 +9,7 @@ import pytest
 from src.mcp.tools.list_tasks import list_tasks_handler
 from src.mcp.schemas import ListTasksInput
 from src.services.task_service import TaskService
-from src.schemas.task import CreateTaskRequest
+from src.schemas.task import CreateTaskRequest, UpdateTaskRequest
 
 
 @pytest.mark.asyncio
@@ -20,7 +20,7 @@ async def test_list_tasks_all(async_session):
     - All user tasks are returned
     - Completed and pending tasks are included
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create tasks
     await TaskService.create_task(
@@ -54,7 +54,7 @@ async def test_list_tasks_pending(async_session):
     - Only incomplete tasks are returned
     - Completed tasks are excluded
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create pending task
     pending = await TaskService.create_task(
@@ -76,7 +76,7 @@ async def test_list_tasks_pending(async_session):
     await TaskService.update_task(
         task_id=completed.id,
         user_id=user_id,
-        updates={"completed": True},
+        task_data=UpdateTaskRequest(completed=True),
         session=async_session,
     )
 
@@ -85,8 +85,8 @@ async def test_list_tasks_pending(async_session):
 
     assert result.success is True
     assert len(result.tasks) == 1
-    assert result.tasks[0]["title"] == "Pending task"
-    assert result.tasks[0]["completed"] is False
+    assert result.tasks[0].title == "Pending task"
+    assert result.tasks[0].completed is False
 
 
 @pytest.mark.asyncio
@@ -97,7 +97,7 @@ async def test_list_tasks_completed(async_session):
     - Only completed tasks are returned
     - Pending tasks are excluded
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create pending task
     await TaskService.create_task(
@@ -119,7 +119,7 @@ async def test_list_tasks_completed(async_session):
     await TaskService.update_task(
         task_id=completed.id,
         user_id=user_id,
-        updates={"completed": True},
+        task_data=UpdateTaskRequest(completed=True),
         session=async_session,
     )
 
@@ -128,8 +128,8 @@ async def test_list_tasks_completed(async_session):
 
     assert result.success is True
     assert len(result.tasks) == 1
-    assert result.tasks[0]["title"] == "Completed task"
-    assert result.tasks[0]["completed"] is True
+    assert result.tasks[0].title == "Completed task"
+    assert result.tasks[0].completed is True
 
 
 @pytest.mark.asyncio
@@ -141,7 +141,7 @@ async def test_list_tasks_empty(async_session):
     - Count is 0
     - Success is True
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     input_data = ListTasksInput(user_id=user_id, status="all")
     result = await list_tasks_handler(input_data, async_session)
@@ -159,8 +159,8 @@ async def test_list_tasks_user_isolation(async_session):
     - Only user's tasks are returned
     - Other users' tasks are not included
     """
-    user1 = 1
-    user2 = 2
+    user1 = "test_user_1"
+    user2 = "test_user_2"
 
     # Create tasks for user1
     await TaskService.create_task(
@@ -186,7 +186,7 @@ async def test_list_tasks_user_isolation(async_session):
 
     assert result.success is True
     assert len(result.tasks) == 1
-    assert result.tasks[0]["title"] == "User 1 task"
+    assert result.tasks[0].title == "User 1 task"
 
 
 @pytest.mark.asyncio
@@ -197,7 +197,7 @@ async def test_list_tasks_output_format(async_session):
     - Each task has id, title, description, completed, created_at
     - Output matches ListTasksOutput schema
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     await TaskService.create_task(
         user_id=user_id,
@@ -214,15 +214,15 @@ async def test_list_tasks_output_format(async_session):
     assert len(result.tasks) == 1
 
     task = result.tasks[0]
-    assert "id" in task
-    assert "title" in task
-    assert "description" in task
-    assert "completed" in task
-    assert "created_at" in task
+    # TaskInfo is a Pydantic model with id, title, description, completed attributes
+    assert hasattr(task, "id")
+    assert hasattr(task, "title")
+    assert hasattr(task, "description")
+    assert hasattr(task, "completed")
 
-    assert task["title"] == "Test task"
-    assert task["description"] == "Test description"
-    assert task["completed"] is False
+    assert task.title == "Test task"
+    assert task.description == "Test description"
+    assert task.completed is False
 
 
 @pytest.mark.asyncio
@@ -233,7 +233,7 @@ async def test_list_tasks_ordering(async_session):
     - Newest tasks appear first
     - Tasks are in reverse chronological order
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create tasks in sequence
     task1 = await TaskService.create_task(
@@ -264,10 +264,10 @@ async def test_list_tasks_ordering(async_session):
     result = await list_tasks_handler(input_data, async_session)
 
     assert len(result.tasks) == 3
-    # Newest first
-    assert result.tasks[0]["id"] == task3.id
-    assert result.tasks[1]["id"] == task2.id
-    assert result.tasks[2]["id"] == task1.id
+    # Newest first (TaskInfo objects have .id attribute)
+    assert result.tasks[0].id == task3.id
+    assert result.tasks[1].id == task2.id
+    assert result.tasks[2].id == task1.id
 
 
 @pytest.mark.asyncio
@@ -278,7 +278,7 @@ async def test_list_tasks_default_status(async_session):
     - Default status is 'all'
     - All tasks are returned when status is not specified
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     await TaskService.create_task(
         user_id=user_id,

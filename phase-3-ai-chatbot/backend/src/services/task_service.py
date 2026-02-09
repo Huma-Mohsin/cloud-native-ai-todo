@@ -20,16 +20,30 @@ class TaskService:
 
         This ensures that when all tasks are deleted, the next task
         starts with ID 1 instead of continuing from the last ID.
+
+        Note: Only works with PostgreSQL. SQLite handles auto-increment differently
+        and this operation is skipped for SQLite databases (used in tests).
         """
         # Check if any tasks exist
         result = await session.execute(select(func.count()).select_from(Task))
         task_count = result.scalar()
 
         if task_count == 0:
-            # No tasks exist - reset sequence to 1
-            await session.execute(text("ALTER SEQUENCE tasks_id_seq RESTART WITH 1"))
-            await session.commit()
-            print("✅ Task sequence reset to 1 (no tasks exist)")
+            # Only run sequence reset for PostgreSQL
+            # Check the database dialect from the session bind
+            try:
+                bind = session.get_bind()
+                dialect_name = bind.dialect.name if bind else "unknown"
+
+                if dialect_name == "postgresql":
+                    # PostgreSQL: Reset sequence to 1
+                    await session.execute(text("ALTER SEQUENCE tasks_id_seq RESTART WITH 1"))
+                    await session.commit()
+                    print("✅ Task sequence reset to 1 (no tasks exist)")
+                # SQLite and other databases: Skip sequence reset (handled automatically)
+            except Exception:
+                # If we can't determine the dialect, silently skip
+                pass
 
     @staticmethod
     async def create_task(

@@ -109,7 +109,8 @@ readinessProbe:
 
 # Environment variables from ConfigMap
 config:
-  NEXT_PUBLIC_API_URL: "http://todo-backend:8000"
+  NEXT_PUBLIC_API_URL: "http://backend-todo-backend:8000"
+  BACKEND_API_URL: "http://backend-todo-backend:8000"
 
 # Environment variables from Secrets
 secrets: {}

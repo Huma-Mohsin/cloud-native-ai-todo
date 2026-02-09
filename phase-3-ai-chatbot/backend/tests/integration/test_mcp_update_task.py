@@ -9,7 +9,7 @@ import pytest
 from src.mcp.tools.update_task import update_task_handler
 from src.mcp.schemas import UpdateTaskInput
 from src.services.task_service import TaskService
-from src.schemas.task import CreateTaskRequest
+from src.schemas.task import CreateTaskRequest, UpdateTaskRequest
 
 
 @pytest.mark.asyncio
@@ -21,7 +21,7 @@ async def test_update_task_title(async_session):
     - Success response is returned
     - New title is included in response
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     # Create task
     task = await TaskService.create_task(
@@ -51,7 +51,7 @@ async def test_update_task_description(async_session):
     - Task description is updated in database
     - Title remains unchanged
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -72,8 +72,8 @@ async def test_update_task_description(async_session):
     assert result.success is True
 
     # Verify changes persisted
-    updated_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    updated_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
 
     assert updated_task.title == "Task title"  # Unchanged
@@ -88,7 +88,7 @@ async def test_update_task_both_fields(async_session):
     - Both fields are updated
     - Changes persist to database
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -109,8 +109,8 @@ async def test_update_task_both_fields(async_session):
     assert result.success is True
 
     # Verify both updated
-    updated_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    updated_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
 
     assert updated_task.title == "New title"
@@ -125,7 +125,7 @@ async def test_update_task_persists_to_database(async_session):
     - Changes can be retrieved after update
     - Database reflects new values
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -141,8 +141,8 @@ async def test_update_task_persists_to_database(async_session):
     await update_task_handler(input_data, async_session)
 
     # Verify persistence
-    retrieved_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    retrieved_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
 
     assert retrieved_task.title == "Updated"
@@ -156,7 +156,7 @@ async def test_update_task_not_found(async_session):
     - Returns failure response
     - Error message indicates task not found
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     input_data = UpdateTaskInput(
         user_id=user_id, task_id=99999, title="New title", description=None
@@ -175,8 +175,8 @@ async def test_update_task_unauthorized(async_session):
     - Returns failure response
     - Task remains unchanged for owner
     """
-    user1 = 1
-    user2 = 2
+    user1 = "test_user_1"
+    user2 = "test_user_2"
 
     # Create task for user1
     task = await TaskService.create_task(
@@ -196,8 +196,8 @@ async def test_update_task_unauthorized(async_session):
     assert result.success is False
 
     # Verify task unchanged for user1
-    unchanged_task = await TaskService.get_task(
-        task_id=task.id, user_id=user1, session=async_session
+    unchanged_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
     assert unchanged_task.title == "User 1 task"
 
@@ -210,7 +210,7 @@ async def test_update_completed_task(async_session):
     - Completed tasks can be updated
     - Completion status is preserved
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -224,7 +224,7 @@ async def test_update_completed_task(async_session):
     await TaskService.update_task(
         task_id=task.id,
         user_id=user_id,
-        updates={"completed": True},
+        task_data=UpdateTaskRequest(completed=True),
         session=async_session,
     )
 
@@ -237,8 +237,8 @@ async def test_update_completed_task(async_session):
     assert result.success is True
 
     # Verify completion status preserved
-    updated_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    updated_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
     assert updated_task.title == "Updated completed task"
     assert updated_task.completed is True
@@ -252,7 +252,7 @@ async def test_update_task_clear_description(async_session):
     - Description can be set to empty string or None
     - Title remains unchanged
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -270,8 +270,8 @@ async def test_update_task_clear_description(async_session):
     assert result.success is True
 
     # Verify description cleared
-    updated_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    updated_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
     assert updated_task.description == "" or updated_task.description is None
 
@@ -284,7 +284,7 @@ async def test_update_task_long_title(async_session):
     - Long titles (up to 200 chars) are accepted
     - Title is stored correctly
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -304,8 +304,8 @@ async def test_update_task_long_title(async_session):
     assert result.success is True
 
     # Verify long title stored
-    updated_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    updated_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
     assert len(updated_task.title) == 200
 
@@ -318,7 +318,7 @@ async def test_update_task_long_description(async_session):
     - Long descriptions (up to 1000 chars) are accepted
     - Description is stored correctly
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
@@ -338,8 +338,8 @@ async def test_update_task_long_description(async_session):
     assert result.success is True
 
     # Verify long description stored
-    updated_task = await TaskService.get_task(
-        task_id=task.id, user_id=user_id, session=async_session
+    updated_task = await TaskService.get_task_by_id(
+        task_id=task.id, session=async_session
     )
     assert len(updated_task.description) == 1000
 
@@ -352,7 +352,7 @@ async def test_update_task_output_format(async_session):
     - Output matches UpdateTaskOutput schema
     - All required fields are present
     """
-    user_id = 1
+    user_id = "test_user_1"
 
     task = await TaskService.create_task(
         user_id=user_id,
